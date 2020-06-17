@@ -4,15 +4,16 @@ class InventarioController {
     constructor({ InventarioService }) {
         _inventarioService = InventarioService;
     }
-    async getAll(req, res) {
-        const inventarios = await _inventarioService.getAll();
-        return res.status(200).json(inventarios);
+    async get(req, res) {
+        const { producto_id } = req.params;
+        const inventario = await _inventarioService.get(producto_id);
+        return res.send(inventario);
     }
-    async get() {}
-    async create() {}
-    async post() {}
-    async update() {}
-    async delete() {}
+    async getAll(req, res) {
+        const { pageSize, pageNum } = req;
+        const inventarios = await _inventarioService.getAll(pageSize, pageNum);
+        return res.send(inventarios);
+    }
 }
 
 module.exports = InventarioController;

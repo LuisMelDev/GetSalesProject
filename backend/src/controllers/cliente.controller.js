@@ -4,15 +4,34 @@ class ClienteController {
     constructor({ ClienteService }) {
         _clienteService = ClienteService;
     }
-    async getAll(req, res) {
-        const clientes = await _clienteService.getAll();
-        return res.status(200).json(clientes);
+    async get(req, res) {
+        const { id } = req.params;
+        const cliente = await _clienteService.get(id);
+        return res.send(cliente);
     }
-    async get() {}
-    async create() {}
-    async post() {}
-    async update() {}
-    async delete() {}
+    async getAll(req, res) {
+        const { pageSize, pageNum } = req.query;
+        const clientes = await _clienteService.getAll(pageSize, pageNum);
+        return res.send(clientes);
+    }
+    async create(req, res) {
+        const { body } = req;
+        const createdCliente = await _clienteService.create(body);
+        return res.send(createdCliente);
+    }
+    async update(req, res) {
+        const { body } = req;
+        const { id } = req.params;
+        const updatedCliente = await _clienteService.update(id, body);
+        return res.send(updatedCliente);
+    }
+    async delete(req, res) {
+        const { id } = req.params;
+        const deletedCliente = await _clienteService.delete(id);
+        return res.send(deletedCliente);
+    }
+    async getFacturas(req, res) {}
+    async search(req, res) {}
 }
 
 module.exports = ClienteController;
