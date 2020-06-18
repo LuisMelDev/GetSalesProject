@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     Grupo.associate = function (models) {
         Grupo.hasMany(models.productos, {
             foreignKey: "grupo_id",
-            as: "productos",
+            as: "Productos",
         });
     };
     return Grupo;

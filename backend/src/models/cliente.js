@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     Cliente.associate = function (models) {
         Cliente.hasMany(models.facturas, {
             foreignKey: "cliente_id",
-            as: "facturas",
+            as: "Facturas",
         });
     };
     return Cliente;

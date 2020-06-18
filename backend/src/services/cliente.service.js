@@ -1,10 +1,13 @@
 const BaseService = require('./base.service')
-
+let _clienteRepository = null;
 class ClienteService extends BaseService{
 
-    constructor(Cliente){
-        super(Cliente)
-        this.Cliente = Cliente
+    constructor(ClienteRepository){
+        super(ClienteRepository)
+        _clienteRepository = ClienteRepository
+    }
+    async getByFacturas(){
+        return await _clienteRepository.getByFacturas();
     }
     
 }

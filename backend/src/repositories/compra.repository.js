@@ -6,6 +6,14 @@ class CompraRepository extends BaseRepository {
         super(Compra);
         _compra = Compra;
     }
+
+    async getByFecha(fecha){
+        return await _compra.findAll({
+            where: {
+                fecha
+            }
+        })
+    }
 }
 
 module.exports = CompraRepository;

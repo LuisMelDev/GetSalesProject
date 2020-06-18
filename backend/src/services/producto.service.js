@@ -1,12 +1,20 @@
 const BaseService = require('./base.service')
+const ErrorHelper = require("../helpers")
+let _productoRepository = null;
 
 class ProductoService extends BaseService{
 
-    constructor(Producto){
-        super(Producto)
-        this.Producto = Producto
+    constructor(ProductoRepository){
+        super(ProductoRepository)
+        _productoRepository = ProductoRepository
     }
     
+    async getProductoNombre(nombre) {
+        if(!nombre){
+            ErrorHelper(400,"nombre must be sent")
+        }
+        return await _productoRepository.getProductoNombre();
+    }
 }
 
 module.exports = ProductoService

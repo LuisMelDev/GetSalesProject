@@ -6,6 +6,11 @@ class ClienteRepository extends BaseRepository {
         super(Cliente);
         _cliente = Cliente;
     }
+
+    async getByFacturas(){
+        return await _cliente.getFacturas();
+    }
 }
+
 
 module.exports = ClienteRepository;

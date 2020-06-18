@@ -6,6 +6,14 @@ class ProductoRepository extends BaseRepository {
         super(Producto);
         _producto = Producto;
     }
+
+    async getProductoNombre(nombre) {
+        return await _producto.findAll({
+            where: {
+                nombre
+            }
+        })
+    }
 }
 
 module.exports = ProductoRepository;

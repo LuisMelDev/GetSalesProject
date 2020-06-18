@@ -6,6 +6,10 @@ class MarcaRepository extends BaseRepository {
         super(Marca);
         _marca = Marca;
     }
+
+    async getProductosMarca() {
+        return await _marca.getProductos();
+    }
 }
 
 module.exports = MarcaRepository;
