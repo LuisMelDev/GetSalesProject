@@ -91,9 +91,6 @@ const {
     usuarioRepository,
 } = require("../repositories");
 
-// middlewares
-const { AuthMiddleWare } = require("../middlewares");
-
 const container = createContainer();
 
 container
@@ -116,9 +113,6 @@ container
         ProveedorService: asClass(proveedorService).singleton(),
         RolService: asClass(rolService).singleton(),
         UsuarioService: asClass(usuarioService).singleton(),
-    })
-    .register({
-        AuthMiddleWare: asFunction(AuthMiddleWare).singleton(),
     })
     .register({
         AmperajeController: asClass(
