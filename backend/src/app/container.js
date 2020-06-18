@@ -39,6 +39,7 @@ const {
 } = require("../controllers");
 
 // routes
+const AuthRoutes = require("../routes/auth.routes");
 const AmperajeRoutes = require("../routes/amperaje.routes");
 const BitacoraRoutes = require("../routes/bitacora.routes");
 const ClienteRoutes = require("../routes/cliente.routes");
@@ -58,11 +59,11 @@ const Routes = require("../routes");
 // models
 const {
     amperajes,
-    bitacora,
+    bitacoras,
     clientes,
     compras,
-    detalle_compra,
-    detalle_factura,
+    detalle_compras,
+    detalle_facturas,
     facturas,
     grupos,
     inventarios,
@@ -154,6 +155,7 @@ container
         ).singleton(),
     })
     .register({
+        AuthRoutes: asFunction(AuthRoutes).singleton(),
         AmperajeRoutes: asFunction(AmperajeRoutes).singleton(),
         BitacoraRoutes: asFunction(BitacoraRoutes).singleton(),
         ClienteRoutes: asFunction(ClienteRoutes).singleton(),
@@ -170,9 +172,11 @@ container
     })
     .register({
         Amperaje: asValue(amperajes),
-        Bitacora: asValue(bitacora),
+        Bitacora: asValue(bitacoras),
         Cliente: asValue(clientes),
         Compra: asValue(compras),
+        DetalleCompra: asValue(detalle_compras),
+        DetalleFactura: asValue(detalle_facturas),
         Factura: asValue(facturas),
         Grupo: asValue(grupos),
         Inventario: asValue(inventarios),

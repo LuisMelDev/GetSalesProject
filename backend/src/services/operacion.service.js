@@ -1,9 +1,10 @@
 const BaseService = require("./base.service");
+let _operacionRepository = null;
 
 class OperacionService extends BaseService {
-    constructor(Operacion) {
-        super(Operacion);
-        this.Operacion = Operacion;
+    constructor({ OperacionRepository }) {
+        super(OperacionRepository);
+        _operacionRepository = OperacionRepository;
     }
 }
 

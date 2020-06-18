@@ -1,5 +1,5 @@
 const { Router } = require("express");
-module.exports = function ({ FacturaController }) {
+module.exports = ({ FacturaController }) => {
     const router = Router();
 
     router.get("", FacturaController.getAll);

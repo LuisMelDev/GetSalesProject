@@ -1,12 +1,11 @@
-const BaseService = require('./base.service')
+const BaseService = require("./base.service");
+let _productoRepository = null;
 
-class ProductoService extends BaseService{
-
-    constructor(Producto){
-        super(Producto)
-        this.Producto = Producto
+class ProductoService extends BaseService {
+    constructor({ ProductoRepository }) {
+        super(ProductoRepository);
+        _productoRepository = ProductoRepository;
     }
-    
 }
 
-module.exports = ProductoService
+module.exports = ProductoService;

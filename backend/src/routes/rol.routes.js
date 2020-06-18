@@ -1,5 +1,5 @@
 const { Router } = require("express");
-module.exports = function ({ RolController }) {
+module.exports = ({ RolController }) => {
     const router = Router();
 
     router.get("", RolController.getAll);

@@ -1,5 +1,5 @@
 const { Router } = require("express");
-module.exports = function ({ GrupoController }) {
+module.exports = ({ GrupoController }) => {
     const router = Router();
 
     router.get("", GrupoController.getAll);

@@ -12,6 +12,7 @@ const swaggerDocument = require(SWAGGER_PATH);
 */
 
 module.exports = function ({
+    AuthRoutes,
     AmperajeRoutes,
     BitacoraRoutes,
     ClienteRoutes,
@@ -44,6 +45,7 @@ module.exports = function ({
     apiRoutes.use("/proveedores", ProveedorRoutes);
     apiRoutes.use("/roles", RolRoutes);
     apiRoutes.use("/usuarios", UsuarioRoutes);
+    apiRoutes.use("/auth", AuthRoutes);
 
     router.use("/v1/api", apiRoutes);
     /*

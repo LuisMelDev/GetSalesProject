@@ -1,36 +1,51 @@
-const { generateToken } = require('../helpers/jwt.helper')
-const { UsuarioService } = require('./index')
-const { ErrorHelper } = require('../helpers')
+const { generateToken } = require("../helpers/jwt.helper");
+const { ErrorHelper } = require("../helpers");
+let _userService = null;
 
-class AuthService{
-    constructor(UserService){
-        this.UserService = UserService
+class AuthService {
+    constructor({ UsuarioService }) {
+        _userService = UsuarioService;
     }
 
-    async signIn(user){
-        const {username, password} = user
-        const userExist = await this.UserService.getUserByUsername(username)
-
-        if(!userExist){
-            ErrorHelper(404, "El usuario no existe")
+    async signUp(user) {
+        const { username } = user;
+        const userExist = await _userService.getUserByUsername(username);
+        if (userExist) {
+            ErrorHelper(400, "El username ya se encuentra en uso.");
         }
 
-        const validPassword = await userExist.validPassword(password)
+        return await _userService.create(user);
+    }
 
-        if(!validPassword){
-            ErrorHelper(400, "contraseña o username invalidos")
+    async signIn(user) {
+        const { username, password } = user;
+        const userExist = await _userService.getByUsername(username);
+
+        if (!userExist) {
+            ErrorHelper(404, "El usuario no existe");
+        }
+
+        const validPassword = await userExist.comparePassword(password);
+
+        if (!validPassword) {
+            ErrorHelper(401, "Contraseña o username invalidos");
         }
 
         const userToEnconde = {
             username: userExist.username,
             id: userExist.id,
-        }
+            rol: userExist.rol_id,
+        };
 
-        const token = generateToken(userToEnconde)
+        const token = generateToken(userToEnconde);
+        delete userExist.password;
 
-        return {token, user: userExist}
+        return { token, user: userExist };
     }
 
+    async signOut() {
+        // TODO
+    }
 }
 
-module.exports = new AuthService(UsuarioService)
+module.exports = AuthService;

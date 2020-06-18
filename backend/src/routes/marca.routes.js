@@ -1,5 +1,5 @@
 const { Router } = require("express");
-module.exports = function ({ MarcaController }) {
+module.exports = ({ MarcaController }) => {
     const router = Router();
 
     router.get("", MarcaController.getAll);
