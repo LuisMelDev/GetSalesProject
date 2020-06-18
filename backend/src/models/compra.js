@@ -24,5 +24,12 @@ module.exports = (sequelize, DataTypes) => {
             as: "productos",
         });
     };
+    Compra.afterCreate(async (compra, options) => {
+        return await sequelize.models.bitacoras.create({
+            fecha: Date.now(),
+            operacion_id: 1,
+            usuario_id: compra.getUsuario().id,
+        });
+    });
     return Compra;
 };

@@ -31,5 +31,18 @@ module.exports = (sequelize, DataTypes) => {
         });
     };
 
+    Producto.afterCreate(async (producto, options) => {
+        return await sequelize.models.inventarios.create({
+            producto_id: producto.id,
+            fecha_entrada: Date.now(),
+            existencia_producto: 0,
+        });
+    });
+    Producto.afterDestroy(async (producto, options) => {
+        const inventarioProducto = await sequelize.models.inventarios.findByPk(
+            producto.id
+        );
+        return await inventarioProducto.destroy();
+    });
     return Producto;
 };

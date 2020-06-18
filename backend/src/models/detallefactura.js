@@ -20,5 +20,14 @@ module.exports = (sequelize, DataTypes) => {
             as: "producto",
         });
     };
+    DetalleFactura.afterCreate(async (detalleFactura, options) => {
+        const producto = await sequelize.models.productos.findByPk(
+            detalleFactura.producto_id
+        );
+        const inventario = await producto.getInventario();
+        return await inventario.decrement("existencia_producto", {
+            by: detalleFactura.cantidad_producto,
+        });
+    });
     return DetalleFactura;
 };

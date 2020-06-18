@@ -1,4 +1,6 @@
 "use strict";
+const { hash, compare, genSalt } = require("bcryptjs");
+
 module.exports = (sequelize, DataTypes) => {
     const Usuario = sequelize.define(
         "usuarios",
@@ -11,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         {}
     );
+    // relaciones
     Usuario.associate = function (models) {
         Usuario.belongsTo(models.roles, {
             foreignKey: "rol_id",
@@ -30,5 +33,17 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "usuario_id",
         });
     };
+
+    // hooks
+    Usuario.beforeCreate(async (usuario, options) => {
+        const salt = await genSalt();
+        const hashedPassword = await hash(usuario.password, salt);
+        usuario.password = hashedPassword;
+    });
+
+    Usuario.prototype.comparePassword = async (password) => {
+        return await compare(password, this.password);
+    };
+
     return Usuario;
 };
