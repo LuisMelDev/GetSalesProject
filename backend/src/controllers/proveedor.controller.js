@@ -32,12 +32,18 @@ class ProveedorController {
         const deletedProveedor = await _proveedorService.delete(id);
         return res.send(deletedProveedor);
     }
+
+    async getProveedorByNombre(req, res){
+        const{ nombre } = req.params;
+        const proveedor = await _proveedorService.getProveedorByNombre(nombre);
+        return res.send(proveedor); 
+    }
     async getCompras(req, res) {
-        const { id } = req.params;
-        const proveedor = await _proveedorService.get(id);
-        const compras = await proveedor.getCompras();
+        const { proveedorId } = req.params;
+        const compras = await _proveedorService.getCompras(proveedorId);
         return res.send(compras);
     }
+
     async search(req, res) {
         const { nombre } = req.query;
         const options = { where: {} };

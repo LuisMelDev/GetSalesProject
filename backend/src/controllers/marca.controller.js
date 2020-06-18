@@ -33,9 +33,8 @@ class MarcaController {
         return res.send(deletedMarca);
     }
     async getProductos(req, res) {
-        const { id } = req.params;
-        const marca = await _marcaService.get(id);
-        const productos = await marca.getProductos();
+        const { marcaId } = req.params;
+        const productos = await _marcaService.getProductos(marcaId);
         return res.send(productos);
     }
     async search(req, res) {

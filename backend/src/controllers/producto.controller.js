@@ -32,6 +32,12 @@ class ProductoController {
         const deleteProduct = await _productoService.delete(id);
         return res.send(deleteProduct);
     }
+
+    async getProductoByNombre(req, res){
+        const { nombre } = req.params;
+        const producto = await _productoService.getProductoByNombre(nombre);
+        return res.send(producto);
+    }
     async search(req, res) {
         const { nombre, amperaje, grupo, marca } = req.query;
         const options = { where: {} };

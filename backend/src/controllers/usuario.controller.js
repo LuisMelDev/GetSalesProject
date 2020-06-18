@@ -32,12 +32,38 @@ class UsuarioController {
         const deletedUsuario = await _usuarioService.delete(id);
         return res.send(deletedUsuario);
     }
+
+    async getUsuarioByUsername(req,res){
+        const { username } = req.params;
+        const usuario = await _usuarioService.getUsuarioByUsername(username);
+        return res.send(usuario);
+    }
+
+    async getUsuarioByNombre(req,res){
+        const { nombre } = req.params;
+        const usuario = await _usuarioService.getUsuarioByNombre(nombre);
+        return res.send(usuario);
+    }
+
+    async getFacturas(req,res){
+        const { userId } = req.params;
+        const usuarioFacturas = await _usuarioService.getFacturas(userId);
+        return res.send(usuarioFacturas);
+    }
+
+    async getCompras(req,res){
+        const { userId } = req.params;
+        const usuarioCompras = await _usuarioService.getCompras(userId);
+        return res.send(usuarioCompras);
+    }
+
     async getOperaciones(req, res) {
         const { id } = req.params;
-        const usuario = await _usuarioService.get(id);
+        const usuario_op = await _usuarioService.get(id);
         const operaciones = usuario.getOperaciones();
         return res.send(operaciones);
     }
+
     async search(req, res) {
         const { nombre, username, email } = req.query;
         const options = { where: {} };

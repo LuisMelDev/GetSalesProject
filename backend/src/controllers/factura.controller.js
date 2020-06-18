@@ -43,6 +43,13 @@ class FacturaController {
         const deletedFactura = await _facturaService.delete(id);
         return res.send(deletedFactura);
     }
+
+    async getByFecha(req, res){
+        const { fecha } = req.params;
+        const factura = await _facturaService.getByFecha(fecha);
+        return res.send(factura);
+    }
+
     async getCliente(req, res) {
         const { id } = req.params;
         const factura = await _facturaService.get(id);

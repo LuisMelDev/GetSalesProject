@@ -22,7 +22,7 @@ class UsuarioService extends BaseService {
     async getFacturas(userId) {
         return await _usuarioRepository.getFacturas(userId);
     }
-    async getCompras() {
+    async getCompras(userId) {
         return await _usuarioRepository.getCompras(userId);
     }
 }

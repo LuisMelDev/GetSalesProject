@@ -32,12 +32,13 @@ class GrupoController {
         const deletedGrupo = await _grupoService.delete(id);
         return res.send(deletedGrupo);
     }
+
     async getProductos(req, res) {
-        const { id } = req.params;
-        const grupo = await _grupoService.get(id);
-        const productos = await grupo.getProductos();
+        const { grupoId } = req.params;
+        const productos = await _grupoService.getProductos(grupoId);
         return res.send(productos);
     }
+
     async search(req, res) {
         const { nombre } = req.query;
         const options = { where: {} };

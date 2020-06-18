@@ -33,10 +33,9 @@ class RolController {
         return res.send(deletedRol);
     }
     async getUsuarios(req, res) {
-        const { id } = req.params;
-        const rol = await _rolService.get(id);
-        const usuarios = await rol.getUsuarios();
-        return res.send(usuarios);
+        const { rolId } = req.params;
+        const usuariosRol = await _rolService.getUsuarios(rolId);
+        return res.send(usuariosRol);
     }
     async search(req, res) {
         const { rol } = req.query;

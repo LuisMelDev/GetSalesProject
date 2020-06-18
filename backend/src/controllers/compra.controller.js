@@ -40,6 +40,13 @@ class CompraController {
         const deletedCompra = await _compraService.delete(id);
         return res.send(deletedCompra);
     }
+
+    async getByFecha(req, res){
+        const { fecha } = req.params;
+        const compra = await _compraService.getByFecha(fecha);
+        return res.send(compra);
+    }
+
     async getProveedor(req, res) {
         const { id } = req.params;
         const compra = await _compraService.get(id);

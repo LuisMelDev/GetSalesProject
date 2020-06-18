@@ -14,6 +14,12 @@ class InventarioController {
         const inventarios = await _inventarioService.getAll(pageSize, pageNum);
         return res.send(inventarios);
     }
+
+    async getByFecha(req, res){
+        const { fecha_entrada } = req.params;
+        const fechaEntrada = await _inventarioService.getByFecha(fecha_entrada);
+        return res.send(fechaEntrada);
+    }
 }
 
 module.exports = InventarioController;

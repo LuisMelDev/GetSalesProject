@@ -7,7 +7,7 @@ class InventarioService extends BaseService {
         _inventarioRepository = InventarioRepository;
     }
     async getByFecha(fecha_entrada) {
-        !fecha_entrada;
+        if(!fecha_entrada)
         {
             ErrorHelper(400, "fecha must be sent");
         }

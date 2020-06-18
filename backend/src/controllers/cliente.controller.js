@@ -33,11 +33,11 @@ class ClienteController {
         return res.send(deletedCliente);
     }
     async getFacturas(req, res) {
-        const { id } = req.params;
-        const cliente = await _clienteService.get(id);
-        const facturas = await cliente.getFacturas();
+        const { clienteId } = req.params;
+        const facturas = await _clienteService.getFacturas(clienteId);
         return res.send(facturas);
     }
+    
     async search(req, res) {
         const { cedula, nombre, email } = req.query;
         const options = { where: {} };

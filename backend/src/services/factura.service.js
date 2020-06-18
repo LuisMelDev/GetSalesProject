@@ -12,7 +12,7 @@ class FacturaService extends BaseService {
     }
 
     async getByFecha(fecha) {
-        !fecha;
+        if (!fecha)
         {
             ErrorHelper(400, "fecha must be sent");
         }
