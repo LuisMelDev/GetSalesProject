@@ -1,7 +1,7 @@
 <!-- Main container -->
 <main class="full-box main-container" *ngIf="usuario">
   <!-- Nav lateral -->
-  <section class="full-box nav-lateral" >
+  <section class="full-box nav-lateral">
     <div class="full-box nav-lateral-bg show-nav-lateral"></div>
     <div class="full-box nav-lateral-content">
       <figure class="full-box nav-lateral-avatar">
@@ -13,7 +13,7 @@
             aria-expanded="false">
             Nombre Usuario <br><small class="roboto-condensed-light">Rol de Usuario</small>
 
-
+ 
           </a>
           <div class="dropdown-menu dropdown-menu-right">
             <button class="dropdown-item" type="button">Panel de Usuario</button>
@@ -30,17 +30,17 @@
           </li>
 
           <li>
-            <a class="nav-btn-submenu"><i class="fas fa-users fa-fw"></i> &nbsp; Administraci[on <i
+            <a class="nav-btn-submenu"><i class="fas fa-users fa-fw"></i> &nbsp; Administración <i
                 class="fas fa-chevron-down"></i></a>
             <ul>
               <li>
-                <a><i class="fas fa-plus fa-fw"></i> &nbsp; Usuarios</a>
+                <a [routerLink]="['/administracion/usuarios']"><i class="fas fa-plus fa-fw"></i> &nbsp; Usuarios</a>
               </li>
               <li>
-                <a><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Reportes</a>
+                <a [routerLink]="['/administracion/reportes']"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Reportes</a>
               </li>
               <li>
-                <a><i class="fas fa-search fa-fw"></i> &nbsp; Bitacora</a>
+                <a [routerLink]="['/administracion/bitacora']"><i class="fas fa-search fa-fw"></i> &nbsp; Bitacora</a>
               </li>
             </ul>
           </li>
@@ -49,13 +49,13 @@
                 class="fas fa-chevron-down"></i></a>
             <ul>
               <li>
-                <a><i class="fas fa-plus fa-fw"></i> &nbsp; Agregar Cliente</a>
+                <a [routerLink]="['/clientes/agregar']"><i class="fas fa-plus fa-fw"></i> &nbsp; Agregar Cliente</a>
               </li>
               <li>
-                <a><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de clientes</a>
+                <a [routerLink]="['/clientes/listado']"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de clientes</a>
               </li>
               <li>
-                <a><i class="fas fa-search fa-fw"></i> &nbsp; Buscar cliente</a>
+                <a [routerLink]="['/clientes/busqueda']"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar cliente</a>
               </li>
             </ul>
           </li>
@@ -115,13 +115,13 @@
   </section>
 
   <!-- Page content -->
-  <section class="full-box page-content">
+  <section class="full-box page-content ">
     <nav class="full-box navbar-info" >
-      <a  class="float-left show-nav-lateral flex-center " id="show-nav-lateral">
-        <i class="fas fa-bars fa-2x"></i>
+      <a (click)="toggleMenu()" href="#" class="float-left show-nav-lateral flex-center " id="show-nav-lateral">
+        <i class="fas fa-2x" [ngClass]="{'fa-bars':hamburguer,'fa-arrow-left':!hamburguer}"></i> 
       </a>
 
-      <div class="dropdown">
+      
         <a class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img src="./assets/assets/avatar/Avatar.png" alt="nombreUser" class="rounded-circle" height="40"> Nombre de
           Usuario
@@ -132,7 +132,7 @@
         <div class="dropdown-divider"></div>
         <button class="dropdown-item" type="button">Salir</button>
         </div>
-      </div>
+     
     </nav>
     
       <router-outlet></router-outlet>

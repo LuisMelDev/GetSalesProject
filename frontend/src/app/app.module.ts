@@ -14,6 +14,7 @@ import { VentasModule } from './modulos/ventas/ventas.module';
 //paginas de login y principal
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ComponentsModule } from './components/components.module';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { LoginComponent } from './pages/login/login.component';
     ClientesModule,
     ComprasModule,
     ProductosModule,
-    VentasModule
+    VentasModule,
+    ComponentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
