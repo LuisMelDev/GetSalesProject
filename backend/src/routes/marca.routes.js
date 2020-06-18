@@ -3,10 +3,12 @@ module.exports = function ({ MarcaController }) {
     const router = Router();
 
     router.get("", MarcaController.getAll);
-    router.get("/:ideaId", MarcaController.get);
+    router.get("/search", MarcaController.search);
+    router.get("/:id", MarcaController.get);
+    router.get("/:id/productos", MarcaController.getProductos);
     router.post("", MarcaController.create);
-    router.patch("/:ideaId", MarcaController.update);
-    router.delete("/:ideaId", MarcaController.delete);
+    router.patch("/:id", MarcaController.update);
+    router.delete("/:id", MarcaController.delete);
 
     return router;
 };

@@ -3,10 +3,10 @@ module.exports = function ({ InventarioController }) {
     const router = Router();
 
     router.get("", InventarioController.getAll);
-    router.get("/:ideaId", InventarioController.get);
-    router.post("", InventarioController.create);
-    router.patch("/:ideaId", InventarioController.update);
-    router.delete("/:ideaId", InventarioController.delete);
+    router.get("/:producto_id", InventarioController.get);
+    // router.post("", InventarioController.create);
+    // router.patch("/:producto_id", InventarioController.update);
+    // router.delete("/:id", InventarioController.delete);
 
     return router;
 };

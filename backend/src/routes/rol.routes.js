@@ -3,10 +3,12 @@ module.exports = function ({ RolController }) {
     const router = Router();
 
     router.get("", RolController.getAll);
-    router.get("/:ideaId", RolController.get);
+    router.get("/search", RolController.search);
+    router.get("/:id", RolController.get);
+    router.get("/:id/usuarios", RolController.getUsuarios);
     router.post("", RolController.create);
-    router.patch("/:ideaId", RolController.update);
-    router.delete("/:ideaId", RolController.delete);
+    router.patch("/:id", RolController.update);
+    router.delete("/:id", RolController.delete);
 
     return router;
 };

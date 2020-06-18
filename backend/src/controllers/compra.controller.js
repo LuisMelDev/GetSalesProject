@@ -30,8 +30,24 @@ class CompraController {
         const deletedCompra = await _compraService.delete(id);
         return res.send(deletedCompra);
     }
-    async getProveedor(req, res) {}
-    async search(req, res) {}
+    async getProveedor(req, res) {
+        const { id } = req.params;
+        const compra = await _compraService.get(id);
+        const proveedor = await compra.getProveedor();
+        return res.send(proveedor);
+    }
+    async search(req, res) {
+        const { proveedor, usuario } = req.query;
+        const options = { where: {} };
+        if (proveedor) {
+            options.where.proveedor_id = proveedor;
+        }
+        if (usuario) {
+            options.where.usuario_id = usuario;
+        }
+        const compras = await _compraService.searchAll(options);
+        return res.send(compras);
+    }
 }
 
 module.exports = CompraController;

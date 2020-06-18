@@ -1,3 +1,5 @@
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 let _rolService = null;
 
 class RolController {
@@ -30,7 +32,23 @@ class RolController {
         const deletedRol = await _rolService.delete(id);
         return res.send(deletedRol);
     }
-    async getUsuarios(req, res) {}
+    async getUsuarios(req, res) {
+        const { id } = req.params;
+        const rol = await _rolService.get(id);
+        const usuarios = await rol.getUsuarios();
+        return res.send(usuarios);
+    }
+    async search(req, res) {
+        const { rol } = req.query;
+        const options = { where: {} };
+        if (rol) {
+            options.where.rol = {
+                [Op.like]: `%${rol}%`,
+            };
+        }
+        const roles = await _rolService.searchAll(options);
+        return res.send(roles);
+    }
 }
 
 module.exports = RolController;

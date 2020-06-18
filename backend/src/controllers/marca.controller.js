@@ -1,3 +1,5 @@
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 let _marcaService = null;
 
 class MarcaController {
@@ -30,8 +32,23 @@ class MarcaController {
         const deletedMarca = await _marcaService.delete(id);
         return res.send(deletedMarca);
     }
-    async getProductos(req, res) {}
-    async search(req, res) {}
+    async getProductos(req, res) {
+        const { id } = req.params;
+        const marca = await _marcaService.get(id);
+        const productos = await marca.getProductos();
+        return res.send(productos);
+    }
+    async search(req, res) {
+        const { nombre } = req.query;
+        const options = { where: {} };
+        if (nombre) {
+            options.where.nombre = {
+                [Op.like]: `%${nombre}%`,
+            };
+        }
+        const marca = await _marcaService.searchAll(options);
+        return res.send(marca);
+    }
 }
 
 module.exports = MarcaController;

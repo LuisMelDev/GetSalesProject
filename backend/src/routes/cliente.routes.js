@@ -3,10 +3,12 @@ module.exports = function ({ ClienteController }) {
     const router = Router();
 
     router.get("", ClienteController.getAll);
-    router.get("/:ideaId", ClienteController.get);
+    router.get("/search", ClienteController.search);
+    router.get("/:id", ClienteController.get);
+    router.get("/:id/facturas", ClienteController.getFacturas);
     router.post("", ClienteController.create);
-    router.patch("/:ideaId", ClienteController.update);
-    router.delete("/:ideaId", ClienteController.delete);
+    router.patch("/:id", ClienteController.update);
+    router.delete("/:id", ClienteController.delete);
 
     return router;
 };

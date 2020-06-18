@@ -3,10 +3,12 @@ module.exports = function ({ AmperajeController }) {
     const router = Router();
 
     router.get("", AmperajeController.getAll);
-    router.get("/:ideaId", AmperajeController.get);
+    router.get("/search", AmperajeController.search);
+    router.get("/:id", AmperajeController.get);
+    router.get("/:id/productos", AmperajeController.getProductos);
     router.post("", AmperajeController.create);
-    router.patch("/:ideaId", AmperajeController.update);
-    router.delete("/:ideaId", AmperajeController.delete);
+    router.patch("/:id", AmperajeController.update);
+    router.delete("/:id", AmperajeController.delete);
 
     return router;
 };

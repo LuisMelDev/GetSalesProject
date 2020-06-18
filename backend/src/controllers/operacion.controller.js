@@ -30,7 +30,12 @@ class OperacionController {
         const deletedOperacion = await _operacionService.delete(id);
         return res.send(deletedOperacion);
     }
-    async getUsuarios(req, res) {}
+    async getUsuarios(req, res) {
+        const { id } = req.params;
+        const operacion = await _operacionService.get(id);
+        const usuarios = await operacion.getUsuarios();
+        return res.send(usuarios);
+    }
 }
 
 module.exports = OperacionController;

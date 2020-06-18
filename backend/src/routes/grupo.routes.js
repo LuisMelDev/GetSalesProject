@@ -3,10 +3,12 @@ module.exports = function ({ GrupoController }) {
     const router = Router();
 
     router.get("", GrupoController.getAll);
-    router.get("/:ideaId", GrupoController.get);
+    router.get("/search", GrupoController.search);
+    router.get("/:id", GrupoController.get);
+    router.get("/:id/productos", GrupoController.getProductos);
     router.post("", GrupoController.create);
-    router.patch("/:ideaId", GrupoController.update);
-    router.delete("/:ideaId", GrupoController.delete);
+    router.patch("/:id", GrupoController.update);
+    router.delete("/:id", GrupoController.delete);
 
     return router;
 };

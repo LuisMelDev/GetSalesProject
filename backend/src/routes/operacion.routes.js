@@ -3,10 +3,11 @@ module.exports = function ({ OperacionController }) {
     const router = Router();
 
     router.get("", OperacionController.getAll);
-    router.get("/:ideaId", OperacionController.get);
+    router.get("/:id", OperacionController.get);
+    router.get("/:id/usuarios", OperacionController.getUsuarios);
     router.post("", OperacionController.create);
-    router.patch("/:ideaId", OperacionController.update);
-    router.delete("/:ideaId", OperacionController.delete);
+    router.patch("/:id", OperacionController.update);
+    router.delete("/:id", OperacionController.delete);
 
     return router;
 };

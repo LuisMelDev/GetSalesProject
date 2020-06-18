@@ -1,3 +1,5 @@
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 let _proveedorService = null;
 
 class ProveedorController {
@@ -30,8 +32,23 @@ class ProveedorController {
         const deletedProveedor = await _proveedorService.delete(id);
         return res.send(deletedProveedor);
     }
-    async getCompras(req, res) {}
-    async search(req, res) {}
+    async getCompras(req, res) {
+        const { id } = req.params;
+        const proveedor = await _proveedorService.get(id);
+        const compras = await proveedor.getCompras();
+        return res.send(compras);
+    }
+    async search(req, res) {
+        const { nombre } = req.query;
+        const options = { where: {} };
+        if (nombre) {
+            options.where.nombre = {
+                [Op.like]: `%${nombre}%`,
+            };
+        }
+        const proveedores = await _proveedorService.searchAll(options);
+        return res.send(proveedores);
+    }
 }
 
 module.exports = ProveedorController;

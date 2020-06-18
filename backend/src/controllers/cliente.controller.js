@@ -1,3 +1,5 @@
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 let _clienteService = null;
 
 class ClienteController {
@@ -30,8 +32,33 @@ class ClienteController {
         const deletedCliente = await _clienteService.delete(id);
         return res.send(deletedCliente);
     }
-    async getFacturas(req, res) {}
-    async search(req, res) {}
+    async getFacturas(req, res) {
+        const { id } = req.params;
+        const cliente = await _clienteService.get(id);
+        const facturas = await cliente.getFacturas();
+        return res.send(facturas);
+    }
+    async search(req, res) {
+        const { cedula, nombre, email } = req.query;
+        const options = { where: {} };
+        if (cedula) {
+            options.where.cedula = {
+                [Op.like]: `%${cedula}%`,
+            };
+        }
+        if (nombre) {
+            options.where.nombre = {
+                [Op.like]: `%${nombre}%`,
+            };
+        }
+        if (email) {
+            options.where.email = {
+                [Op.like]: `%${email}%`,
+            };
+        }
+        const clientes = await _clienteService.searchAll(options);
+        return res.send(clientes);
+    }
 }
 
 module.exports = ClienteController;

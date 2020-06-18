@@ -31,8 +31,24 @@ class FacturaController {
         const deletedFactura = await _facturaService.delete(id);
         return res.send(deletedFactura);
     }
-    async getCliente(req, res) {}
-    async search(req, res) {}
+    async getCliente(req, res) {
+        const { id } = req.params;
+        const factura = await _facturaService.get(id);
+        const cliente = await factura.getCliente();
+        return res.send(cliente);
+    }
+    async search(req, res) {
+        const { cliente, usuario } = req.query;
+        const options = { where: {} };
+        if (cliente) {
+            options.where.cliente_id = cliente;
+        }
+        if (usuario) {
+            options.where.usuario_id = usuario;
+        }
+        const compras = await _facturaService.searchAll(options);
+        return res.send(compras);
+    }
 }
 
 module.exports = FacturaController;

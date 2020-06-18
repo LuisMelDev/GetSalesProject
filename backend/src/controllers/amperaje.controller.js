@@ -11,7 +11,7 @@ class AmperajeController {
     }
     async getAll(req, res) {
         const { pageSize, pageNum } = req.query;
-        const amperajes = await _amperajeService.getAll(pageSize, pageNum);
+        const amperajes = await _amperajeService.getAll();
         return res.send(amperajes);
     }
     async create(req, res) {
@@ -30,8 +30,21 @@ class AmperajeController {
         const deletedAmperaje = await _amperajeService.delete(id);
         res.send(deletedAmperaje);
     }
-    async getProductos(req, res) {}
-    async search(req, res) {}
+    async getProductos(req, res) {
+        const { id } = req.params;
+        const amperaje = await _amperajeService.get(id);
+        const productos = await amperaje.getProductos();
+        return res.send(productos);
+    }
+    async search(req, res) {
+        const { amp } = req.query;
+        const options = { where: {} };
+        if (amp) {
+            options.where.amp = amp;
+        }
+        const amperajes = await _amperajeService.searchAll(options);
+        return res.send(amperajes);
+    }
 }
 
 module.exports = AmperajeController;

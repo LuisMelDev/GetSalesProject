@@ -1,3 +1,5 @@
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 let _productoService = null;
 
 class ProductoController {
@@ -30,7 +32,26 @@ class ProductoController {
         const deleteProduct = await _productoService.delete(id);
         return res.send(deleteProduct);
     }
-    search(req, res) {}
+    async search(req, res) {
+        const { nombre, amperaje, grupo, marca } = req.query;
+        const options = { where: {} };
+        if (nombre) {
+            options.where.nombre = {
+                [Op.like]: `%${nombre}%`,
+            };
+        }
+        if (amperaje) {
+            options.where.amperaje_id = amperaje;
+        }
+        if (grupo) {
+            options.where.grupo_id = grupo;
+        }
+        if (marca) {
+            options.where.marca_id = marca;
+        }
+        const productos = await _productoService.searchAll(options);
+        return res.send(productos);
+    }
 }
 
 module.exports = ProductoController;

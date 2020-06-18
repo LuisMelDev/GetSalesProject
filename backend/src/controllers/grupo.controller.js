@@ -1,4 +1,6 @@
 let _grupoService = null;
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 class GrupoController {
     constructor({ GrupoService }) {
@@ -11,7 +13,7 @@ class GrupoController {
     }
     async getAll(req, res) {
         const { pageSize, pageNum } = req.query;
-        const grupos = await _grupoService.getAll(pageSize, pageNum);
+        const grupos = await _grupoService.getAll();
         return res.send(grupos);
     }
     async create(req, res) {
@@ -30,8 +32,23 @@ class GrupoController {
         const deletedGrupo = await _grupoService.delete(id);
         return res.send(deletedGrupo);
     }
-    async getProductos(req, res) {}
-    async search(req, res) {}
+    async getProductos(req, res) {
+        const { id } = req.params;
+        const grupo = await _grupoService.get(id);
+        const productos = await grupo.getProductos();
+        return res.send(productos);
+    }
+    async search(req, res) {
+        const { nombre } = req.query;
+        const options = { where: {} };
+        if (nombre) {
+            options.where.nombre = {
+                [Op.like]: `%${nombre}%`,
+            };
+        }
+        const grupos = await _grupoService.searchAll(options);
+        return res.send(grupos);
+    }
 }
 
 module.exports = GrupoController;
