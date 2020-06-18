@@ -5,10 +5,12 @@ module.exports = (sequelize, DataTypes) => {
         {
             nombre: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
             },
         },
-        {}
+        {
+            timestamps: false,
+        }
     );
     Marca.associate = function (models) {
         Marca.hasMany(models.productos, {

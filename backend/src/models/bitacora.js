@@ -5,18 +5,20 @@ module.exports = (sequelize, DataTypes) => {
         {
             fecha: {
                 type: DataTypes.DATE,
-                allowNull: false
+                allowNull: false,
             },
             operacion_id: {
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: false,
             },
             usuario_id: {
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: false,
             },
         },
-        {}
+        {
+            timestamps: false,
+        }
     );
     Bitacora.associate = function (models) {
         Bitacora.belongsTo(models.operaciones, {

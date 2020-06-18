@@ -5,10 +5,12 @@ module.exports = (sequelize, DataTypes) => {
         {
             nombre: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
             },
         },
-        {}
+        {
+            timestamps: false,
+        }
     );
     Grupo.associate = function (models) {
         Grupo.hasMany(models.productos, {

@@ -5,26 +5,28 @@ module.exports = (sequelize, DataTypes) => {
         {
             nombre: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
             },
             imagen: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
             },
             amperaje_id: {
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: false,
             },
             grupo_id: {
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: false,
             },
-            marca_id:  {
+            marca_id: {
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: false,
             },
         },
-        {}
+        {
+            timestamps: false,
+        }
     );
     Producto.associate = function (models) {
         Producto.belongsTo(models.amperajes, {

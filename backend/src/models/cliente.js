@@ -5,30 +5,32 @@ module.exports = (sequelize, DataTypes) => {
         {
             cedula: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
             },
             nombre: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
             },
             direccion: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
             },
             fecha_nacimiento: {
                 type: DataTypes.DATE,
-                allowNull: false
+                allowNull: false,
             },
             telefono: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
             },
             email: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
             },
         },
-        {}
+        {
+            timestamps: false,
+        }
     );
     Cliente.associate = function (models) {
         Cliente.hasMany(models.facturas, {

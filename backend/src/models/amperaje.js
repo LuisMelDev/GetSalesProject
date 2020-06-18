@@ -3,12 +3,14 @@ module.exports = (sequelize, DataTypes) => {
     const Amperaje = sequelize.define(
         "amperajes",
         {
-            amp: { 
-                type:DataTypes.INTEGER,
-                allowNull: false
+            amp: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
             },
         },
-        {}
+        {
+            timestamps: false,
+        }
     );
     Amperaje.associate = function (models) {
         Amperaje.hasMany(models.productos, {

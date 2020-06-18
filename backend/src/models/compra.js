@@ -5,18 +5,20 @@ module.exports = (sequelize, DataTypes) => {
         {
             proveedor_id: {
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: false,
             },
             usuario_id: {
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: false,
             },
             fecha: {
                 type: DataTypes.DATE,
-                allowNull: false
+                allowNull: false,
             },
         },
-        {}
+        {
+            timestamps: false,
+        }
     );
     Compra.associate = function (models) {
         Compra.belongsTo(models.proveedores, {

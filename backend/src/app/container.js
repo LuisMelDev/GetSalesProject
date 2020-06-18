@@ -7,6 +7,7 @@ const app = require(".");
 //servicios
 const {
     amperajeService,
+    authService,
     bitacoraService,
     clienteService,
     compraService,
@@ -24,6 +25,7 @@ const {
 //controllers
 const {
     amperajeController,
+    authController,
     bitacoraController,
     clienteController,
     compraController,
@@ -102,6 +104,7 @@ container
     })
     .register({
         AmperajeService: asClass(amperajeService).singleton(),
+        AuthService: asClass(authService).singleton(),
         BitacoraService: asClass(bitacoraService).singleton(),
         ClienteService: asClass(clienteService).singleton(),
         CompraService: asClass(compraService).singleton(),
@@ -116,6 +119,9 @@ container
         UsuarioService: asClass(usuarioService).singleton(),
     })
     .register({
+        AuthController: asClass(
+            authController.bind(authController)
+        ).singleton(),
         AmperajeController: asClass(
             amperajeController.bind(amperajeController)
         ).singleton(),

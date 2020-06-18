@@ -1,10 +1,9 @@
 module.exports = {
     amperajeService: require("./amperaje.service"),
+    authService: require("./auth.service"),
     bitacoraService: require("./bitacora.service"),
     clienteService: require("./cliente.service"),
     compraService: require("./compra.service"),
-    detalleCompraService: require("./detalleCompra.service"),
-    detalleFacturaService: require("./detalleFactura.service"),
     facturaService: require("./factura.service"),
     grupoService: require("./grupo.service"),
     inventarioService: require("./inventario.service"),

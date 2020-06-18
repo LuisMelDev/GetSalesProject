@@ -9,14 +9,16 @@ module.exports = (sequelize, DataTypes) => {
             },
             fecha_entrada: {
                 type: DataTypes.DATE,
-                allowNull: false
+                allowNull: false,
             },
-            existencia_producto: { 
+            existencia_producto: {
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: false,
             },
         },
-        {}
+        {
+            timestamps: false,
+        }
     );
     Inventario.associate = function (models) {
         Inventario.belongsTo(models.productos, {

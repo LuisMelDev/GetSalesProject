@@ -4,7 +4,7 @@ let _bitacoraRepository = null;
 class BitacoraService extends BaseService {
     constructor({ BitacoraRepository }) {
         super(BitacoraRepository);
-        _bitacoraRepository = Bitacora;
+        _bitacoraRepository = BitacoraRepository;
     }
 }
 

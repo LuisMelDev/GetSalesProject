@@ -3,12 +3,14 @@ module.exports = (sequelize, DataTypes) => {
     const Rol = sequelize.define(
         "roles",
         {
-            rol:{
+            rol: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
             },
         },
-        {}
+        {
+            timestamps: false,
+        }
     );
     Rol.associate = function (models) {
         Rol.hasMany(models.usuarios, {

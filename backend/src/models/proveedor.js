@@ -5,14 +5,16 @@ module.exports = (sequelize, DataTypes) => {
         {
             nombre: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
             },
-            rif:{
+            rif: {
                 type: DataTypes.STRING,
-                allowNull: false
-            }
+                allowNull: false,
+            },
         },
-        {}
+        {
+            timestamps: false,
+        }
     );
     Proveedor.associate = function (models) {
         Proveedor.hasMany(models.compras, {

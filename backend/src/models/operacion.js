@@ -5,10 +5,12 @@ module.exports = (sequelize, DataTypes) => {
         {
             operaciones: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
             },
         },
-        {}
+        {
+            timestamps: false,
+        }
     );
     Operacion.associate = function (models) {
         Operacion.belongsToMany(models.usuarios, {

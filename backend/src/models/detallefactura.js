@@ -5,22 +5,24 @@ module.exports = (sequelize, DataTypes) => {
         {
             factura_id: {
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: false,
             },
             producto_id: {
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: false,
             },
             cantidad_producto: {
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: false,
             },
             precio_producto: {
                 type: DataTypes.DOUBLE,
-                allowNull: false
+                allowNull: false,
             },
         },
-        {}
+        {
+            timestamps: false,
+        }
     );
     DetalleFactura.associate = function (models) {
         DetalleFactura.belongsTo(models.facturas, {

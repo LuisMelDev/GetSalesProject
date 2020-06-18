@@ -7,26 +7,28 @@ module.exports = (sequelize, DataTypes) => {
         {
             rol_id: {
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: false,
             },
             nombre: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
             },
             username: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
             },
             password: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
             },
             email: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
             },
         },
-        {}
+        {
+            timestamps: false,
+        }
     );
     // relaciones
     Usuario.associate = function (models) {
