@@ -3,9 +3,18 @@ module.exports = (sequelize, DataTypes) => {
     const Compra = sequelize.define(
         "compras",
         {
-            proveedor_id: DataTypes.INTEGER,
-            usuario_id: DataTypes.INTEGER,
-            fecha: DataTypes.DATE,
+            proveedor_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            },
+            usuario_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            },
+            fecha: {
+                type: DataTypes.DATE,
+                allowNull: false
+            },
         },
         {}
     );

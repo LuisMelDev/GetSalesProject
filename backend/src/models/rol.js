@@ -3,7 +3,10 @@ module.exports = (sequelize, DataTypes) => {
     const Rol = sequelize.define(
         "roles",
         {
-            rol: DataTypes.STRING,
+            rol:{
+                type: DataTypes.STRING,
+                allowNull: false
+            },
         },
         {}
     );

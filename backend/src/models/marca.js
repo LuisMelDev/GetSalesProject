@@ -3,7 +3,10 @@ module.exports = (sequelize, DataTypes) => {
     const Marca = sequelize.define(
         "marcas",
         {
-            nombre: DataTypes.STRING,
+            nombre: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
         },
         {}
     );

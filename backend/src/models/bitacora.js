@@ -3,9 +3,18 @@ module.exports = (sequelize, DataTypes) => {
     const Bitacora = sequelize.define(
         "bitacora",
         {
-            fecha: DataTypes.DATE,
-            operacion_id: DataTypes.INTEGER,
-            usuario_id: DataTypes.INTEGER,
+            fecha: {
+                type: DataTypes.DATE,
+                allowNull: false
+            },
+            operacion_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            },
+            usuario_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            },
         },
         {}
     );

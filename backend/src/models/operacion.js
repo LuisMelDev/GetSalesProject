@@ -3,7 +3,10 @@ module.exports = (sequelize, DataTypes) => {
     const Operacion = sequelize.define(
         "operaciones",
         {
-            operaciones: DataTypes.STRING,
+            operaciones: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
         },
         {}
     );

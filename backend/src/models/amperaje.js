@@ -3,7 +3,10 @@ module.exports = (sequelize, DataTypes) => {
     const Amperaje = sequelize.define(
         "amperajes",
         {
-            amp: DataTypes.INTEGER,
+            amp: { 
+                type:DataTypes.INTEGER,
+                allowNull: false
+            },
         },
         {}
     );

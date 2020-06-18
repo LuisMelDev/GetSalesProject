@@ -3,7 +3,10 @@ module.exports = (sequelize, DataTypes) => {
     const Grupo = sequelize.define(
         "grupos",
         {
-            nombre: DataTypes.STRING,
+            nombre: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
         },
         {}
     );

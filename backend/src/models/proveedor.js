@@ -3,7 +3,14 @@ module.exports = (sequelize, DataTypes) => {
     const Proveedor = sequelize.define(
         "proveedores",
         {
-            nombre: DataTypes.STRING,
+            nombre: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            rif:{
+                type: DataTypes.STRING,
+                allowNull: false
+            }
         },
         {}
     );
