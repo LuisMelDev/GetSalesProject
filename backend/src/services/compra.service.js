@@ -1,12 +1,15 @@
-const BaseService = require('./base.service')
+const BaseService = require("./base.service");
+let _compraRepository = null;
 
-class CompraService extends BaseService{
-
-    constructor(Compra){
-        super(Compra)
-        this.Compra = Compra
+class CompraService extends BaseService {
+    constructor({ CompraRepository }) {
+        super(CompraRepository);
+        _compraRepository = CompraRepository;
     }
-    
+    async createDetalle(detalle) {
+        const detalleCompra = await _compraRepository.createDetalle(detalle);
+        return detalleCompra;
+    }
 }
 
-module.exports = CompraService
+module.exports = CompraService;

@@ -16,8 +16,20 @@ class FacturaController {
     }
 
     async create(req, res) {
-        const { body } = req;
-        const createdFactura = await _facturaService.create(body);
+        const { detalles, ...factura } = req.body;
+        const createdFactura = await _facturaService.create(factura);
+        detalles.forEach(async ({ producto, cantidad, precio }) => {
+            const detalle = {
+                factura_id: createdFactura.id,
+                producto_id: producto,
+                cantidad_producto: cantidad,
+                precio_producto: precio,
+            };
+            // TODO crear metodo createDetalle
+            const detalle_factura = await _facturaService.createDetalle(
+                detalle
+            );
+        });
         return res.send(createdFactura);
     }
     async update(req, res) {

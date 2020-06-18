@@ -15,8 +15,18 @@ class CompraController {
         return res.send(compras);
     }
     async create(req, res) {
-        const { body } = req;
-        const createdCompra = await _compraService.create(body);
+        const { detalles, ...compra } = req.body;
+        const createdCompra = await _compraService.create(compra);
+        detalles.forEach(async ({ producto, cantidad, precio }) => {
+            const detalle = {
+                compra_id: createdCompra.id,
+                producto_id: producto,
+                cantidad_producto: cantidad,
+                precio_producto: precio,
+            };
+            // TODO crear metodo createDetalle
+            const detalle_compra = await _compraService.createDetalle(detalle);
+        });
         return res.send(createdCompra);
     }
     async update(req, res) {

@@ -4,12 +4,14 @@ class BaseService {
     constructor(repository) {
         this.repository = repository;
     }
-
+    async get(id) {
+        return await this.repository.get(id);
+    }
     async getAll() {
-        // const offset = pageSize * (pageNum - 1)
-        // const limit = pageSize
-        console.log(`service checked`);
         return await this.repository.getAll();
+    }
+    async searchAll(options) {
+        return await this.repository.searchAll(options);
     }
 }
 

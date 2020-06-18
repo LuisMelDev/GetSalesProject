@@ -1,12 +1,15 @@
-const BaseService = require('./base.service')
+const BaseService = require("./base.service");
+let _facturaRepository = null;
 
-class FacturaService extends BaseService{
-
-    constructor(Factura){
-        super(Factura)
-        this.Factura = Factura
+class FacturaService extends BaseService {
+    constructor({ FacturaRepository }) {
+        super(FacturaRepository);
+        _facturaRepository = FacturaRepository;
     }
-    
+    async createDetalle(detalle) {
+        const detalleFactura = await _facturaRepository.createDetalle(detalle);
+        return detalleFactura;
+    }
 }
 
-module.exports = FacturaService
+module.exports = FacturaService;

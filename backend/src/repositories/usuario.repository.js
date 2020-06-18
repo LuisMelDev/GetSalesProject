@@ -6,6 +6,14 @@ class UsuarioRepository extends BaseRepository {
         super(Usuario);
         _usuario = Usuario;
     }
+    async getByUsername(username) {
+        const usuario = await _usuario.findOne({
+            where: {
+                username,
+            },
+        });
+        return usuario;
+    }
 }
 
 module.exports = UsuarioRepository;
