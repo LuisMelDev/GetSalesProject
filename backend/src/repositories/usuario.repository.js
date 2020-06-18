@@ -7,7 +7,7 @@ class UsuarioRepository extends BaseRepository {
         _usuario = Usuario;
     }
 
-    async getUsuarioUsername(username) {
+    async getUsuarioByUsername(username) {
         return await _usuario.findAll({
             where: {
                 username,
@@ -15,20 +15,21 @@ class UsuarioRepository extends BaseRepository {
         });
     }
 
-    async getUsuarioNombre(nombre) {
+    async getUsuarioByNombre(nombre) {
         return await _usuario.findAll({
             where: {
                 nombre,
             },
         });
     }
-
-    async getByFacturas() {
-        return await _usuario.getFacturas();
+    async getFacturas(userId) {
+        const usuario = await _usuario.findByPk(userId);
+        return await usuario.getFacturas();
     }
 
-    async getByCompras() {
-        return await _usuario.getCompras();
+    async getCompras(userId) {
+        const usuario = await _usuario.findByPk(userId);
+        return await usuario.getCompras();
     }
 }
 

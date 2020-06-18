@@ -7,10 +7,10 @@ class ClienteRepository extends BaseRepository {
         _cliente = Cliente;
     }
 
-    async getByFacturas(){
-        return await _cliente.getFacturas();
+    async getFacturas(clienteId) {
+        const cliente = await _cliente.findByPk(clienteId);
+        return await cliente.getFacturas();
     }
 }
-
 
 module.exports = ClienteRepository;

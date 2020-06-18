@@ -6,6 +6,10 @@ class AmperajeRepository extends BaseRepository {
         super(Amperaje);
         _amperaje = Amperaje;
     }
+    async getProductos(amperajeId) {
+        const amperaje = await _amperaje.findByPk(amperajeId);
+        return await amperaje.getProductos();
+    }
 }
 
 module.exports = AmperajeRepository;

@@ -6,15 +6,15 @@ class ProveedorService extends BaseService {
         super(ProveedorRepository);
         _proveedorRepository = ProveedorRepository;
     }
-    async getProveedorNombre(nombre) {
+    async getProveedorByNombre(nombre) {
         if (!nombre) {
             ErrorHelper(400, "nombre must be sent");
         }
-        return await _proveedorRepository.getProveedorNombre();
+        return await _proveedorRepository.getProveedorByNombre();
     }
 
-    async getCompras() {
-        return await _proveedorRepository.getCompras();
+    async getCompras(proveedorId) {
+        return await _proveedorRepository.getCompras(proveedorId);
     }
 }
 

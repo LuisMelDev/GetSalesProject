@@ -7,8 +7,9 @@ class MarcaRepository extends BaseRepository {
         _marca = Marca;
     }
 
-    async getProductosMarca() {
-        return await _marca.getProductos();
+    async getProductos(marcaId) {
+        const marca = await _marca.findByPk(marcaId);
+        return await marca.getProductos();
     }
 }
 

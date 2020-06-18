@@ -7,8 +7,9 @@ class RolRepository extends BaseRepository {
         _rol = Rol;
     }
 
-    async getUsuario() {
-        return await _rol.getUsuarios;
+    async getUsuarios(rolId) {
+        const rol = await _rol.findByPk(rolId);
+        return await rol.getUsuarios();
     }
 }
 

@@ -6,8 +6,9 @@ class GrupoRepository extends BaseRepository {
         super(Grupo);
         _grupo = Grupo;
     }
-    async getProductosGrupo() {
-        return await _grupo.getProductos();
+    async getProductos(grupoId) {
+        const grupo = await _grupo.findByPk(grupoId);
+        return await grupo.getProductos();
     }
 }
 

@@ -6,11 +6,11 @@ class ProductoService extends BaseService {
         super(ProductoRepository);
         _productoRepository = ProductoRepository;
     }
-    async getProductoNombre(nombre) {
+    async getProductoByNombre(nombre) {
         if (!nombre) {
             ErrorHelper(400, "nombre must be sent");
         }
-        return await _productoRepository.getProductoNombre();
+        return await _productoRepository.getProductoByNombre();
     }
 }
 

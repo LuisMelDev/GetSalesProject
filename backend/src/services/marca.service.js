@@ -7,8 +7,8 @@ class MarcaService extends BaseService {
         _marcaRepository = MarcaRepository;
     }
 
-    async getProductosMarca() {
-        return await _marcaRepository.getProductosMarca();
+    async getProductos(marcaId) {
+        return await _marcaRepository.getProductos(marcaId);
     }
 }
 

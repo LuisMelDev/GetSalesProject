@@ -6,6 +6,9 @@ class AmperajeService extends BaseService {
         super(AmperajeRepository);
         _amperajeRepository = AmperajeRepository;
     }
+    async getProductos(amperajeId) {
+        return await _amperajeRepository.getProductos(amperajeId);
+    }
 }
 
 module.exports = AmperajeService;

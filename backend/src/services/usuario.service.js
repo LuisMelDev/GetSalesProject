@@ -7,27 +7,23 @@ class UsuarioService extends BaseService {
         super(UsuarioRepository);
         _usuarioRepository = UsuarioRepository;
     }
-    async getByUsername(username) {
-        const usuario = await _usuarioRepository.getByUsername(username);
-        return usuario;
-    }
     async getUsuarioByUsername(username) {
         if (!username) {
             ErrorHelper(400, "username must be sent");
         }
-        return await _usuarioRepository.getUserByUsername(username);
+        return await _usuarioRepository.getUsuarioByUsername(username);
     }
     async getUsuarioByNombre(nombre) {
         if (!nombre) {
             ErrorHelper(400, "nombre must be sent");
         }
-        return await _usuarioRepository.getUserByNombre(nombre);
+        return await _usuarioRepository.getUsuarioByNombre(nombre);
     }
-    async getByFacturas() {
-        return await _usuarioRepository.getByFacturas();
+    async getFacturas(userId) {
+        return await _usuarioRepository.getFacturas(userId);
     }
-    async getByCompras() {
-        return await _usuarioRepository.getByCompras();
+    async getCompras() {
+        return await _usuarioRepository.getCompras(userId);
     }
 }
 

@@ -5,8 +5,8 @@ class ClienteService extends BaseService {
         super(ClienteRepository);
         _clienteRepository = ClienteRepository;
     }
-    async getByFacturas() {
-        return await _clienteRepository.getByFacturas();
+    async getFacturas(clienteId) {
+        return await _clienteRepository.getFacturas(clienteId);
     }
 }
 

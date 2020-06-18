@@ -7,12 +7,12 @@ class ProductoRepository extends BaseRepository {
         _producto = Producto;
     }
 
-    async getProductoNombre(nombre) {
+    async getProductoByNombre(nombre) {
         return await _producto.findAll({
             where: {
-                nombre
-            }
-        })
+                nombre,
+            },
+        });
     }
 }
 

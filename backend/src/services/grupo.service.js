@@ -7,8 +7,8 @@ class GrupoService extends BaseService {
         _grupoRepository = GrupoRepository;
     }
 
-    async getProductosGrupo() {
-        return await _grupoRepository.getProductosGrupo();
+    async getProductos(grupoId) {
+        return await _grupoRepository.getProductos(grupoId);
     }
 }
 

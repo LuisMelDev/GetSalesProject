@@ -11,7 +11,7 @@ class AmperajeController {
     }
     async getAll(req, res) {
         const { pageSize, pageNum } = req.query;
-        const amperajes = await _amperajeService.getAll();
+        const amperajes = await _amperajeService.getAll(pageSize, pageNum);
         return res.send(amperajes);
     }
     async create(req, res) {

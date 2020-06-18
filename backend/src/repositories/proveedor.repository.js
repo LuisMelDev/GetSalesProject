@@ -7,19 +7,18 @@ class ProveedorRepository extends BaseRepository {
         _proveedor = Proveedor;
     }
 
-    async getProveedorNombre(nombre) {
+    async getProveedorByNombre(nombre) {
         return await _proveedor.findAll({
             where: {
-                nombre
-            }
-        })
+                nombre,
+            },
+        });
     }
 
-    async getCompras() {
-        return await _proveedor.getCompras;
+    async getCompras(proveedorId) {
+        const proveedor = await _proveedor.findByPk(proveedorId);
+        return await proveedor.getCompras();
     }
-
-
 }
 
 module.exports = ProveedorRepository;

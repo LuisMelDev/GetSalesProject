@@ -7,8 +7,8 @@ class RolService extends BaseService {
         _rolRepository = RolRepository;
     }
 
-    async getUsuario() {
-        return await _rolRepository.getUsuario();
+    async getUsuarios(rolId) {
+        return await _rolRepository.getUsuarios(rolId);
     }
 }
 
