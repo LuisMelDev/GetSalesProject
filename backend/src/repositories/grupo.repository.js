@@ -6,6 +6,9 @@ class GrupoRepository extends BaseRepository {
         super(Grupo);
         _grupo = Grupo;
     }
+    async getProductosGrupo() {
+        return await _grupo.getProductos();
+    }
 }
 
 module.exports = GrupoRepository;

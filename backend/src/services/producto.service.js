@@ -6,6 +6,12 @@ class ProductoService extends BaseService {
         super(ProductoRepository);
         _productoRepository = ProductoRepository;
     }
+    async getProductoNombre(nombre) {
+        if (!nombre) {
+            ErrorHelper(400, "nombre must be sent");
+        }
+        return await _productoRepository.getProductoNombre();
+    }
 }
 
 module.exports = ProductoService;

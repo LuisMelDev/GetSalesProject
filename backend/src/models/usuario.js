@@ -5,11 +5,26 @@ module.exports = (sequelize, DataTypes) => {
     const Usuario = sequelize.define(
         "usuarios",
         {
-            rol_id: DataTypes.INTEGER,
-            nombre: DataTypes.STRING,
-            username: DataTypes.STRING,
-            password: DataTypes.STRING,
-            email: DataTypes.STRING,
+            rol_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            },
+            nombre: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            username: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            password: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            email: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
         },
         {}
     );
@@ -21,11 +36,11 @@ module.exports = (sequelize, DataTypes) => {
         });
         Usuario.hasMany(models.compras, {
             foreignKey: "usuario_id",
-            as: "compras",
+            as: "Compras",
         });
         Usuario.hasMany(models.facturas, {
             foreignKey: "usuario_id",
-            as: "facturas",
+            as: "Facturas",
         });
         Usuario.belongsToMany(models.operaciones, {
             through: models.bitacora,

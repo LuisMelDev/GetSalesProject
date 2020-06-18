@@ -10,6 +10,13 @@ class CompraService extends BaseService {
         const detalleCompra = await _compraRepository.createDetalle(detalle);
         return detalleCompra;
     }
+    async getByFecha(fecha) {
+        !fecha;
+        {
+            ErrorHelper(400, "fecha must be sent");
+        }
+        return await _compraRepository.getByFecha();
+    }
 }
 
 module.exports = CompraService;

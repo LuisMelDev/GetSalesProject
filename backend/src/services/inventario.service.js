@@ -6,6 +6,13 @@ class InventarioService extends BaseService {
         super(InventarioRepository);
         _inventarioRepository = InventarioRepository;
     }
+    async getByFecha(fecha_entrada) {
+        !fecha_entrada;
+        {
+            ErrorHelper(400, "fecha must be sent");
+        }
+        return await _inventarioRepository.getByFecha();
+    }
 }
 
 module.exports = InventarioService;

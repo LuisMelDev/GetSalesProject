@@ -3,10 +3,22 @@ module.exports = (sequelize, DataTypes) => {
     const DetalleFactura = sequelize.define(
         "detalle_factura",
         {
-            factura_id: DataTypes.INTEGER,
-            producto_id: DataTypes.INTEGER,
-            cantidad_producto: DataTypes.INTEGER,
-            precio_producto: DataTypes.DOUBLE,
+            factura_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            },
+            producto_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            },
+            cantidad_producto: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            },
+            precio_producto: {
+                type: DataTypes.DOUBLE,
+                allowNull: false
+            },
         },
         {}
     );

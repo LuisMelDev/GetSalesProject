@@ -7,8 +7,14 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
             },
-            fecha_entrada: DataTypes.DATE,
-            existencia_producto: DataTypes.INTEGER,
+            fecha_entrada: {
+                type: DataTypes.DATE,
+                allowNull: false
+            },
+            existencia_producto: { 
+                type: DataTypes.INTEGER,
+                allowNull: false
+            },
         },
         {}
     );

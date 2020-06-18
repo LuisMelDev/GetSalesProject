@@ -6,6 +6,10 @@ class MarcaService extends BaseService {
         super(MarcaRepository);
         _marcaRepository = MarcaRepository;
     }
+
+    async getProductosMarca() {
+        return await _marcaRepository.getProductosMarca();
+    }
 }
 
 module.exports = MarcaService;

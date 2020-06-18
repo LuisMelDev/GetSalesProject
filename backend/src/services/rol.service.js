@@ -6,6 +6,10 @@ class RolService extends BaseService {
         super(RolRepository);
         _rolRepository = RolRepository;
     }
+
+    async getUsuario() {
+        return await _rolRepository.getUsuario();
+    }
 }
 
 module.exports = RolService;

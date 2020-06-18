@@ -3,14 +3,17 @@ module.exports = (sequelize, DataTypes) => {
     const Grupo = sequelize.define(
         "grupos",
         {
-            nombre: DataTypes.STRING,
+            nombre: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
         },
         {}
     );
     Grupo.associate = function (models) {
         Grupo.hasMany(models.productos, {
             foreignKey: "grupo_id",
-            as: "productos",
+            as: "Productos",
         });
     };
     return Grupo;

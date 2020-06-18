@@ -12,6 +12,14 @@ class CompraRepository extends BaseRepository {
         const detalleCompra = await _detalleCompra.create(detalle);
         return detalleCompra;
     }
+
+    async getByFecha(fecha){
+        return await _compra.findAll({
+            where: {
+                fecha
+            }
+        })
+    }
 }
 
 module.exports = CompraRepository;
