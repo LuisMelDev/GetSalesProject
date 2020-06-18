@@ -6,6 +6,15 @@ class FacturaRepository extends BaseRepository {
         super(Factura);
         _factura = Factura;
     }
+
+    async getByFecha(fecha){
+        return await _factura.findAll({
+            where: {
+                fecha
+            }
+        })
+    }
+
 }
 
 module.exports = FacturaRepository;

@@ -1,10 +1,16 @@
 const BaseService = require("./base.service");
+let _rolRepository = null;
 
 class RolService extends BaseService {
-    constructor(Rol) {
-        super(Rol);
-        this.Rol = Rol;
+    constructor(RolRepository) {
+        super(RolRepository);
+        _rolRepository = RolRepository;
     }
+
+    async getUsuario(){
+        return await _rolRepository.getUsuario();
+    } 
+    
 }
 
 module.exports = RolService;

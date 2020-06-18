@@ -6,6 +6,13 @@ class InventarioRepository extends BaseRepository {
         super(Inventario);
         _inventario = Inventario;
     }
-}
 
+    async getByFecha(fecha_entrada){
+        return await _inventario.findAll({
+            where: {
+                fecha_entrada
+            }
+        })
+}
+}
 module.exports = InventarioRepository;

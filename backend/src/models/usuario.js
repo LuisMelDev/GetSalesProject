@@ -18,11 +18,11 @@ module.exports = (sequelize, DataTypes) => {
         });
         Usuario.hasMany(models.compras, {
             foreignKey: "usuario_id",
-            as: "compras",
+            as: "Compras",
         });
         Usuario.hasMany(models.facturas, {
             foreignKey: "usuario_id",
-            as: "facturas",
+            as: "Facturas",
         });
         Usuario.belongsToMany(models.operaciones, {
             through: models.bitacora,

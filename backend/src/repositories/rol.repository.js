@@ -6,6 +6,10 @@ class RolRepository extends BaseRepository {
         super(Rol);
         _rol = Rol;
     }
+
+    async getUsuario() {
+        return await _rol.getUsuarios;
+    }
 }
 
 module.exports = RolRepository;

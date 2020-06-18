@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     Marca.associate = function (models) {
         Marca.hasMany(models.productos, {
             foreignKey: "marca_id",
-            as: "productos",
+            as: "Productos",
         });
     };
     return Marca;
