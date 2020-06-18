@@ -1,0 +1,58 @@
+<div class="container-fluid">
+    <form action="" class="form-neon" autocomplete="off">
+        <fieldset>
+            <legend><i class="fas fa-user"></i> &nbsp; Información básica</legend>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group bmd-form-group bmd-form-group-lg">
+                            <label for="cliente_dni" >Cedula</label>
+                            <input type="text" pattern="[a-zA-Z0-9-]{1,27}" class="form-control" id="cliente_dni" id="cliente_dni" maxlength="27">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group bmd-form-group bmd-form-group-lg">
+                            <label for="cliente_nombre" >Nombres</label>
+                            <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" class="form-control" name="cliente_nombre" id="cliente_nombre" maxlength="40">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group bmd-form-group bmd-form-group-lg">
+                            <label for="cliente_apellido" >Apellidos</label>
+                            <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" class="form-control" name="cliente_apellido" id="cliente_apellido" maxlength="40">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group bmd-form-group bmd-form-group-lg">
+                            <label for="cliente_telefono" >Fecha de Nacimiento</label>
+                            <input type="date" pattern="[0-9()+]{1,20}" class="form-control" name="cliente_telefono" id="cliente_telefono" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group bmd-form-group bmd-form-group-lg">
+                            <label for="cliente_apellido" >Telefono</label>
+                            <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" class="form-control" name="cliente_apellido" id="cliente_apellido" maxlength="40">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group bmd-form-group bmd-form-group-lg">
+                            <label for="cliente_apellido" >Correo</label>
+                            <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" class="form-control" name="cliente_apellido" id="cliente_apellido" maxlength="40">
+                        </div>
+                    </div>
+                    <div class="col-12 ">
+                        <div class="form-group bmd-form-group bmd-form-group-lg">
+                            <label for="cliente_direccion">Dirección</label>
+                            <textarea class="form-control" name="cliente_direccion" id="cliente_direccion" maxlength="150"></textarea>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </fieldset>
+        <p class="text-center" style="margin-top: 40px;">
+            &nbsp; &nbsp;
+            <button type="submit" class="btn btn-raised btn-danger btn-lg"><i class="far fa-save"></i> &nbsp; Registrar</button>
+        </p>
+    </form>
+</div>	
+

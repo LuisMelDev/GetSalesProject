@@ -141,7 +141,7 @@ body,html{
 	border: 1px solid var(--accent-color);
 }
 .table-dark thead tr{
-	background-color: var(--accent-color);
+	background-color: #1f2028;
 }
 .table-dark td,
 .table-dark thead th,

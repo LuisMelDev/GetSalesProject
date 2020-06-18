@@ -9,10 +9,13 @@ import { Router } from "@angular/router";
 export class AppComponent implements OnInit {
   title = 'GetSales';
   public usuario: any;
+  public hamburguer:boolean;
+
   constructor( 
     private _router :Router
   ){
     this.usuario = true;
+    this.hamburguer = false;
   }
 
   ngOnInit(){
@@ -21,4 +24,7 @@ export class AppComponent implements OnInit {
     }
   }
 
+  toggleMenu(){
+        this.hamburguer = !this.hamburguer
+  }
 }

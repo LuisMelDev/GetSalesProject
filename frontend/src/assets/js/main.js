@@ -1,4 +1,4 @@
-
+$('body').bootstrapMaterialDesign();
 $(document).ready(function(){
 
 	/*  Show/Hidden Submenus */
@@ -18,7 +18,7 @@ $(document).ready(function(){
 	});
 
 	/*  Show/Hidden Nav Lateral */
-	$('#show-nav-lateral').on('click', function(e){
+	$('.show-nav-lateral').on('click', function(e){
 		e.preventDefault();
 		var NavLateral=$('.nav-lateral');
 		var PageConten=$('.page-content');
@@ -30,6 +30,7 @@ $(document).ready(function(){
 			PageConten.addClass('active');
 		}
 	});
+
 
 	/*  Exit system buttom */
 	
