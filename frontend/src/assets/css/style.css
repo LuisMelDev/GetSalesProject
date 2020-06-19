@@ -513,3 +513,16 @@ table form{
 	align-items: center !important;
 	justify-content: center !important;
 }
+
+.flex-bottom{
+    display: flex !important;
+    align-items: flex-end !important;
+}
+
+.flex-bottom div{
+	width: 100% !important;
+}
+
+.flex-bottom div button{
+	width: 100% !important;
+}

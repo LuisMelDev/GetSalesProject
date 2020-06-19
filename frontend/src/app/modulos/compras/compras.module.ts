@@ -3,14 +3,24 @@ import { CommonModule } from '@angular/common';
 
 import { ComprasRoutingModule } from './compras-routing.module';
 import { PrincipalComponent } from './pages/principal/principal.component';
-
+import { AgregarComponent } from './pages/agregar/agregar.component';
+import { ConsultarComponent } from './pages/consultar/consultar.component';
+import { VerComponent } from './pages/ver/ver.component';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
-  declarations: [PrincipalComponent],
-  imports: [
-    CommonModule,
-    ComprasRoutingModule
+  declarations: [
+    PrincipalComponent,
+    AgregarComponent,
+    ConsultarComponent,
+    VerComponent,
   ],
-  exports: [PrincipalComponent]
+  imports: [CommonModule, ComprasRoutingModule, ComponentsModule],
+  exports: [
+    PrincipalComponent,
+    AgregarComponent,
+    ConsultarComponent,
+    VerComponent,
+  ],
 })
-export class ComprasModule { }
+export class ComprasModule {}

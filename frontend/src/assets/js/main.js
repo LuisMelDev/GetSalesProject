@@ -1,6 +1,6 @@
 $('body').bootstrapMaterialDesign();
 $(document).ready(function(){
-
+	$('body').bootstrapMaterialDesign();
 	/*  Show/Hidden Submenus */
 	$('.nav-btn-submenu').on('click', function(e){
 		e.preventDefault();

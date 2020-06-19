@@ -26,7 +26,7 @@
       <nav class="full-box nav-lateral-menu">
         <ul>
           <li>
-            <a><i class="fab fa-dashcube fa-fw"></i> &nbsp; Principal</a>
+            <a [routerLink]="['/']" ><i class="fab fa-dashcube fa-fw"></i> &nbsp; Principal</a>
           </li>
 
           <li>
@@ -65,13 +65,10 @@
                 class="fas fa-chevron-down"></i></a>
             <ul>
               <li>
-                <a><i class="fas fa-plus fa-fw"></i> &nbsp; Agregar Producto</a>
+                <a [routerLink]="['/productos/agregar']"  ><i class="fas fa-plus fa-fw"></i> &nbsp; Agregar Producto</a>
               </li>
               <li>
-                <a><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Productos</a>
-              </li>
-              <li>
-                <a><i class="fas fa-search fa-fw"></i> &nbsp; Buscar Producto</a>
+                <a [routerLink]="['/productos/listado']"  ><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Productos</a>
               </li>
             </ul>
           </li>
@@ -81,13 +78,10 @@
                 class="fas fa-chevron-down"></i></a>
             <ul>
               <li>
-                <a><i class="fas fa-plus fa-fw"></i> &nbsp; Registrar venta</a>
+                <a [routerLink]="['/ventas/registrar']" ><i class="fas fa-plus fa-fw"></i> &nbsp; Registrar venta</a>
               </li>
               <li>
-                <a><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Ventas</a>
-              </li>
-              <li>
-                <a><i class="fas fa-search-dollar fa-fw"></i> &nbsp; Buscar Venta</a>
+                <a [routerLink]="['/ventas/listado']" ><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Consultar Ventas</a>
               </li>
             </ul>
           </li>
@@ -97,13 +91,10 @@
                 class="fas fa-chevron-down"></i></a>
             <ul>
               <li>
-                <a><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo Compra</a>
+                <a [routerLink]="['/compras/registrar']" ><i class="fas fa-plus fa-fw"></i> &nbsp; Nueva Compra</a>
               </li>
               <li>
-                <a><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Compras</a>
-              </li>
-              <li>
-                <a><i class="fas fa-search fa-fw"></i> &nbsp; Buscar Compra</a>
+                <a [routerLink]="['/compras/consultar']" ><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Consultar de Compras</a>
               </li>
             </ul>
           </li>
