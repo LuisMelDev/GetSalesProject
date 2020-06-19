@@ -22,7 +22,11 @@ class AuthController {
         const { body } = req;
         try {
             const creds = await _authService.signIn(body);
-            // await _bitacoraService.register("LOGIN", " ", creds.user.id);
+            await _bitacoraService.register(
+                "LOGIN",
+                "The user has sign in",
+                creds.user.id
+            );
             return res.send(creds);
         } catch (err) {
             console.error(err);

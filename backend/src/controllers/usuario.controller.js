@@ -4,6 +4,7 @@ const { usuarioSchema } = require("../validations");
 const { ErrorHelper } = require("../helpers");
 
 let _usuarioService = null;
+let _bitacoraService = null;
 
 class UsuarioController {
     constructor({ UsuarioService, BitacoraService }) {
