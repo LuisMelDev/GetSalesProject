@@ -34,13 +34,14 @@ module.exports = (sequelize, DataTypes) => {
             as: "producto",
         });
     };
-    DetalleFactura.afterCreate(async (detalleFactura, options) => {
-        const producto = await sequelize.models.productos.findByPk(
-            detalleFactura.producto_id
-        );
-        const inventario = await producto.getInventario();
-        return await inventario.decrement("existencia_producto", {
-            by: detalleFactura.cantidad_producto,
+    DetalleFactura.afterBulkCreate(async (datalles, options) => {
+        detalles.forEach(async (detalleFactura) => {
+            const inventario = await sequelize.models.inventario.findByPk(
+                detalleFactura.producto_id
+            );
+            return await inventario.decrement("existencia_producto", {
+                by: detalleFactura.cantidad_producto,
+            });
         });
     });
     return DetalleFactura;
