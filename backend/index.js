@@ -3,7 +3,7 @@ const server = container.resolve("app");
 const db = require("./src/models");
 
 db.sequelize
-    .sync({ force: false })
+    .authenticate()
     .then(() => {
         server.start();
     })

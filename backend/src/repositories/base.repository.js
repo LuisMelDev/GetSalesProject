@@ -7,7 +7,7 @@ class BaseRepository {
         return await this.model.findByPk(id);
     }
 
-    async getAll(limit = 5, pageNum = 1) {
+    async getAll(limit = 10, pageNum = 1) {
         const offset = limit * (pageNum - 1);
         return await this.model.findAll({
             offset,

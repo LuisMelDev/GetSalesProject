@@ -15,8 +15,11 @@ class AuthService {
         if (userExist) {
             ErrorHelper(400, "El username ya se encuentra en uso.");
         }
+        
+        const created = await _userService.create(user);
 
-        return await _userService.create(user);
+        created.password =undefined
+        return created
     }
 
     async signIn(user) {
