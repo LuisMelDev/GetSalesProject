@@ -12,10 +12,10 @@ const clienteSchema = yup.object().shape({
     .required(),
   fecha_nacimiento: yup
     .date()
-    .require(),
+    .required(),
   telefono: yup
     .string()
-    .require(),
+    .required(),
   email: yup
     .string()
     .email('Email no válido')

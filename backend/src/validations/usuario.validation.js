@@ -23,7 +23,5 @@ const usuarioSchema = yup.object().shape({
     .required()
 });
 
-module.exports = {
-  usuarioSchema
-};
+module.exports = usuarioSchema;
 
