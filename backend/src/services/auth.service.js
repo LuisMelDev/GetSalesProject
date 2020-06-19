@@ -1,15 +1,17 @@
 const { generateToken } = require("../helpers/jwt.helper");
 const { ErrorHelper } = require("../helpers");
 let _userService = null;
+let _rolService = null;
 
 class AuthService {
-    constructor({ UsuarioService }) {
+    constructor({ UsuarioService, RolService }) {
         _userService = UsuarioService;
+        _rolService = RolService
     }
 
     async signUp(user) {
         const { username } = user;
-        const userExist = await _userService.getUserByUsername(username);
+        const userExist = await _userService.getUsuarioByUsername(username);
         if (userExist) {
             ErrorHelper(400, "El username ya se encuentra en uso.");
         }
@@ -18,14 +20,14 @@ class AuthService {
     }
 
     async signIn(user) {
-        const { username, password } = user;
-        const userExist = await _userService.getByUsername(username);
+        const { username,password  } = user;
+        const userExist = await _userService.getUsuarioByUsername(username);
 
         if (!userExist) {
             ErrorHelper(404, "El usuario no existe");
         }
 
-        const validPassword = await userExist.comparePassword(password);
+        const validPassword = await userExist.validPassword(password)
 
         if (!validPassword) {
             ErrorHelper(401, "Contraseña o username invalidos");
@@ -33,14 +35,14 @@ class AuthService {
 
         const userToEnconde = {
             username: userExist.username,
-            id: userExist.id,
-            rol: userExist.rol_id,
+            id: userExist.id
         };
 
         const token = generateToken(userToEnconde);
-        delete userExist.password;
+        userExist.password = undefined;
 
-        return { token, user: userExist };
+
+        return { token, user:userExist };
     }
 
     async signOut() {
