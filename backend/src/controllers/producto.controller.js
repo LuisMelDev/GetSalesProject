@@ -1,6 +1,8 @@
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 let _productoService = null;
+const { productoSchema } = require('../validations');
+
 
 class ProductoController {
     constructor({ ProductoService }) {
@@ -18,6 +20,9 @@ class ProductoController {
     }
     async create(req, res) {
         const { body } = req;
+        await productoSchema
+            .validate(body)
+            .catch((err) => ErrorHandler(401, err.errors[0]));
         const createdProducto = await _productoService.create(body);
         return res.send(createdProducto);
     }

@@ -1,6 +1,8 @@
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 let _proveedorService = null;
+const { proveedorSchema } = require('../validations');
+
 
 class ProveedorController {
     constructor({ ProveedorService }) {
@@ -18,6 +20,9 @@ class ProveedorController {
     }
     async create(req, res) {
         const { body } = req;
+        await proveedorSchema
+            .validate(body)
+            .catch((err) => ErrorHandler(401, err.errors[0]));
         const createdProveedor = await _proveedorService.create(body);
         return res.send(createdProveedor);
     }

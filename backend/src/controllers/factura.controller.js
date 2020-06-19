@@ -1,4 +1,6 @@
 let _facturaService = null;
+const { facturaSchema } = require('../validations');
+
 
 class FacturaController {
     constructor({ FacturaService }) {
@@ -17,6 +19,9 @@ class FacturaController {
 
     async create(req, res) {
         const { detalles, ...factura } = req.body;
+        await facturaSchema
+            .validate(factura)
+            .catch((err) => ErrorHandler(401, err.errors[0]));
         const createdFactura = await _facturaService.create(factura);
         detalles.forEach(async ({ producto, cantidad, precio }) => {
             const detalle = {

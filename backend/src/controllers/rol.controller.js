@@ -1,6 +1,8 @@
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 let _rolService = null;
+const { rolSchema } = require('../validations');
+
 
 class RolController {
     constructor({ RolService }) {
@@ -18,6 +20,9 @@ class RolController {
     }
     async create(req, res) {
         const { body } = req;
+        await rolSchema
+            .validate(body)
+            .catch((err) => ErrorHandler(401, err.errors[0]));
         const createdRol = await _rolService.create(body);
         return res.send(createdRol);
     }

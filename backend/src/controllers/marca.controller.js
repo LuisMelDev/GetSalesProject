@@ -1,6 +1,8 @@
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 let _marcaService = null;
+const { marcaSchema } = require('../validations');
+
 
 class MarcaController {
     constructor({ MarcaService }) {
@@ -18,6 +20,9 @@ class MarcaController {
     }
     async create(req, res) {
         const { body } = req;
+        await marcaSchema
+            .validate(body)
+            .catch((err) => ErrorHandler(401, err.errors[0]));
         const createdMarca = await _marcaService.create(body);
         return res.send(createdMarca);
     }

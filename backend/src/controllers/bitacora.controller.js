@@ -1,4 +1,5 @@
 let _bitacoraService = null;
+const { bitacoraSchema } = require('../validations');
 
 class BitacoraController {
     constructor({ BitacoraService }) {
@@ -16,6 +17,9 @@ class BitacoraController {
     }
     async create(req, res) {
         const { body } = req;
+        await bitacoraSchema
+            .validate(body)
+            .catch((err) => ErrorHandler(401, err.errors[0]));
         const createdBitacora = await _bitacoraService.create(body);
         return res.send(createdBitacora);
     }

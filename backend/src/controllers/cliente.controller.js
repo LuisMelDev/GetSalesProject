@@ -1,6 +1,8 @@
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 let _clienteService = null;
+const { clienteSchema } = require('../validations');
+
 
 class ClienteController {
     constructor({ ClienteService }) {
@@ -18,6 +20,9 @@ class ClienteController {
     }
     async create(req, res) {
         const { body } = req;
+        await clienteSchema
+            .validate(body)
+            .catch((err) => ErrorHandler(401, err.errors[0]));
         const createdCliente = await _clienteService.create(body);
         return res.send(createdCliente);
     }

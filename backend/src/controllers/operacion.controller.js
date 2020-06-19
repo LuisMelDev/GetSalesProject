@@ -1,4 +1,5 @@
 let _operacionService = null;
+const { operacionSchema } = require('../validations');
 
 class OperacionController {
     constructor({ OperacionService }) {
@@ -16,6 +17,9 @@ class OperacionController {
     }
     async create(req, res) {
         const { body } = req;
+        await operacionSchema
+            .validate(body)
+            .catch((err) => ErrorHandler(401, err.errors[0]));
         const createdOperacion = await _operacionService.create(body);
         return res.send(createdOperacion);
     }

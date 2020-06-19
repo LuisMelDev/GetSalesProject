@@ -1,6 +1,8 @@
 let _grupoService = null;
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
+const { grupoSchema } = require('../validations');
+
 
 class GrupoController {
     constructor({ GrupoService }) {
@@ -18,6 +20,9 @@ class GrupoController {
     }
     async create(req, res) {
         const { body } = req;
+        await grupoSchema
+            .validate(body)
+            .catch((err) => ErrorHandler(401, err.errors[0]));
         const createdGrupo = await _grupoService.create(body);
         return res.send(createdGrupo);
     }

@@ -1,4 +1,6 @@
 let _amperajeService = null;
+const { amperajeSchema } = require('../validations');
+
 
 class AmperajeController {
     constructor({ AmperajeService }) {
@@ -16,6 +18,9 @@ class AmperajeController {
     }
     async create(req, res) {
         const { body } = req;
+        await amperajeSchema
+            .validate(body)
+            .catch((err) => ErrorHandler(401, err.errors[0]));
         const createdAmperaje = await _amperajeService.create(body);
         return res.send(createdAmperaje);
     }

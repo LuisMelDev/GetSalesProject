@@ -1,4 +1,5 @@
 let _compraService = null;
+const { compraSchema } = require('../validations');
 
 class CompraController {
     constructor({ CompraService }) {
@@ -16,6 +17,9 @@ class CompraController {
     }
     async create(req, res) {
         const { detalles, ...compra } = req.body;
+        await compraSchema
+            .validate(compra)
+            .catch((err) => ErrorHandler(401, err.errors[0]));
         const createdCompra = await _compraService.create(compra);
         detalles.forEach(async ({ producto, cantidad, precio }) => {
             const detalle = {
