@@ -1,5 +1,6 @@
 module.exports = {
     amperajeController: require("./amperaje.controller"),
+    authController: require("./auth.controller"),
     bitacoraController: require("./bitacora.controller"),
     clienteController: require("./cliente.controller"),
     compraController: require("./compra.controller"),

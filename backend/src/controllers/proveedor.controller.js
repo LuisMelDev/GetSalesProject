@@ -1,8 +1,7 @@
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 let _proveedorService = null;
-const { proveedorSchema } = require('../validations');
-
+const { proveedorSchema } = require("../validations");
 
 class ProveedorController {
     constructor({ ProveedorService }) {
@@ -29,7 +28,7 @@ class ProveedorController {
     async update(req, res) {
         const { body } = req;
         const { id } = req.params;
-        const updatedProveedor = await _proveedorService(id, body);
+        const updatedProveedor = await _proveedorService.update(id, body);
         return res.send(updatedProveedor);
     }
     async delete(req, res) {
@@ -38,10 +37,10 @@ class ProveedorController {
         return res.send(deletedProveedor);
     }
 
-    async getProveedorByNombre(req, res){
-        const{ nombre } = req.params;
+    async getProveedorByNombre(req, res) {
+        const { nombre } = req.params;
         const proveedor = await _proveedorService.getProveedorByNombre(nombre);
-        return res.send(proveedor); 
+        return res.send(proveedor);
     }
     async getCompras(req, res) {
         const { proveedorId } = req.params;

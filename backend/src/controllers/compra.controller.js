@@ -1,5 +1,5 @@
 let _compraService = null;
-const { compraSchema } = require('../validations');
+const { compraSchema } = require("../validations");
 
 class CompraController {
     constructor({ CompraService }) {
@@ -21,16 +21,13 @@ class CompraController {
             .validate(compra)
             .catch((err) => ErrorHandler(401, err.errors[0]));
         const createdCompra = await _compraService.create(compra);
-        detalles.forEach(async ({ producto, cantidad, precio }) => {
-            const detalle = {
+        const detallesData = detalles.map((detalle) => {
+            return {
+                ...detalle,
                 compra_id: createdCompra.id,
-                producto_id: producto,
-                cantidad_producto: cantidad,
-                precio_producto: precio,
             };
-            // TODO crear metodo createDetalle
-            const detalle_compra = await _compraService.createDetalle(detalle);
         });
+        await _compraService.createDetalles(detallesData);
         return res.send(createdCompra);
     }
     async update(req, res) {
@@ -45,7 +42,7 @@ class CompraController {
         return res.send(deletedCompra);
     }
 
-    async getByFecha(req, res){
+    async getByFecha(req, res) {
         const { fecha } = req.params;
         const compra = await _compraService.getByFecha(fecha);
         return res.send(compra);

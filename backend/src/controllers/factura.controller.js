@@ -1,6 +1,5 @@
 let _facturaService = null;
-const { facturaSchema } = require('../validations');
-
+const { facturaSchema } = require("../validations");
 
 class FacturaController {
     constructor({ FacturaService }) {
@@ -23,18 +22,13 @@ class FacturaController {
             .validate(factura)
             .catch((err) => ErrorHandler(401, err.errors[0]));
         const createdFactura = await _facturaService.create(factura);
-        detalles.forEach(async ({ producto, cantidad, precio }) => {
-            const detalle = {
+        const detallesData = detalles.map((detalle) => {
+            return {
+                ...detalle,
                 factura_id: createdFactura.id,
-                producto_id: producto,
-                cantidad_producto: cantidad,
-                precio_producto: precio,
             };
-            // TODO crear metodo createDetalle
-            const detalle_factura = await _facturaService.createDetalle(
-                detalle
-            );
         });
+        await _facturaService.createDetalles(detallesData);
         return res.send(createdFactura);
     }
     async update(req, res) {
@@ -49,7 +43,7 @@ class FacturaController {
         return res.send(deletedFactura);
     }
 
-    async getByFecha(req, res){
+    async getByFecha(req, res) {
         const { fecha } = req.params;
         const factura = await _facturaService.getByFecha(fecha);
         return res.send(factura);
