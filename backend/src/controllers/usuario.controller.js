@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 let _usuarioService = null;
+const { ErrorHelper } = require('../helpers');
 const { usuarioSchema } = require('../validations');
 
 class UsuarioController {
@@ -22,7 +23,7 @@ class UsuarioController {
         const { body } = req;
         await usuarioSchema
             .validate(body)
-            .catch((err) => ErrorHandler(401, err.errors[0]));
+            .catch((err) => ErrorHelper(401, err.errors[0]));
         const createdUsuario = await _usuarioService.create(body);
         return res.send(createdUsuario);
     }
