@@ -8,19 +8,18 @@ class FacturaRepository extends BaseRepository {
         _factura = Factura;
         _detalleFactura = DetalleFactura;
     }
-    async createDetalle(detalle) {
-        const detalleFactura = await _detalleFactura.create(detalle);
-        return detalleFactura;
+    async createDetalles(detalles) {
+        const detallesFactura = await _detalleFactura.bulkCreate(detalles);
+        return detallesFactura;
     }
 
-    async getByFecha(fecha){
+    async getByFecha(fecha) {
         return await _factura.findAll({
             where: {
-                fecha
-            }
-        })
+                fecha,
+            },
+        });
     }
-
 }
 
 module.exports = FacturaRepository;

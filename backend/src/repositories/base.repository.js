@@ -7,9 +7,12 @@ class BaseRepository {
         return await this.model.findByPk(id);
     }
 
-    async getAll(pageSize = 5, pageNum = 1) {
-        const skips = pageSize * (pageNum - 1);
-        return await this.model.find().skip(skips).limit(pageSize);
+    async getAll(limit = 5, pageNum = 1) {
+        const offset = limit * (pageNum - 1);
+        return await this.model.findAll({
+            offset,
+            limit,
+        });
     }
 
     async create(entity) {

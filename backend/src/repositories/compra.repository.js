@@ -8,17 +8,17 @@ class CompraRepository extends BaseRepository {
         _compra = Compra;
         _detalleCompra = DetalleCompra;
     }
-    async createDetalle(detalle) {
-        const detalleCompra = await _detalleCompra.create(detalle);
-        return detalleCompra;
+    async createDetalles(detalles) {
+        const detallesCompra = await _detalleCompra.bulkCreate(detalles);
+        return detallesCompra;
     }
 
-    async getByFecha(fecha){
+    async getByFecha(fecha) {
         return await _compra.findAll({
             where: {
-                fecha
-            }
-        })
+                fecha,
+            },
+        });
     }
 }
 
