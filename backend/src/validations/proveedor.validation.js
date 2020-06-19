@@ -9,7 +9,6 @@ const proveedorSchema = yup.object().shape({
     .required('Campo obligatorio')
 });
 
-module.exports = {
-  proveedorSchema
-};
+module.exports = proveedorSchema;
+
 

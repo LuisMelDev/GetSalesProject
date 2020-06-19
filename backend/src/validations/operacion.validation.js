@@ -6,7 +6,6 @@ const operacionSchema = yup.object().shape({
     .required('Campo obligatorio')
 });
 
-module.exports = {
-  operacionSchema
-};
+module.exports = operacionSchema;
+
 

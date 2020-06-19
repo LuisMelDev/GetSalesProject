@@ -16,6 +16,5 @@ const bitacoraSchema = yup.object().shape({
     .required()
 });
 
-module.exports = {
-  bitacoraSchema
-};
+module.exports = bitacoraSchema;
+

@@ -24,7 +24,5 @@ const productoSchema = yup.object().shape({
     .required()
 });
 
-module.exports = {
-  productoSchema
-};
+module.exports = productoSchema;
 

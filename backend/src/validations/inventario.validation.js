@@ -15,7 +15,6 @@ const inventarioSchema = yup.object().shape({
     .required()
 });
 
-module.exports = {
-  inventarioSchema
-};
+module.exports = inventarioSchema;
+
 

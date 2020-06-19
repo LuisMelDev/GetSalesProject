@@ -6,7 +6,6 @@ const grupoSchema = yup.object().shape({
     .required()
 });
 
-module.exports = {
-  grupoSchema
-};
+module.exports = grupoSchema;
+
 
