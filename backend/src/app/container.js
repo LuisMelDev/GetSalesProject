@@ -61,7 +61,7 @@ const Routes = require("../routes");
 // models
 const {
     amperajes,
-    bitacoras,
+    bitacora,
     clientes,
     compras,
     detalle_compras,
@@ -178,7 +178,7 @@ container
     })
     .register({
         Amperaje: asValue(amperajes),
-        Bitacora: asValue(bitacoras),
+        Bitacora: asValue(bitacora),
         Cliente: asValue(clientes),
         Compra: asValue(compras),
         DetalleCompra: asValue(detalle_compras),

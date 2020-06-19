@@ -1,14 +1,16 @@
 const { Router } = require("express");
+const { AuthMiddleWare } = require("../middlewares");
+
 module.exports = ({ CompraController }) => {
     const router = Router();
 
-    router.get("", CompraController.getAll);
-    router.get("/search", CompraController.search);
-    router.get("/:id", CompraController.get);
-    router.get("/:id/proveedor", CompraController.getProveedor);
-    router.post("", CompraController.create);
-    router.patch("/:id", CompraController.update);
-    router.delete("/:id", CompraController.delete);
+    router.get("", AuthMiddleWare, CompraController.getAll);
+    router.get("/search", AuthMiddleWare, CompraController.search);
+    router.get("/:id", AuthMiddleWare, CompraController.get);
+    router.get("/:id/proveedor", AuthMiddleWare, CompraController.getProveedor);
+    router.post("", AuthMiddleWare, CompraController.create);
+    router.patch("/:id", AuthMiddleWare, CompraController.update);
+    router.delete("/:id", AuthMiddleWare, CompraController.delete);
 
     return router;
 };

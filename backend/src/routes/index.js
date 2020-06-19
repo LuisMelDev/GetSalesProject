@@ -30,7 +30,12 @@ module.exports = function ({
     const router = express.Router();
     const apiRoutes = express.Router();
 
-    apiRoutes.use(express.json()).use(cors()).use(helmet()).use(compression());
+    apiRoutes
+        .use(express.json())
+        .use(cors())
+        .use(helmet())
+        .use(compression())
+        .use(express.urlencoded({ extended: true }));
 
     apiRoutes.use("/amperajes", AmperajeRoutes);
     apiRoutes.use("/bitacoras", BitacoraRoutes);

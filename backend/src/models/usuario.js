@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
         Usuario.belongsTo(models.roles, {
             foreignKey: "rol_id",
             sourceKey: "id",
-            as:'rol'
+            as: "rol",
         });
         Usuario.hasMany(models.compras, {
             foreignKey: "usuario_id",
@@ -59,7 +59,7 @@ module.exports = (sequelize, DataTypes) => {
         usuario.password = hashedPassword;
     });
 
-    Usuario.prototype.validPassword = async function(password){
+    Usuario.prototype.validPassword = async function (password) {
         return await compareSync(password, this.password);
     };
 
