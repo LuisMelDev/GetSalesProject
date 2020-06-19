@@ -1,5 +1,5 @@
 "use strict";
-const { hash, compare, genSalt } = require("bcryptjs");
+const { hashSync, compareSync, genSaltSync } = require("bcryptjs");
 
 module.exports = (sequelize, DataTypes) => {
     const Usuario = sequelize.define(
@@ -35,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
         Usuario.belongsTo(models.roles, {
             foreignKey: "rol_id",
             sourceKey: "id",
+            as:'rol'
         });
         Usuario.hasMany(models.compras, {
             foreignKey: "usuario_id",
@@ -53,13 +54,13 @@ module.exports = (sequelize, DataTypes) => {
 
     // hooks
     Usuario.beforeCreate(async (usuario, options) => {
-        const salt = await genSalt();
-        const hashedPassword = await hash(usuario.password, salt);
+        const salt = await genSaltSync();
+        const hashedPassword = await hashSync(usuario.password, salt);
         usuario.password = hashedPassword;
     });
 
-    Usuario.prototype.comparePassword = async (password) => {
-        return await compare(password, this.password);
+    Usuario.prototype.validPassword = async function(password){
+        return await compareSync(password, this.password);
     };
 
     return Usuario;
