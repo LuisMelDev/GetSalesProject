@@ -1,45 +1,97 @@
-let _amperajeService = null;
-const { amperajeSchema } = require('../validations');
+const { amperajeSchema } = require("../validations");
+const { ErrorHelper } = require("../helpers");
 
+let _amperajeService = null;
+let _bitacoraService = null;
 
 class AmperajeController {
-    constructor({ AmperajeService }) {
+    constructor({ AmperajeService, BitacoraService }) {
         _amperajeService = AmperajeService;
+        _bitacoraService = BitacoraService;
     }
-    async get(req, res) {
+    async get(req, res, next) {
         const { id } = req.params;
-        const amperaje = await _amperajeService.get(id);
-        return res.send(amperaje);
+        try {
+            const amperaje = await _amperajeService.get(id);
+            return res.send(amperaje);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async getAll(req, res) {
+    async getAll(req, res, next) {
         const { pageSize, pageNum } = req.query;
-        const amperajes = await _amperajeService.getAll(pageSize, pageNum);
-        return res.send(amperajes);
+        try {
+            const amperajes = await _amperajeService.getAll(pageSize, pageNum);
+            return res.send(amperajes);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async create(req, res) {
-        const { body } = req;
-        await amperajeSchema
-            .validate(body)
-            .catch((err) => ErrorHandler(401, err.errors[0]));
-        const createdAmperaje = await _amperajeService.create(body);
-        return res.send(createdAmperaje);
+    async create(req, res, next) {
+        const { body, user } = req;
+        try {
+            await amperajeSchema
+                .validate(body)
+                .catch((err) => ErrorHelper(401, err.errors[0]));
+            const createdAmperaje = await _amperajeService.create(body);
+            await _bitacoraService.register(
+                "CREATE",
+                `AMPERAJES(ID: ${createdAmperaje.id})`,
+                user.id
+            );
+            return res.send(createdAmperaje);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async update(req, res) {
-        const { body } = req;
+    async update(req, res, next) {
+        const { body, user } = req;
         const { id } = req.params;
-        const updatedAmperaje = await _amperajeService.update(id, body);
-        return res.send(updatedAmperaje);
+        try {
+            await amperajeSchema
+                .validate(body)
+                .catch((err) => ErrorHelper(401, err.errors[0]));
+            const updatedAmperaje = await _amperajeService.update(id, body);
+            await _bitacoraService.register(
+                "UPDATE",
+                `AMPERAJES(ID: ${id})`,
+                user.id
+            );
+            return res.send(updatedAmperaje);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async delete(req, res) {
-        const { id } = req.param;
-        const deletedAmperaje = await _amperajeService.delete(id);
-        res.send(deletedAmperaje);
-    }
-    async getProductos(req, res) {
+    async delete(req, res, next) {
         const { id } = req.params;
-        const amperaje = await _amperajeService.get(id);
-        const productos = await amperaje.getProductos();
-        return res.send(productos);
+        const { user } = req;
+        try {
+            const deletedAmperaje = await _amperajeService.delete(id);
+            await _bitacoraService.register(
+                "DELETE",
+                `AMPERAJES(ID: ${id})`,
+                user.id
+            );
+            return res.send(deletedAmperaje);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
+    }
+    async getProductos(req, res, next) {
+        const { id } = req.params;
+        try {
+            const amperaje = await _amperajeService.get(id);
+            const productos = await amperaje.getProductos();
+            return res.send(productos);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
     async search(req, res) {
         const { amp } = req.query;
@@ -47,8 +99,13 @@ class AmperajeController {
         if (amp) {
             options.where.amp = amp;
         }
-        const amperajes = await _amperajeService.searchAll(options);
-        return res.send(amperajes);
+        try {
+            const amperajes = await _amperajeService.searchAll(options);
+            return res.send(amperajes);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 }
 

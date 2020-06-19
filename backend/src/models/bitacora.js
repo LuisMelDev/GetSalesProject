@@ -6,10 +6,14 @@ module.exports = (sequelize, DataTypes) => {
             fecha: {
                 type: DataTypes.DATE,
                 allowNull: false,
+                defaultValue: DataTypes.NOW,
             },
             operacion_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
+            },
+            descripcion: {
+                type: DataTypes.STRING,
             },
             usuario_id: {
                 type: DataTypes.INTEGER,
@@ -17,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
         {
+            freezeTableName: true,
             timestamps: false,
         }
     );

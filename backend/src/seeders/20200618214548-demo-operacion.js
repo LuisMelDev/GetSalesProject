@@ -6,13 +6,16 @@ module.exports = {
             "operaciones",
             [
                 {
-                    operacion: "Crear",
+                    operacion: "CREATE",
                 },
                 {
-                    operacion: "Actualizar",
+                    operacion: "UPDATE",
                 },
                 {
-                    operacion: "Eliminar",
+                    operacion: "DELETE",
+                },
+                {
+                    operacion: "LOGIN",
                 },
             ],
             {}

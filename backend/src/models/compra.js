@@ -37,10 +37,11 @@ module.exports = (sequelize, DataTypes) => {
         });
     };
     // Compra.afterCreate(async (compra, options) => {
-    //     return await sequelize.models.bitacoras.create({
-    //         fecha: Date.now(),
+    //     const usuario = await compra.getUsuario();
+    //     return await sequelize.models.bitacora.create({
+    //         fecha: new Date(),
     //         operacion_id: 1,
-    //         usuario_id: compra.getUsuario().id,
+    //         usuario_id: usuario.id,
     //     });
     // });
     return Compra;

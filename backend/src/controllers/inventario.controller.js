@@ -4,21 +4,41 @@ class InventarioController {
     constructor({ InventarioService }) {
         _inventarioService = InventarioService;
     }
-    async get(req, res) {
+    async get(req, res, next) {
         const { producto_id } = req.params;
-        const inventario = await _inventarioService.get(producto_id);
-        return res.send(inventario);
+        try {
+            const inventario = await _inventarioService.get(producto_id);
+            return res.send(inventario);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async getAll(req, res) {
+    async getAll(req, res, next) {
         const { pageSize, pageNum } = req;
-        const inventarios = await _inventarioService.getAll(pageSize, pageNum);
-        return res.send(inventarios);
+        try {
+            const inventarios = await _inventarioService.getAll(
+                pageSize,
+                pageNum
+            );
+            return res.send(inventarios);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 
-    async getByFecha(req, res){
+    async getByFecha(req, res, next) {
         const { fecha_entrada } = req.params;
-        const fechaEntrada = await _inventarioService.getByFecha(fecha_entrada);
-        return res.send(fechaEntrada);
+        try {
+            const fechaEntrada = await _inventarioService.getByFecha(
+                fecha_entrada
+            );
+            return res.send(fechaEntrada);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 }
 

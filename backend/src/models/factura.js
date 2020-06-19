@@ -36,5 +36,13 @@ module.exports = (sequelize, DataTypes) => {
             as: "productos",
         });
     };
+    // Factura.afterCreate(async (factura, options) => {
+    //     const usuario = await factura.getUsuario();
+    //     return await sequelize.models.bitacora.create({
+    //         fecha: new Date(),
+    //         operacion_id: 1,
+    //         usuario_id: usuario.id,
+    //     });
+    // });
     return Factura;
 };

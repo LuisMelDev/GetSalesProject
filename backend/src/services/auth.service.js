@@ -1,12 +1,13 @@
 const { generateToken } = require("../helpers/jwt.helper");
 const { ErrorHelper } = require("../helpers");
+
 let _userService = null;
 let _rolService = null;
 
 class AuthService {
     constructor({ UsuarioService, RolService }) {
         _userService = UsuarioService;
-        _rolService = RolService
+        _rolService = RolService;
     }
 
     async signUp(user) {
@@ -23,14 +24,14 @@ class AuthService {
     }
 
     async signIn(user) {
-        const { username,password  } = user;
+        const { username, password } = user;
         const userExist = await _userService.getUsuarioByUsername(username);
 
         if (!userExist) {
             ErrorHelper(404, "El usuario no existe");
         }
 
-        const validPassword = await userExist.validPassword(password)
+        const validPassword = await userExist.validPassword(password);
 
         if (!validPassword) {
             ErrorHelper(401, "Contraseña o username invalidos");
@@ -38,14 +39,13 @@ class AuthService {
 
         const userToEnconde = {
             username: userExist.username,
-            id: userExist.id
+            id: userExist.id,
         };
 
         const token = generateToken(userToEnconde);
         userExist.password = undefined;
 
-
-        return { token, user:userExist };
+        return { token, user: userExist };
     }
 
     async signOut() {

@@ -1,48 +1,100 @@
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
-let _marcaService = null;
-const { marcaSchema } = require('../validations');
+const { marcaSchema } = require("../validations");
+const { ErrorHelper } = require("../helpers");
 
+let _marcaService = null;
+let _bitacoraService = null;
 
 class MarcaController {
-    constructor({ MarcaService }) {
+    constructor({ MarcaService, BitacoraService }) {
         _marcaService = MarcaService;
+        _bitacoraService = BitacoraService;
     }
-    async get(req, res) {
+    async get(req, res, next) {
         const { id } = req.params;
-        const marca = await _marcaService.get(id);
-        return res.send(marca);
+        try {
+            const marca = await _marcaService.get(id);
+            return res.send(marca);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async getAll(req, res) {
+    async getAll(req, res, next) {
         const { pageSize, pageNum } = req.query;
-        const marcas = await _marcaService.getAll(pageSize, pageNum);
-        return res.send(marcas);
+        try {
+            const marcas = await _marcaService.getAll(pageSize, pageNum);
+            return res.send(marcas);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async create(req, res) {
-        const { body } = req;
-        await marcaSchema
-            .validate(body)
-            .catch((err) => ErrorHandler(401, err.errors[0]));
-        const createdMarca = await _marcaService.create(body);
-        return res.send(createdMarca);
+    async create(req, res, next) {
+        const { body, user } = req;
+        try {
+            await marcaSchema
+                .validate(body)
+                .catch((err) => ErrorHelper(401, err.errors[0]));
+            const createdMarca = await _marcaService.create(body);
+            await _bitacoraService.register(
+                "CREATE",
+                `MARCAS(ID: ${createdMarca.id})`,
+                user.id
+            );
+            return res.send(createdMarca);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async update(req, res) {
-        const { body } = req;
+    async update(req, res, next) {
+        const { body, user } = req;
         const { id } = req.params;
-        const updatedMarca = await _marcaService.update(id, body);
-        return res.send(updatedMarca);
+        try {
+            await marcaSchema
+                .validate(body)
+                .catch((err) => ErrorHelper(401, err.errors[0]));
+            const updatedMarca = await _marcaService.update(id, body);
+            await _bitacoraService.register(
+                "UPDATE",
+                `MARCAS(ID: ${id})`,
+                user.id
+            );
+            return res.send(updatedMarca);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async delete(req, res) {
+    async delete(req, res, next) {
         const { id } = req.params;
-        const deletedMarca = await _marcaService.delete(id);
-        return res.send(deletedMarca);
+        const { user } = req;
+        try {
+            const deletedMarca = await _marcaService.delete(id);
+            await _bitacoraService.register(
+                "DELETE",
+                `MARCAS(ID: ${id})`,
+                user.id
+            );
+            return res.send(deletedMarca);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async getProductos(req, res) {
+    async getProductos(req, res, next) {
         const { marcaId } = req.params;
-        const productos = await _marcaService.getProductos(marcaId);
-        return res.send(productos);
+        try {
+            const productos = await _marcaService.getProductos(marcaId);
+            return res.send(productos);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async search(req, res) {
+    async search(req, res, next) {
         const { nombre } = req.query;
         const options = { where: {} };
         if (nombre) {
@@ -50,8 +102,13 @@ class MarcaController {
                 [Op.like]: `%${nombre}%`,
             };
         }
-        const marca = await _marcaService.searchAll(options);
-        return res.send(marca);
+        try {
+            const marca = await _marcaService.searchAll(options);
+            return res.send(marca);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 }
 

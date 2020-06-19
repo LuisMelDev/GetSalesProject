@@ -1,78 +1,151 @@
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
+const { usuarioSchema } = require("../validations");
+const { ErrorHelper } = require("../helpers");
+
 let _usuarioService = null;
-const { ErrorHelper } = require('../helpers');
-const { usuarioSchema } = require('../validations');
+let _bitacoraService = null;
 
 class UsuarioController {
-    constructor({ UsuarioService }) {
+    constructor({ UsuarioService, BitacoraService }) {
         _usuarioService = UsuarioService;
+        _bitacoraService = BitacoraService;
     }
-    async get(req, res) {
+    async get(req, res, next) {
         const { id } = req.params;
-        const usuario = await _usuarioService.get(id);
-        return res.send(usuario);
+        try {
+            const usuario = await _usuarioService.get(id);
+            return res.send(usuario);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async getAll(req, res) {
+    async getAll(req, res, next) {
         const { pageSize, pageNum } = req.query;
-        const usuarios = await _usuarioService.getAll(pageSize, pageNum);
-        return res.send(usuarios);
+        try {
+            const usuarios = await _usuarioService.getAll(pageSize, pageNum);
+            return res.send(usuarios);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 
-    async create(req, res) {
-        const { body } = req;
-        await usuarioSchema
-            .validate(body)
-            .catch((err) => ErrorHelper(401, err.errors[0]));
-        const createdUsuario = await _usuarioService.create(body);
-        return res.send(createdUsuario);
+    async create(req, res, next) {
+        const { body, user } = req;
+        try {
+            await usuarioSchema
+                .validate(body)
+                .catch((err) => ErrorHelper(401, err.errors[0]));
+            const createdUsuario = await _usuarioService.create(body);
+            await _bitacoraService.register(
+                "CREATE",
+                `USUARIOS(ID: ${createdUsuario.id})`,
+                user.id
+            );
+            return res.send(createdUsuario);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    
 
-    async update(req, res) {
-        const { body } = req;
+    async update(req, res, next) {
+        const { body, user } = req;
         const { id } = req.params;
-        const updatedUsuario = await _usuarioService.update(id, body);
-        return res.send(updatedUsuario);
+        try {
+            await usuarioSchema
+                .validate(body)
+                .catch((err) => ErrorHelper(401, err.errors[0]));
+            const updatedUsuario = await _usuarioService.update(id, body);
+            await _bitacoraService.register(
+                "UPDATE",
+                `USUARIOS(ID: ${id})`,
+                user.id
+            );
+            return res.send(updatedUsuario);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async delete(req, res) {
+    async delete(req, res, next) {
         const { id } = req.params;
-        const deletedUsuario = await _usuarioService.delete(id);
-        return res.send(deletedUsuario);
+        const { user } = req;
+        try {
+            const deletedUsuario = await _usuarioService.delete(id);
+            await _bitacoraService.register(
+                "DELETE",
+                `USUARIOS(ID: ${id})`,
+                user.id
+            );
+            return res.send(deletedUsuario);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 
-    async getUsuarioByUsername(req,res){
+    async getUsuarioByUsername(req, res, next) {
         const { username } = req.params;
-        const usuario = await _usuarioService.getUsuarioByUsername(username);
-        return res.send(usuario);
+        try {
+            const usuario = await _usuarioService.getUsuarioByUsername(
+                username
+            );
+            return res.send(usuario);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 
-    async getUsuarioByNombre(req,res){
+    async getUsuarioByNombre(req, res, next) {
         const { nombre } = req.params;
-        const usuario = await _usuarioService.getUsuarioByNombre(nombre);
-        return res.send(usuario);
+        try {
+            const usuario = await _usuarioService.getUsuarioByNombre(nombre);
+            return res.send(usuario);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 
-    async getFacturas(req,res){
+    async getFacturas(req, res, next) {
         const { userId } = req.params;
-        const usuarioFacturas = await _usuarioService.getFacturas(userId);
-        return res.send(usuarioFacturas);
+        try {
+            const usuarioFacturas = await _usuarioService.getFacturas(userId);
+            return res.send(usuarioFacturas);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 
-    async getCompras(req,res){
+    async getCompras(req, res, next) {
         const { userId } = req.params;
-        const usuarioCompras = await _usuarioService.getCompras(userId);
-        return res.send(usuarioCompras);
+        try {
+            const usuarioCompras = await _usuarioService.getCompras(userId);
+            return res.send(usuarioCompras);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 
-    async getOperaciones(req, res) {
+    async getOperaciones(req, res, next) {
         const { id } = req.params;
-        const usuario_op = await _usuarioService.get(id);
-        const operaciones = usuario.getOperaciones();
-        return res.send(operaciones);
+        try {
+            const usuario = await _usuarioService.get(id);
+            const operaciones = await usuario.getOperaciones();
+            return res.send(operaciones);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 
-    async search(req, res) {
+    async search(req, res, next) {
         const { nombre, username, email } = req.query;
         const options = { where: {} };
         if (nombre) {
@@ -90,8 +163,13 @@ class UsuarioController {
                 [Op.like]: `%${email}%`,
             };
         }
-        const usuarios = await _usuarioService.searchAll(options);
-        return res.send(usuarios);
+        try {
+            const usuarios = await _usuarioService.searchAll(options);
+            return res.send(usuarios);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 }
 

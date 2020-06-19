@@ -1,44 +1,100 @@
+const { operacionSchema } = require("../validations");
+const { ErrorHelper } = require("../helpers");
+
 let _operacionService = null;
-const { operacionSchema } = require('../validations');
+let _bitacoraService = null;
 
 class OperacionController {
-    constructor({ OperacionService }) {
+    constructor({ OperacionService, BitacoraService }) {
         _operacionService = OperacionService;
+        _bitacoraService = BitacoraService;
     }
-    async get(req, res) {
+    async get(req, res, next) {
         const { id } = req.params;
-        const operacion = await _operacionService.get(id);
-        return res.send(operacion);
+        try {
+            const operacion = await _operacionService.get(id);
+            return res.send(operacion);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async getAll(req, res) {
+    async getAll(req, res, next) {
         const { pageSize, pageNum } = req.query;
-        const operaciones = await _operacionService.getAll(pageSize, pageNum);
-        return res.send(operaciones);
+        try {
+            const operaciones = await _operacionService.getAll(
+                pageSize,
+                pageNum
+            );
+            return res.send(operaciones);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async create(req, res) {
-        const { body } = req;
-        await operacionSchema
-            .validate(body)
-            .catch((err) => ErrorHandler(401, err.errors[0]));
-        const createdOperacion = await _operacionService.create(body);
-        return res.send(createdOperacion);
+    async create(req, res, next) {
+        const { body, user } = req;
+        try {
+            await operacionSchema
+                .validate(body)
+                .catch((err) => ErrorHelper(401, err.errors[0]));
+            const createdOperacion = await _operacionService.create(body);
+            await _bitacoraService.register(
+                "CREATE",
+                `OPERACIONES(ID: ${createdOperacion.id})`,
+                user.id
+            );
+            return res.send(createdOperacion);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async update(req, res) {
-        const { body } = req;
+    async update(req, res, next) {
+        const { body, user } = req;
         const { id } = req.params;
-        const updatedOperacion = await _operacionService.update(id, body);
-        return res.send(updatedOperacion);
+        try {
+            await operacionSchema
+                .validate(body)
+                .catch((err) => ErrorHelper(401, err.errors[0]));
+            const updatedOperacion = await _operacionService.update(id, body);
+            await _bitacoraService.register(
+                "UPDATE",
+                `OPERACIONES(ID: ${id})`,
+                user.id
+            );
+            return res.send(updatedOperacion);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async delete(req, res) {
+    async delete(req, res, next) {
         const { id } = req.params;
-        const deletedOperacion = await _operacionService.delete(id);
-        return res.send(deletedOperacion);
+        const { user } = req;
+        try {
+            const deletedOperacion = await _operacionService.delete(id);
+            await _bitacoraService.register(
+                "DELETE",
+                `OPERACIONES(ID: ${id})`,
+                user.id
+            );
+            return res.send(deletedOperacion);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async getUsuarios(req, res) {
+    async getUsuarios(req, res, next) {
         const { id } = req.params;
-        const operacion = await _operacionService.get(id);
-        const usuarios = await operacion.getUsuarios();
-        return res.send(usuarios);
+        try {
+            const operacion = await _operacionService.get(id);
+            const usuarios = await operacion.getUsuarios();
+            return res.send(usuarios);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 }
 

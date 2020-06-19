@@ -1,49 +1,102 @@
-let _grupoService = null;
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const { grupoSchema } = require("../validations");
+const { ErrorHelper } = require("../helpers");
+
+let _grupoService = null;
+let _bitacoraService = null;
 
 class GrupoController {
-    constructor({ GrupoService }) {
+    constructor({ GrupoService, BitacoraService }) {
         _grupoService = GrupoService;
+        _bitacoraService = BitacoraService;
     }
-    async get(req, res) {
+    async get(req, res, next) {
         const { id } = req.params;
-        const grupo = await _grupoService.get(id);
-        return res.send(grupo);
+        try {
+            const grupo = await _grupoService.get(id);
+            return res.send(grupo);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async getAll(req, res) {
+    async getAll(req, res, next) {
         const { pageSize, pageNum } = req.query;
-        const grupos = await _grupoService.getAll(pageSize, pageNum);
-        return res.send(grupos);
+        try {
+            const grupos = await _grupoService.getAll(pageSize, pageNum);
+            return res.send(grupos);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async create(req, res) {
-        const { body } = req;
-        await grupoSchema
-            .validate(body)
-            .catch((err) => ErrorHandler(401, err.errors[0]));
-        const createdGrupo = await _grupoService.create(body);
-        return res.send(createdGrupo);
+    async create(req, res, next) {
+        const { body, user } = req;
+        try {
+            await grupoSchema
+                .validate(body)
+                .catch((err) => ErrorHelper(401, err.errors[0]));
+            const createdGrupo = await _grupoService.create(body);
+            await _bitacoraService.register(
+                "CREATE",
+                `GRUPOS(ID: ${createdGrupo.id})`,
+                user.id
+            );
+            return res.send(createdGrupo);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async update(req, res) {
-        const { body } = req;
+    async update(req, res, next) {
+        const { body, user } = req;
         const { id } = req.params;
-        const updatedGrupo = await _grupoService.update(id, body);
-        return res.send(updatedGrupo);
+        try {
+            await grupoSchema
+                .validate(body)
+                .catch((err) => ErrorHelper(401, err.errors[0]));
+            const updatedGrupo = await _grupoService.update(id, body);
+            await _bitacoraService.register(
+                "UPDATE",
+                `GRUPOS(ID: ${id})`,
+                user.id
+            );
+            return res.send(updatedGrupo);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async delete(req, res) {
+    async delete(req, res, next) {
         const { id } = req.params;
-        const deletedGrupo = await _grupoService.delete(id);
-        return res.send(deletedGrupo);
+        const { user } = req;
+        try {
+            const deletedGrupo = await _grupoService.delete(id);
+            await _bitacoraService.register(
+                "DELETE",
+                `GRUPOS(ID: ${id})`,
+                user.id
+            );
+            return res.send(deletedGrupo);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 
-    async getProductos(req, res) {
+    async getProductos(req, res, next) {
         const { grupoId } = req.params;
-        const productos = await _grupoService.getProductos(grupoId);
-        return res.send(productos);
+        try {
+            const productos = await _grupoService.getProductos(grupoId);
+            return res.send(productos);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 
-    async search(req, res) {
+    async search(req, res, next) {
         const { nombre } = req.query;
         const options = { where: {} };
         if (nombre) {
@@ -51,8 +104,13 @@ class GrupoController {
                 [Op.like]: `%${nombre}%`,
             };
         }
-        const grupos = await _grupoService.searchAll(options);
-        return res.send(grupos);
+        try {
+            const grupos = await _grupoService.searchAll(options);
+            return res.send(grupos);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 }
 

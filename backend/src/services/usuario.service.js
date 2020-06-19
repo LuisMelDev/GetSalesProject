@@ -1,5 +1,5 @@
 const BaseService = require("./base.service");
-const ErrorHelper = require("../helpers");
+const { ErrorHelper } = require("../helpers");
 let _usuarioRepository = null;
 
 class UsuarioService extends BaseService {
