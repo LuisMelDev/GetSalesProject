@@ -1,22 +1,28 @@
 const BaseRepository = require("./base.repository");
 let _usuario = null;
+let _rol = null
+const { Sequelize } = require('../models')
 
 class UsuarioRepository extends BaseRepository {
-    constructor({ Usuario }) {
+    constructor({ Usuario, Rol }) {
         super(Usuario);
         _usuario = Usuario;
+        _rol= Rol;
     }
 
     async getUsuarioByUsername(username) {
-        return await _usuario.findAll({
+        return await _usuario.findOne({
             where: {
                 username,
             },
+            include:[
+                {model: _rol, as:'rol'}
+            ]
         });
     }
 
     async getUsuarioByNombre(nombre) {
-        return await _usuario.findAll({
+        return await _usuario.findOne({
             where: {
                 nombre,
             },
