@@ -1,7 +1,7 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
     const DetalleCompra = sequelize.define(
-        "detalle_compra",
+        "detalle_compras",
         {
             compra_id: {
                 type: DataTypes.INTEGER,
@@ -34,9 +34,9 @@ module.exports = (sequelize, DataTypes) => {
             as: "producto",
         });
     };
-    DetalleCompra.afterBulkCreate(async (datalles, options) => {
+    DetalleCompra.afterBulkCreate(async (detalles, options) => {
         detalles.forEach(async (detalleCompra) => {
-            const inventario = await sequelize.models.inventario.findByPk(
+            const inventario = await sequelize.models.inventarios.findByPk(
                 detalleCompra.producto_id
             );
             return await inventario.increment("existencia_producto", {

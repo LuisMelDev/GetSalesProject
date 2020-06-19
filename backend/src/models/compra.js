@@ -30,17 +30,17 @@ module.exports = (sequelize, DataTypes) => {
             as: "usuario",
         });
         Compra.belongsToMany(models.inventarios, {
-            through: models.detalle_compra,
+            through: models.detalle_compras,
             foreignKey: "compra_id",
             as: "productos",
         });
     };
-    Compra.afterCreate(async (compra, options) => {
-        return await sequelize.models.bitacoras.create({
-            fecha: Date.now(),
-            operacion_id: 1,
-            usuario_id: compra.getUsuario().id,
-        });
-    });
+    // Compra.afterCreate(async (compra, options) => {
+    //     return await sequelize.models.bitacoras.create({
+    //         fecha: Date.now(),
+    //         operacion_id: 1,
+    //         usuario_id: compra.getUsuario().id,
+    //     });
+    // });
     return Compra;
 };

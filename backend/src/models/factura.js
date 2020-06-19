@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
             as: "usuario",
         });
         Factura.belongsToMany(models.inventarios, {
-            through: models.detalle_factura,
+            through: models.detalle_facturas,
             foreignKey: "factura_id",
             as: "productos",
         });

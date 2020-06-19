@@ -7,10 +7,7 @@ class FacturaService extends BaseService {
         _facturaRepository = FacturaRepository;
     }
     async createDetalles(detalles) {
-        const detallesFactura = await _facturaRepository.createDetalles(
-            detalle
-        );
-        return detallesFactura;
+        return await _facturaRepository.createDetalles(detalles);
     }
 
     async getByFecha(fecha) {

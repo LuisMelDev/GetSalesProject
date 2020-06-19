@@ -1,5 +1,6 @@
 let _compraService = null;
 const { compraSchema } = require("../validations");
+const { ErrorHelper } = require("../helpers");
 
 class CompraController {
     constructor({ CompraService }) {
@@ -17,18 +18,24 @@ class CompraController {
     }
     async create(req, res) {
         const { detalles, ...compra } = req.body;
-        await compraSchema
-            .validate(compra)
-            .catch((err) => ErrorHandler(401, err.errors[0]));
-        const createdCompra = await _compraService.create(compra);
-        const detallesData = detalles.map((detalle) => {
-            return {
-                ...detalle,
-                compra_id: createdCompra.id,
-            };
-        });
-        await _compraService.createDetalles(detallesData);
-        return res.send(createdCompra);
+        try {
+            await compraSchema
+                .validate(compra)
+                .catch((err) => ErrorHandler(401, err.errors[0]));
+            const createdCompra = await _compraService.create(compra);
+            const detallesData = detalles.map((detalle) => {
+                return {
+                    ...detalle,
+                    compra_id: createdCompra.id,
+                };
+            });
+            console.log(detallesData);
+            await _compraService.createDetalles(detallesData);
+            console.log(`almost end`);
+            return res.send(createdCompra);
+        } catch (err) {
+            console.error(err);
+        }
     }
     async update(req, res) {
         const { body } = req;

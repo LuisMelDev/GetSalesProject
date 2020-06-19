@@ -7,8 +7,7 @@ class CompraService extends BaseService {
         _compraRepository = CompraRepository;
     }
     async createDetalles(detalles) {
-        const detallesCompra = await _compraRepository.createDetalles(detalles);
-        return detallesCompra;
+        return await _compraRepository.createDetalles(detalles);
     }
     async getByFecha(fecha) {
         if (!fecha) {

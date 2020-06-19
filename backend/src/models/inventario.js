@@ -26,13 +26,13 @@ module.exports = (sequelize, DataTypes) => {
             as: "producto",
         });
         Inventario.belongsToMany(models.facturas, {
-            through: models.detalle_factura,
+            through: models.detalle_facturas,
             foreignKey: "producto_id",
             as: "facturas",
         });
 
         Inventario.belongsToMany(models.compras, {
-            through: models.detalle_compra,
+            through: models.detalle_compras,
             foreignKey: "producto_id",
             as: "compras",
         });

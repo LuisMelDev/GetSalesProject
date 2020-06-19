@@ -9,8 +9,7 @@ class CompraRepository extends BaseRepository {
         _detalleCompra = DetalleCompra;
     }
     async createDetalles(detalles) {
-        const detallesCompra = await _detalleCompra.bulkCreate(detalles);
-        return detallesCompra;
+        return await _detalleCompra.bulkCreate(detalles);
     }
 
     async getByFecha(fecha) {

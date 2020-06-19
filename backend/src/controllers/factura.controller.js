@@ -1,5 +1,6 @@
 let _facturaService = null;
 const { facturaSchema } = require("../validations");
+const { ErrorHelper } = require("../helpers");
 
 class FacturaController {
     constructor({ FacturaService }) {
@@ -18,18 +19,22 @@ class FacturaController {
 
     async create(req, res) {
         const { detalles, ...factura } = req.body;
-        await facturaSchema
-            .validate(factura)
-            .catch((err) => ErrorHandler(401, err.errors[0]));
-        const createdFactura = await _facturaService.create(factura);
-        const detallesData = detalles.map((detalle) => {
-            return {
-                ...detalle,
-                factura_id: createdFactura.id,
-            };
-        });
-        await _facturaService.createDetalles(detallesData);
-        return res.send(createdFactura);
+        try {
+            await facturaSchema
+                .validate(factura)
+                .catch((err) => ErrorHelper(401, err.errors[0]));
+            const createdFactura = await _facturaService.create(factura);
+            const detallesData = detalles.map((detalle) => {
+                return {
+                    ...detalle,
+                    factura_id: createdFactura.id,
+                };
+            });
+            await _facturaService.createDetalles(detallesData);
+            return res.send(createdFactura);
+        } catch (err) {
+            console.error(err);
+        }
     }
     async update(req, res) {
         const { body } = req;
