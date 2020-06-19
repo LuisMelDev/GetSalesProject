@@ -1,23 +1,37 @@
-let _facturaService = null;
 const { facturaSchema } = require("../validations");
 const { ErrorHelper } = require("../helpers");
 
+let _facturaService = null;
+let _bitacoraService = null;
+
 class FacturaController {
-    constructor({ FacturaService }) {
+    constructor({ FacturaService, BitacoraService }) {
         _facturaService = FacturaService;
+        _bitacoraService = BitacoraService;
     }
-    async get(req, res) {
+    async get(req, res, next) {
         const { id } = req.params;
-        const factura = await _facturaService.get(id);
-        return res.send(factura);
+        try {
+            const factura = await _facturaService.get(id);
+            return res.send(factura);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async getAll(req, res) {
+    async getAll(req, res, next) {
         const { pageSize, pageNum } = req.query;
-        const amperajes = await _facturaService.getAll(pageSize, pageNum);
-        return res.status(200).json(amperajes);
+        try {
+            const facturas = await _facturaService.getAll(pageSize, pageNum);
+            return res.send(facturas);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 
-    async create(req, res) {
+    async create(req, res, next) {
+        const { user } = req;
         const { detalles, ...factura } = req.body;
         try {
             await facturaSchema
@@ -31,36 +45,76 @@ class FacturaController {
                 };
             });
             await _facturaService.createDetalles(detallesData);
+            await _bitacoraService.register(
+                "CREATE",
+                `FACTURAS(ID: ${createdFactura.id})`,
+                user.id
+            );
             return res.send(createdFactura);
         } catch (err) {
             console.error(err);
+            next(err);
         }
     }
-    async update(req, res) {
-        const { body } = req;
+    async update(req, res, next) {
+        const { body, user } = req;
         const { id } = req.params;
-        const updatedFactura = await _facturaService.update(id, body);
-        return res.send(updatedFactura);
+        try {
+            await facturaSchema
+                .validate(body)
+                .catch((err) => ErrorHelper(401, err.errors[0]));
+            const updatedFactura = await _facturaService.update(id, body);
+            await _bitacoraService.register(
+                "UPDATE",
+                `FACTURAS(ID: ${id})`,
+                user.id
+            );
+            return res.send(updatedFactura);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async delete(req, res) {
+    async delete(req, res, next) {
         const { id } = req.params;
-        const deletedFactura = await _facturaService.delete(id);
-        return res.send(deletedFactura);
+        const { user } = req;
+        try {
+            const deletedFactura = await _facturaService.delete(id);
+            await _bitacoraService.register(
+                "DELETE",
+                `FACTURAS(ID: ${id})`,
+                user.id
+            );
+            return res.send(deletedFactura);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 
-    async getByFecha(req, res) {
+    async getByFecha(req, res, next) {
         const { fecha } = req.params;
-        const factura = await _facturaService.getByFecha(fecha);
-        return res.send(factura);
+        try {
+            const factura = await _facturaService.getByFecha(fecha);
+            return res.send(factura);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 
-    async getCliente(req, res) {
+    async getCliente(req, res, next) {
         const { id } = req.params;
-        const factura = await _facturaService.get(id);
-        const cliente = await factura.getCliente();
-        return res.send(cliente);
+        try {
+            const factura = await _facturaService.get(id);
+            const cliente = await factura.getCliente();
+            return res.send(cliente);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async search(req, res) {
+    async search(req, res, next) {
         const { cliente, usuario } = req.query;
         const options = { where: {} };
         if (cliente) {
@@ -69,8 +123,13 @@ class FacturaController {
         if (usuario) {
             options.where.usuario_id = usuario;
         }
-        const compras = await _facturaService.searchAll(options);
-        return res.send(compras);
+        try {
+            const compras = await _facturaService.searchAll(options);
+            return res.send(compras);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 }
 

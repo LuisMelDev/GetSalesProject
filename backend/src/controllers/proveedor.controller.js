@@ -1,54 +1,117 @@
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
-let _proveedorService = null;
 const { proveedorSchema } = require("../validations");
+const { ErrorHelper } = require("../helpers");
+
+let _proveedorService = null;
+let _bitacoraService = null;
 
 class ProveedorController {
-    constructor({ ProveedorService }) {
+    constructor({ ProveedorService, BitacoraService }) {
         _proveedorService = ProveedorService;
+        _bitacoraService = BitacoraService;
     }
-    async get(req, res) {
+    async get(req, res, next) {
         const { id } = req.params;
-        const proveedor = await _proveedorService.get(id);
-        return res.send(proveedor);
+        try {
+            const proveedor = await _proveedorService.get(id);
+            return res.send(proveedor);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async getAll(req, res) {
+    async getAll(req, res, next) {
         const { pageSize, pageNum } = req.query;
-        const proveedores = await _proveedorService.getAll(pageSize, pageNum);
-        return res.send(proveedores);
+        try {
+            const proveedores = await _proveedorService.getAll(
+                pageSize,
+                pageNum
+            );
+            return res.send(proveedores);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async create(req, res) {
-        const { body } = req;
-        await proveedorSchema
-            .validate(body)
-            .catch((err) => ErrorHandler(401, err.errors[0]));
-        const createdProveedor = await _proveedorService.create(body);
-        return res.send(createdProveedor);
+    async create(req, res, next) {
+        const { body, user } = req;
+        try {
+            await proveedorSchema
+                .validate(body)
+                .catch((err) => ErrorHelper(401, err.errors[0]));
+            const createdProveedor = await _proveedorService.create(body);
+            await _bitacoraService.register(
+                "CREATE",
+                `PROVEEDORES(ID: ${createdProveedor.id})`,
+                user.id
+            );
+            return res.send(createdProveedor);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async update(req, res) {
-        const { body } = req;
+    async update(req, res, next) {
+        const { body, user } = req;
         const { id } = req.params;
-        const updatedProveedor = await _proveedorService.update(id, body);
-        return res.send(updatedProveedor);
+        try {
+            await proveedorSchema
+                .validate(body)
+                .catch((err) => ErrorHelper(401, err.errors[0]));
+            const updatedProveedor = await _proveedorService.update(id, body);
+            await _bitacoraService.register(
+                "UPDATE",
+                `PROVEEDORES(ID: ${id})`,
+                user.id
+            );
+            return res.send(updatedProveedor);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async delete(req, res) {
+    async delete(req, res, next) {
         const { id } = req.params;
-        const deletedProveedor = await _proveedorService.delete(id);
-        return res.send(deletedProveedor);
+        const { user } = req;
+        try {
+            const deletedProveedor = await _proveedorService.delete(id);
+            await _bitacoraService.register(
+                "DELETE",
+                `PROVEEDORES(ID: ${id})`,
+                user.id
+            );
+            return res.send(deletedProveedor);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 
-    async getProveedorByNombre(req, res) {
+    async getProveedorByNombre(req, res, next) {
         const { nombre } = req.params;
-        const proveedor = await _proveedorService.getProveedorByNombre(nombre);
-        return res.send(proveedor);
+        try {
+            const proveedor = await _proveedorService.getProveedorByNombre(
+                nombre
+            );
+            return res.send(proveedor);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
-    async getCompras(req, res) {
+    async getCompras(req, res, next) {
         const { proveedorId } = req.params;
-        const compras = await _proveedorService.getCompras(proveedorId);
-        return res.send(compras);
+        try {
+            const compras = await _proveedorService.getCompras(proveedorId);
+            return res.send(compras);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 
-    async search(req, res) {
+    async search(req, res, next) {
         const { nombre } = req.query;
         const options = { where: {} };
         if (nombre) {
@@ -56,8 +119,13 @@ class ProveedorController {
                 [Op.like]: `%${nombre}%`,
             };
         }
-        const proveedores = await _proveedorService.searchAll(options);
-        return res.send(proveedores);
+        try {
+            const proveedores = await _proveedorService.searchAll(options);
+            return res.send(proveedores);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
     }
 }
 
