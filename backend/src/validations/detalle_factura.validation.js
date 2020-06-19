@@ -22,7 +22,6 @@ const detalleFacturaSchema = yup.object().shape({
     .required()
 });
 
-module.exports = {
-  detalleFacturaSchema
-};
+module.exports = detalleFacturaSchema;
+
 

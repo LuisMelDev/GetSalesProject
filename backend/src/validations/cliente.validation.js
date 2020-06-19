@@ -22,7 +22,5 @@ const clienteSchema = yup.object().shape({
     .required()
 });
 
-module.exports = {
-  clienteSchema
-};
+module.exports = clienteSchema;
 

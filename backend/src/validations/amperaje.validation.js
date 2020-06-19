@@ -7,7 +7,6 @@ const amperajeSchema = yup.object().shape({
     .required()
 });
 
-module.exports = {
-  amperajeSchema
-};
+module.exports = amperajeSchema;
+
 

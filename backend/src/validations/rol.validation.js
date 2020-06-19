@@ -6,7 +6,6 @@ const rolSchema = yup.object().shape({
     .required('Campo obligatorio')
 });
 
-module.exports = {
-  rolSchema
-};
+module.exports = rolSchema;
+
 

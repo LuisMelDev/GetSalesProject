@@ -6,7 +6,5 @@ const marcaSchema = yup.object().shape({
     .required()
 });
 
-module.exports = {
-  marcaSchema
-};
+module.exports = marcaSchema;
 
