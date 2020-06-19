@@ -6,14 +6,15 @@ class FacturaService extends BaseService {
         super(FacturaRepository);
         _facturaRepository = FacturaRepository;
     }
-    async createDetalle(detalle) {
-        const detalleFactura = await _facturaRepository.createDetalle(detalle);
-        return detalleFactura;
+    async createDetalles(detalles) {
+        const detallesFactura = await _facturaRepository.createDetalles(
+            detalle
+        );
+        return detallesFactura;
     }
 
     async getByFecha(fecha) {
-        if (!fecha)
-        {
+        if (!fecha) {
             ErrorHelper(400, "fecha must be sent");
         }
         return await _facturaRepository.getByFecha();

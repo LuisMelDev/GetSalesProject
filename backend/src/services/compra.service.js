@@ -6,13 +6,12 @@ class CompraService extends BaseService {
         super(CompraRepository);
         _compraRepository = CompraRepository;
     }
-    async createDetalle(detalle) {
-        const detalleCompra = await _compraRepository.createDetalle(detalle);
-        return detalleCompra;
+    async createDetalles(detalles) {
+        const detallesCompra = await _compraRepository.createDetalles(detalles);
+        return detallesCompra;
     }
     async getByFecha(fecha) {
-        if(!fecha)
-        {
+        if (!fecha) {
             ErrorHelper(400, "fecha must be sent");
         }
         return await _compraRepository.getByFecha();
