@@ -40,6 +40,7 @@ class AuthService {
         const userToEnconde = {
             username: userExist.username,
             id: userExist.id,
+            rol_id: userExist.rol_id
         };
 
         const token = generateToken(userToEnconde);
