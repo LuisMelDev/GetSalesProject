@@ -5,9 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 //modulos del sistema
-// import { AdministracionModule } from './modulos/administracion/administracion.module';
-// import { ClientesModule } from './modulos/clientes/clientes.module';
-// import { ProductosModule } from './modulos/productos/productos.module';
+
 import { ComprasModule } from './modulos/compras/compras.module';
 import { VentasModule } from './modulos/ventas/ventas.module';
 
