@@ -18,7 +18,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ClientesComponent } from './pages/clientes/clientes.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { ProductosComponent } from './pages/productos/productos.component';
-import { VentasComponent } from './pages/ventas/ventas.component';
 import { BitacoraComponent } from './pages/bitacora/bitacora.component';
 import { ReportesComponent } from './pages/reportes/reportes.component';
 import { ActualizarProductoComponent  } from "./pages/productos/actualizar/actualizar.component";
@@ -41,7 +40,6 @@ import { ListarClientesComponent } from "./pages/clientes/listar/listar.componen
     ClientesComponent,
     UsuariosComponent,
     ProductosComponent,
-    VentasComponent,
     BitacoraComponent,
     ReportesComponent,
     ActualizarClientesComponent,
