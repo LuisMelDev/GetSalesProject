@@ -3,6 +3,7 @@ export class Venta {
     public id: string,
     public cliente_id: string,
     public usuario_id: string,
-    public fecha: string
+    public fecha: any,
+    public detalle_venta:any
   ) {}
 }
