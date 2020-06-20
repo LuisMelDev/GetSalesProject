@@ -11,6 +11,15 @@ module.exports = {
                 {
                     nombre: "Tesla",
                 },
+                {
+                    nombre: "Samsung",
+                },
+                {
+                    nombre: "Silver",
+                },
+                {
+                    nombre: "Bogaloo Socialista",
+                },
             ],
             {}
         );

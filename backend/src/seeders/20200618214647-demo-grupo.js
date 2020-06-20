@@ -6,10 +6,19 @@ module.exports = {
             "grupos",
             [
                 {
-                    nombre: "Daily",
+                    nombre: "Group one",
                 },
                 {
                     nombre: "Group two",
+                },
+                {
+                    nombre: "Group three",
+                },
+                {
+                    nombre: "Group four",
+                },
+                {
+                    nombre: "Group five",
                 },
             ],
             {}

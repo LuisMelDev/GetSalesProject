@@ -17,6 +17,9 @@ module.exports = {
                 {
                     operacion: "LOGIN",
                 },
+                {
+                    operacion: "LOGOUT",
+                },
             ],
             {}
         );

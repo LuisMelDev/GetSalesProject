@@ -20,6 +20,27 @@ module.exports = {
                     password: await hash("empleado", 12),
                     email: "empleado@hey.com",
                 },
+                {
+                    rol_id: "2",
+                    nombre: "Empleado2",
+                    username: "empleado2",
+                    password: await hash("empleado2", 12),
+                    email: "empleado2@gmail.com",
+                },
+                {
+                    rol_id: "2",
+                    nombre: "Empleado3",
+                    username: "empleado3",
+                    password: await hash("empleado3", 12),
+                    email: "empleado3@outlook.com",
+                },
+                {
+                    rol_id: "2",
+                    nombre: "Empleado4",
+                    username: "empleado4",
+                    password: await hash("empleado4", 12),
+                    email: "empleado4@yahoo.com",
+                },
             ],
             {}
         );

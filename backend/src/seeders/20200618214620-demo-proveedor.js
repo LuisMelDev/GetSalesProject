@@ -9,7 +9,17 @@ module.exports = {
                     nombre: "Titanium",
                 },
                 {
-                    nombre: "MetalGear",
+                    nombre: "Metal Gear",
+                },
+
+                {
+                    nombre: "Hattori Hanzo",
+                },
+                {
+                    nombre: "Lewis C.A.",
+                },
+                {
+                    nombre: "Electroniks",
                 },
             ],
             {}
