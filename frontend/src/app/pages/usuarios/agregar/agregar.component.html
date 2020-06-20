@@ -1,0 +1,69 @@
+<app-page-header 
+[titulo]="titulo" 
+[icono]="icono">
+</app-page-header> 
+
+
+<div class="container-fluid">
+    <div class="alert alert-success" role="alert" *ngIf="register">
+        El usuario {{ register.nombre }} ha sido registrado ver <a 
+        [routerLink]="['/usuarios/usuario', register.id]" >aqui</a>
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="error">
+        {{error}}
+      </div>
+    <form class="form-neon" #formUsuario="ngForm">
+        <fieldset>
+            <legend><i class="far fa-address-card"></i> &nbsp; Información personal</legend>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                            <label for="username" class="">Nombre de usuario</label>
+                            <input type="text" [(ngModel)]="usuario.username" #username="ngModel"
+                            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ 1-9]{1,20}" class="form-control" name="username" id="username" maxlength="20" required>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                            <label for="nombre" class="">Nombres y Apellidos</label>
+                            <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,100}"  #nombre="ngModel" [(ngModel)]="usuario.nombre" class="form-control" name="nombre" id="nombre" maxlength="100" required >
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                            <label for="correo" class="">Correo</label>
+                            <input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" [(ngModel)]="usuario.email" #correo="ngModel" name="correo" id="correo" maxlength="40" required >
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                            <label class="">Nivel de Privilegio</label>
+                            <select class="form-control" name="rol" [(ngModel)]="usuario.rol_id" #rol="ngModel" required>
+                                <option value="" selected="" disabled=""></option>
+                                <option value="1">Administrador del Sistema</option>
+                                <option value="2">Vendedor</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                            <label for="usuario_clave_1" class="">Contraseña</label>
+                            <input type="password" class="form-control" name="password" id="password" #password="ngModel" [(ngModel)]="usuario.password" maxlength="200" required>
+                        </div>
+                    </div>             
+                    
+                </div>
+            </div>
+        </fieldset>
+        <div class="bd-callout-danger bd-callout" *ngIf="formUsuario.touched && formUsuario.invalid">
+            <p *ngIf="formUsuario.invalid">Todos los campos son obligatorios</p>
+            <p *ngIf="nombre.invalid && nombre.touched">El campo nombre y apellido no admite numeros</p>
+            <p *ngIf="correo.invalid && correo.touched">Ingrese un correo valido</p>
+            
+        </div>
+        <p class="text-center" style="margin-top: 40px;">
+            <button [disabled]="!formUsuario.valid" (click)="registrar(formUsuario)" class="btn btn-raised btn-info btn-xl"><i class="far fa-save" ></i>Registrar</button>
+        </p>
+    </form>
+</div>

@@ -7,6 +7,7 @@ import { PrincipalComponent } from './pages/principal/principal.component';
 import { RegistrarComponent } from './pages/registrar/registrar.component';
 import { ListadoComponent } from './pages/listado/listado.component';
 import { VerComponent } from './pages/ver/ver.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { VerComponent } from './pages/ver/ver.component';
     ListadoComponent,
     VerComponent,
   ],
-  imports: [CommonModule, VentasRoutingModule, ComponentsModule],
+  imports: [CommonModule, VentasRoutingModule, ComponentsModule, FormsModule],
   exports: [
     PrincipalComponent,
     RegistrarComponent,

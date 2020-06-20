@@ -2,6 +2,7 @@ import { Component, OnInit,DoCheck } from '@angular/core';
 import { Router } from "@angular/router";
 import { Usuario } from "./models/usuario.model";
 import { UsuarioService } from "./services/usuario.service";
+import {Cliente} from './models/cliente.model'
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,16 @@ export class AppComponent implements OnInit, DoCheck {
     this.getIdentity()
 
     this.navigate()
+
+    let cli = localStorage.getItem('clientes')
+    if(!cli){
+      let clientes = [
+        new Cliente('1','26136504','Luis Melendez','barquisimeto','27/02/1998', '04262782969','luis@luis.com'),
+        new Cliente('2','15478256','jodefina','barquisimeto','5/12/1900', '04257524584','jodefina@jodefina.com')
+      ];
+
+      localStorage.setItem('clientes', JSON.stringify(clientes))
+    }
   }
 
   ngDoCheck(){

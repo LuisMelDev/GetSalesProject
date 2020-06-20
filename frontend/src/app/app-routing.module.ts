@@ -2,13 +2,25 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
+import { BitacoraComponent } from './pages/bitacora/bitacora.component';
+import { ReportesComponent } from './pages/reportes/reportes.component';
+import { ProductosComponent } from './pages/productos/productos.component';
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { ClientesComponent } from './pages/clientes/clientes.component';
 
 
 
 const routes: Routes = [
   {path: '', component:DashboardComponent},
   {path: 'dashboard', component:DashboardComponent},
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'bitacora', component: BitacoraComponent},
+  {path: 'reportes', component: ReportesComponent},
+  {path: 'productos', component: ProductosComponent},
+  {path: 'usuarios', component: UsuariosComponent},
+  {path: 'clientes', component: ClientesComponent},
+  
+  
 ];
 
 @NgModule({

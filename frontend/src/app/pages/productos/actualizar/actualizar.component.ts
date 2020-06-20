@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-actualizar',
+  selector: 'app-actualizar-producto',
   templateUrl: '../agregar/agregar.component.html',
   styleUrls: ['./actualizar.component.scss']
 })
-export class ActualizarComponent implements OnInit {
+export class ActualizarProductoComponent implements OnInit {
 
   constructor() { }
 

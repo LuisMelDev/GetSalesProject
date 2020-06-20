@@ -11,6 +11,7 @@ import { ActualizarComponent } from './pages/actualizar/actualizar.component';
 import { ListarComponent } from './pages/listar/listar.component';
 import { ClienteComponent } from './pages/cliente/cliente.component';
 import { BusquedaComponent } from './pages/busqueda/busqueda.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { BusquedaComponent } from './pages/busqueda/busqueda.component';
     ClienteComponent,
     BusquedaComponent,
   ],
-  imports: [CommonModule, ClientesRoutingModule, ComponentsModule],
+  imports: [CommonModule, ClientesRoutingModule, ComponentsModule, FormsModule],
   exports: [
     PrincipalComponent,
     AgregarComponent,
