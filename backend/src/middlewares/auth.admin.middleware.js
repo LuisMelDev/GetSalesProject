@@ -20,7 +20,6 @@ if(req.headers.authorization){
                 ErrorHelper(403, "Debes ser administrador");
         }
 
-        req.user = decodedToken.user;
         next();
 
 
