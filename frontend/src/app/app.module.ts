@@ -8,14 +8,13 @@ import { AppComponent } from './app.component';
 
 import { ComprasModule } from './modulos/compras/compras.module';
 import { VentasModule } from './modulos/ventas/ventas.module';
-
+ 
 //paginas de login y principal
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ComponentsModule } from './components/components.module';
 import { UsuarioService } from './services/usuario.service';
 import { HttpClientModule } from '@angular/common/http';
-import { UsuariosModule } from './modulos/usuarios/usuarios.module';
 import { ClientesComponent } from './pages/clientes/clientes.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { ProductosComponent } from './pages/productos/productos.component';
@@ -63,7 +62,6 @@ import { ListarClientesComponent } from "./pages/clientes/listar/listar.componen
     ComponentsModule,
     FormsModule,
     HttpClientModule,
-    UsuariosModule
   ],
   providers: [
     UsuarioService
