@@ -526,3 +526,14 @@ table form{
 .flex-bottom div button{
 	width: 100% !important;
 }
+.bd-callout-danger {
+    border-left-color: #d9534f  !important;
+}
+.bd-callout{
+    padding: 1.25rem !important;
+    margin-top: 1.25rem !important;
+    margin-bottom: 1.25rem !important;
+    border: 1px solid #d9534f !important;
+    border-left-width: .25rem !important;
+    border-radius: .25rem !important;
+}

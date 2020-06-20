@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -15,6 +15,9 @@ import { VentasModule } from './modulos/ventas/ventas.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ComponentsModule } from './components/components.module';
+import { UsuarioService } from './services/usuario.service';
+import { HttpClientModule } from '@angular/common/http';
+import { UsuariosModule } from './modulos/usuarios/usuarios.module';
 
 
 @NgModule({
@@ -31,9 +34,14 @@ import { ComponentsModule } from './components/components.module';
     ComprasModule,
     ProductosModule,
     VentasModule,
-    ComponentsModule
+    ComponentsModule,
+    FormsModule,
+    HttpClientModule,
+    UsuariosModule
   ],
-  providers: [],
+  providers: [
+    UsuarioService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

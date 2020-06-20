@@ -1,21 +1,29 @@
 <div class="login-container">
     <div class="login-content">
+          
+       
         <p class="text-center">
             <i class="fas fa-user-circle fa-5x"></i>
         </p>
         <p class="text-center">
             Inicia sesión con tu cuenta
         </p>
-        <form>
+        <form #loginForn="ngForm">
             <div class="form-group">
                 <label for="UserName" class="bmd-label-floating"><i class="fas fa-user-secret"></i> &nbsp; Usuario</label>
-                <input type="text" class="form-control" id="UserName" name="usuario" pattern="[a-zA-Z0-9]{1,35}" maxlength="35">
+                <input type="text" class="form-control" id="username" name="username" [(ngModel)]="usuario.username" #username="ngModel">
             </div>
             <div class="form-group">
                 <label for="UserPassword" class="bmd-label-floating"><i class="fas fa-key"></i> &nbsp; Contraseña</label>
-                <input type="password" class="form-control" id="UserPassword" name="clave" maxlength="200">
+                <input type="password" class="form-control" [(ngModel)]="usuario.password" #password="ngModel" id="password"  name="password">
             </div>
-            <a [routerLink]="['']"  class="btn-login text-center">LOG IN</a>
+            <div class="form group text-danger" *ngIf="usuario.password.length == 0 || usuario.username.length == 0 ">
+                <blockquote>Debe Llenar todos los campos</blockquote>
+            </div>
+            <input type="button" (click)="login()" [disabled]="usuario.password.length == 0  || usuario.username.length == 0" class="btn-login text-center" value="Inicia Sesion">
         </form>
+        <div class="alert alert-danger" role="alert" *ngIf="status.length != 0">
+            <span>{{status}}</span> 
+        </div>
     </div>
-</div>
+</div>  
