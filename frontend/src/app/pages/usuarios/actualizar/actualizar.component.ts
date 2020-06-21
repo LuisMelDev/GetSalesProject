@@ -5,25 +5,26 @@ import { UsuarioService } from "src/app/services/usuario.service";
 
 @Component({
   selector: 'app-actualizar-usuario',
-  templateUrl: '../agregar/agregar.component.html',
+  //templateUrl: '../agregar/agregar.component.html',
+  templateUrl:'./actualizar.component.html',
   styleUrls: ['./actualizar.component.scss'],
   providers:[UsuarioService]
 })
 export class ActualizarUsuariosComponent implements OnInit {
 
-  public titulo: string = 'Agregar';
+ /* public titulo: string = 'Agregar';
   public icono: string = 'fa fa-home';
   public usuario: any;
   public register:any;
   public error:string;
-  public id:string;
+  public id:string;*/
   constructor(private _usuarioService: UsuarioService, private _activateRoute:ActivatedRoute, private _route:Router) {
-    this.usuario = new Usuario('', '', '', '', '', '', '');
-    this.error = '';
+    /*this.usuario = new Usuario('', '', '', '', '', '', '');
+    this.error = '';*/
   }
 
   ngOnInit(): void {
-    console.log
+    /*console.log
     this._activateRoute.params.subscribe(params => {
       this.id = params["id"];
       this._usuarioService.get(this.id)
@@ -35,10 +36,10 @@ export class ActualizarUsuariosComponent implements OnInit {
         err=>{
           this._route.navigate(['/usuarios/listado'])
         });
-    });
+    });*/
   }
 
-  registrar(form) {
+  /*registrar(form) {
     this._usuarioService.updateUser(this.usuario,this.id).subscribe(
       (res) => { 
         
@@ -53,6 +54,6 @@ export class ActualizarUsuariosComponent implements OnInit {
         }
       }
     );
-  }
+  }*/
 
 }

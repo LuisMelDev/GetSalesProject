@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./usuarios.component.scss']
 })
 export class UsuariosComponent implements OnInit {
-  public titulo:string = "Lista de Usuarios"
+  public titulo:string = "Lista de Usuarioooooooos"
   public icono:string = "fas fa-clipboard-list"
   constructor() { }
 

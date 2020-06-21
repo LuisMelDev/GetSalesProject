@@ -3,12 +3,13 @@
 [icono]="icono"
 ></app-page-header>
 <div class="container-fluid">
-    <form class="form-neon" #formsearch="ngForm">
+    <!-- FILTRO DE USUARIOS !-->
+<form class="form-neon" #formsearch="ngForm">
         <div class="container-fluid">
             <div class="row justify-content-md-center">
                 <div class="col-12 col-md-6">
                     <div class="form-group">
-                        <label for="busqueda" class="">Nombre De usuario</label>
+                        <label for="busqueda" placeholder="Nombre de Usuario" aria-label="Nombre de Usuario" class="">Nombre De usuario</label>
                         <input type="text" [(ngModel)]="busqueda" class="form-control" name="busqueda" id="busqueda" required>
                     </div>
                 </div>
@@ -18,11 +19,19 @@
                             Buscar</button>
                     </p>
                 </div>
-            </div>
+           </div>
         </div>
-    </form>
+</form>  
+
+
+
+<br>
+
+<button class="btn btn-raised btn-info" [routerLink]="['/usuarios/agregar']" class="btn btn-success"><i class="fas fa-search"></i> &nbsp; Agregar Usuario</button>
+ 
+         
     <div class="table-responsive">
-        <table class="table table-dark table-sm">
+        <table class="table table-dark table-sm" >
             <thead>
                 <tr class="text-center roboto-medium">
                     <th>Rol</th>
@@ -42,14 +51,17 @@
                         <a class="btn btn-success">
                             <i [routerLink]="['/usuarios/usuario/',usuario.id ]"   class="fas fa-sync-alt"></i>
                         </a>
-                        <!-- <button type="button" class="btn btn-warning">
+                         <button type="button" class="btn btn-warning">
                             <i class="far fa-trash-alt"></i>
-                        </button> -->
+                        </button> 
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+
+
     <nav aria-label="Page navigation example" *ngIf="!busqueda">
         <ul class="pagination justify-content-center">
             <li class="page-item">
@@ -61,3 +73,4 @@
         </ul>
     </nav>
 </div>
+

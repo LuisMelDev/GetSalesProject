@@ -15,15 +15,24 @@ export class AgregarUsuariosComponent implements OnInit {
   public password2: string;
   public register:any;
   public error:string;
+  public usuarios: any;
+  public registrado: boolean;
+
   constructor(private _usuarioService: UsuarioService) {
     this.usuario = new Usuario('', '', '', '', '', '', '');
     this.password2 = '';
     this.error = '';
+    this.usuarios = [];
+    this.registrado = false;
+
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.usuarios = JSON.parse(localStorage.getItem('usuarios'))
+    console.log(this.usuarios)
+  }
 
-  registrar(form) {
+  /*registrar(form) {
     this._usuarioService.createUser(this.usuario).subscribe(
       (res) => { 
         this.error = '';
@@ -38,5 +47,18 @@ export class AgregarUsuariosComponent implements OnInit {
         }
       }
     );
+  }*/
+
+  registrar(form){
+    this.usuarios.push(this.usuario);
+    localStorage.setItem('usuarios', JSON.stringify(this.usuarios));
+    console.log(this.usuarios)
+    form.reset();
+    this.registrado = true;
   }
-}
+
+
+  }
+
+
+

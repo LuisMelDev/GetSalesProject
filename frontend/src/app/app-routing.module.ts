@@ -8,9 +8,9 @@ import { ProductosComponent } from './pages/productos/productos.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
 import { AgregarUsuariosComponent } from './pages/usuarios/agregar/agregar.component';
-import { AgregarClientesComponent } from './pages/cliente/agregar/agregar.component';
+import { AgregarClientesComponent } from './pages/clientes/agregar/agregar.component';
 import { ActualizarUsuariosComponent } from './pages/usuarios/actualizar/actualizar.component';
-import { ActualizarClientesComponent } from './pages/cliente/actualizar/actualizar.component';
+import { ActualizarClientesComponent } from './pages/clientes/actualizar/actualizar.component';
 
 
 
