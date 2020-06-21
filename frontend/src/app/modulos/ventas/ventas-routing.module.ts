@@ -12,7 +12,7 @@ const routes: Routes = [
     children: [
       {path: 'registrar', component: RegistrarComponent},
       {path: 'listado', component: ListadoComponent},
-      {path: 'factura', component: VerComponent},
+      {path: 'factura/:id', component: VerComponent},
     ],
   },
 ];

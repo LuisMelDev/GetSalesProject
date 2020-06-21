@@ -535,5 +535,9 @@ table form{
     margin-bottom: 1.25rem !important;
     border: 1px solid #d9534f !important;
     border-left-width: .25rem !important;
-    border-radius: .25rem !important;
+	border-radius: .25rem !important;
+}
+
+.hand{
+	cursor: pointer;
 }

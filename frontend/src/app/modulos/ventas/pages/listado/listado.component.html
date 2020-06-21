@@ -45,23 +45,22 @@
                 <thead>
                     <tr class="text-center roboto-medium">
                         <th>#</th>
-                        <th>CÓDIGO</th>
-                        <th>NOMBRE</th>
-                        <th>STOCK</th>
+                        <th>Fecha</th>
+                        <th>Cliente</th>
+                        <th>Vendedor</th>
+                        <th>Precio</th>
                         <th>Accion</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-center" >
-                        <td>1</td>
-                        <td>012342567</td>
-                        <td>NOMBRE DEL ITEM</td>
-                        <td>20</td>
+                    <tr class="text-center" *ngFor="let venta of ventas; index as i">
+                        <td>{{venta.id}}</td>
+                        <td>{{venta.fecha | date:'dd/MM/yy'}}</td>
+                        <td>{{venta.cliente.nombre}}</td>
+                        <td>{{venta.usuario}}</td>
+                        <td>{{venta.precioFactura}}</td>
                         <td>
-                            <a [routerLink]="['/productos/actualizar',1]" class="btn btn-success">
-                                <i class="fas fa-sync-alt"></i> 
-                            </a>
-                            <button [routerLink]="['/productos/ver',1]" type="button" class="btn btn-warning">
+                            <button [routerLink]="['/ventas/factura',venta.id]" type="button" class="btn btn-warning">
                                 <i class="far fa-eye"></i>
                             </button>
                         </td>
@@ -75,11 +74,11 @@
                 <li class="page-item disabled">
                     <a class="page-link" href="#" tabindex="-1">Previous</a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link">1</a></li>
+                <li class="page-item"><a class="page-link">2</a></li>
+                <li class="page-item"><a class="page-link">3</a></li>
                 <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
+                    <a class="page-link">Next</a>
                 </li>
             </ul>
         </nav>

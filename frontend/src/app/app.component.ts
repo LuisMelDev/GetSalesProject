@@ -2,7 +2,8 @@ import { Component, OnInit,DoCheck } from '@angular/core';
 import { Router } from "@angular/router";
 import { Usuario } from "./models/usuario.model";
 import { UsuarioService } from "./services/usuario.service";
-import {Cliente} from './models/cliente.model'
+import {Cliente} from './models/cliente.model';
+import { Producto } from "./models/producto.model";
 
 @Component({
   selector: 'app-root',
@@ -37,6 +38,23 @@ export class AppComponent implements OnInit, DoCheck {
 
       localStorage.setItem('clientes', JSON.stringify(clientes))
     }
+
+    let pro = localStorage.getItem('productos')
+
+    if(!pro){
+      let productos = [
+        new Producto('1','Bateria 1', '',10,'20/01/2019','700','24mr','ETNA'),
+        new Producto('2','Bateria 2', '',50,'20/05/2019','700','34mr','ETNA'),
+        new Producto('3','Bateria 3', '',60,'20/01/2020','1100','4d','ETNA'),
+      ]
+      localStorage.setItem('baterias',JSON.stringify(productos))
+    }
+
+    let ven = localStorage.getItem('ventas')
+    if(!ven){
+      localStorage.setItem('ventas', JSON.stringify([]))
+    }
+
   }
 
   ngDoCheck(){
