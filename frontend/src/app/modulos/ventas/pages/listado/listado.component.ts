@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./listado.component.scss']
 })
 export class ListadoComponent implements OnInit {
+  public titulo: string ="listado de Ventas";
+  public icono: string ="fa fa-home";
   public ventas: any;
   constructor() { }
 

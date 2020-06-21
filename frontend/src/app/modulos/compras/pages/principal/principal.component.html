@@ -1,15 +1,2 @@
-<app-page-header
-[titulo]="titulo"
-[icono]="icono"
-></app-page-header>
- 
-<div class="container-fluid">
-    <ul class="full-box list-unstyled page-nav-tabs">
-        <li *ngFor="let link of links" >
-            <a [routerLink]="[link.link]" (click)="cambiarTitulo(link.titulo,link.icono2)" ><i class="{{link.icono}} fa-fw fas"></i> &nbsp; {{link.nombre}}</a>
-        </li>
-        
-    </ul>	
-</div>
 <router-outlet></router-outlet>
  
