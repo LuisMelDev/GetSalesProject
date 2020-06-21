@@ -13,7 +13,7 @@ import { Router } from "@angular/router";
 })
 export class RegistrarComponent implements OnInit {
   public titulo: string ="Registrar Venta";
-  public icono: string ="fa fa-home";
+  public icono: string ="fa fa-shopping-cart";
   public fecha: any;
   public resultados: any;
   public cliente:Cliente;

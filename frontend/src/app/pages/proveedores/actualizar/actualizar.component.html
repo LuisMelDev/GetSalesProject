@@ -1,0 +1,33 @@
+<div class="container-fluid py-4">
+    <div class="alert alert-danger" role="alert" *ngIf="actualizado">
+        El Proveedor ha sido actualizado 
+    </div>
+    <form #formulario="ngForm" autocomplete="off" >
+        <fieldset>
+            <legend><i class="fas fa-user"></i> &nbsp; Información De Proveedor</legend>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group bmd-form-group bmd-form-group-lg">
+                             <label for="cedula">Rif</label>
+                            <input type="text" class="form-control" id="cedula" name="cedula"  maxlength="10" [(ngModel)]="proveedor.rif" #cedula="ngModel" required>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group bmd-form-group bmd-form-group-lg">
+                            <label for="nombre" >Nombre</label>
+                            <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" class="form-control" name="nombre" id="nombre"  [(ngModel)]="proveedor.nombre" #nombre="ngModel" maxlength="100" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="bd-callout-danger bd-callout" *ngIf="formulario.touched && formulario.invalid">
+            <p *ngIf="formulario.invalid">Todos los campos son obligatorios</p>            
+        </div>
+        <p class="text-center" >
+            &nbsp; &nbsp;
+            <button (click)="agregar(formulario)" type="submit" class="btn btn-raised btn-danger btn-lg" [disabled]="formulario.invalid" data-toggle="modal" data-target="#modalActualizar"><i class="far fa-save"></i> &nbsp; Registrar</button>
+        </p>
+    </form>
+</div>	

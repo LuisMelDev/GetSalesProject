@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, DoCheck {
     private _router :Router,
     private _usuarioService:UsuarioService
   ){
-    this.usuario = new Usuario('','','','','','',''); 
+    this.usuario = new Usuario('13','Administrador','12','Luis Melendez','melendez','',''); 
     this.hamburguer = false;
   }
 

@@ -12,7 +12,7 @@ import { Producto } from "src/app/models/producto.model";
 })
 export class AgregarComponent implements OnInit {
   public titulo: string ="Registrar compra";
-  public icono: string ="fa fa-home";
+  public icono: string ="fa fa-truck";
   public fecha: any;
   public resultados: any;
   public cliente:Proveedor;

@@ -1,24 +1,6 @@
 $('body').bootstrapMaterialDesign();
 $(document).ready(function(){
-	$('#btnModalCli').on('click', function(e){
-		e.preventDefault();
-		$('#modalCli').modal('show')
-	})
-	
-	$('.modalEsconderCli').on('click', function(e){
-		e.preventDefault();
-		$('#modalCli').modal('hide')
-	})
 
-	$('#btnModalPro').on('click', function(e){
-		e.preventDefault();
-		console.log('hola')
-		$('#modalPro').modal('show')
-	})
-	$('.modalEsconderPro').on('click', function(e){
-		e.preventDefault();
-		$('#modalPro').modal('hide')
-	})
 	$('body').bootstrapMaterialDesign();
 	/*  Show/Hidden Submenus */
 	$('.nav-btn-submenu').on('click', function(e){

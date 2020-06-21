@@ -29,6 +29,10 @@ import { ActualizarUsuariosComponent } from "./pages/usuarios/actualizar/actuali
 import { ActualizarClientesComponent } from "./pages/clientes/actualizar/actualizar.component";
 import { AgregarClientesComponent } from "./pages/clientes/agregar/agregar.component";
 import { ListarClientesComponent } from "./pages/clientes/listar/listar.component";
+import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
+import { ListarProveedoresComponent } from "./pages/proveedores/listar/listar.component";
+import { AgregarProveedoresComponent } from "./pages/proveedores/agregar/agregar.component";
+import { ActualizarProveedoresComponent } from "./pages/proveedores/actualizar/actualizar.component";
 
 
 
@@ -50,7 +54,11 @@ import { ListarClientesComponent } from "./pages/clientes/listar/listar.componen
     AgregarUsuariosComponent,
     ListarProductoComponent,
     ListarUsuariosComponent,
-    ListarClientesComponent
+    ListarClientesComponent,
+    ProveedoresComponent,
+    ListarProveedoresComponent,
+    AgregarProveedoresComponent,
+    ActualizarProveedoresComponent
   ],
   imports: [
     BrowserModule,

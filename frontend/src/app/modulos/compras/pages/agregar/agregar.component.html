@@ -2,7 +2,7 @@
 [titulo]="titulo"
 [icono]="icono"
 ></app-page-header>
-<div class="modal fade" id="modalCli">
+<div class="modal fade" id="modalCli" tabindex="-1" role="document"  aria-hidden="true">
     <div class="modal-dialog modal-xl" >
         <div class="modal-content">
             <div class="modal-header">
@@ -29,7 +29,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr  *ngFor="let persona of clientes" (click)="addCliente(persona)" class="modalEsconderCli text-center hand" >
+                            <tr  *ngFor="let persona of clientes" (click)="addCliente(persona)" class=" text-center hand" data-toggle="modal" data-target="#modalCli">
                                 <td>{{persona.rif}}</td>
                                 <td>{{persona.nombre}}</td>
                             </tr>
@@ -40,7 +40,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="modalPro">
+<div class="modal fade" id="modalPro" tabindex="-1" role="document"  aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -69,7 +69,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr  *ngFor="let bate of baterias" (click)="addBateria(bate)" class="modalEsconderPro text-center hand" >
+                            <tr  *ngFor="let bate of baterias" (click)="addBateria(bate)" class="text-center hand" data-toggle="modal" data-target="#modalPro">
                                 <td>{{bate.nombre}}</td>
                                 <td>{{bate.inventario}}</td>
                                 <td>{{bate.marca_id +' '+bate.amperaje_id +' '+ bate.grupo_id }}</td>
@@ -103,14 +103,14 @@
                         <div class="col-3 col-md-2 flex-bottom">
                             <div class="form-group bmd-form-group bmd-form-group-md">
                                 <button  type="button"
-                                    class="btn btn-raised btn-success btn-block" id="btnModalCli">Agregar</button>
+                                    class="btn btn-raised btn-success btn-block" data-toggle="modal" data-target="#modalCli">Agregar</button>
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="form-group bmd-form-group bmd-form-group-md">
                                 <label for="btnModalPro">Bateria</label>
                                 <input type="text" class="form-control hand" name="item_codigo"
-                                    id="btnModalPro" value="{{bateria.nombre +' '+ bateria.marca_id+' '+bateria.amperaje_id+' '+bateria.grupo_id}}"  required [disabled]="!venta.cliente.rif">
+                                    id="btnModalPro" value="{{bateria.nombre +' '+ bateria.marca_id+' '+bateria.amperaje_id+' '+bateria.grupo_id}}"  required [disabled]="!venta.cliente.rif" data-toggle="modal" data-target="#modalPro">
                             </div>
                         </div>
                         <div class="col-9 col-md-2">

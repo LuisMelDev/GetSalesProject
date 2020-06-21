@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListadoComponent implements OnInit {
   public titulo: string ="listado de Ventas";
-  public icono: string ="fa fa-home";
+  public icono: string ="fa fa-shopping-cart";
   public ventas: any;
   constructor() { }
 

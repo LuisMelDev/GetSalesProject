@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class ConsultarComponent implements OnInit {
 
   public titulo: string ="listado de Compras";
-  public icono: string ="fa fa-home";
+  public icono: string ="fa fa-truck";
   public ventas: any;
   constructor() { }
 
