@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, DoCheck {
     private _router :Router,
     private _usuarioService:UsuarioService
   ){
-    this.usuario = new Usuario('13','Administrador','12','Luis Melendez','melendez','',''); 
+    this.usuario = new Usuario('','','','','','',''); 
     this.hamburguer = false;
   }
 
@@ -29,6 +29,17 @@ export class AppComponent implements OnInit, DoCheck {
     this.getIdentity()
 
     this.navigate()
+
+    let user = localStorage.getItem('usuarios')
+    if(!user){
+      let usuarios = [
+    new Usuario("1","Administrador","1","Pedro Fernandez","pedrito","pedrito","pedrito@gmail.com"),
+    new Usuario("2","Administrador","1","Juan Perez","juanL","juanL","juan@gmail.com")
+    ];
+
+      localStorage.setItem('usuarios', JSON.stringify(usuarios))
+    }
+
 
     let cli = localStorage.getItem('clientes')
     if(!cli){

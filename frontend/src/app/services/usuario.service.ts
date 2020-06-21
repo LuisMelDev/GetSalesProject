@@ -2,15 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from "rxjs";
 import { environment } from "../../environments/environment.prod";
+import { Usuario } from '../models/usuario.model'
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
-  private url: string = environment.url
+  private url: string = environment.url;
+  
+
   constructor(
     private _http:HttpClient
+
   ) { }
+
 
   login(user): Observable<any> {
     let usuario = JSON.stringify(user)
@@ -65,6 +71,11 @@ export class UsuarioService {
     return this._http.patch(this.url+`usuarios/${id}`,usuario, {headers}); 
   }
 
+
+  }
+
+
+
   // DeleteUser(user){
   //   let usuario = JSON.stringify(user)
   //   let headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -73,4 +84,4 @@ export class UsuarioService {
   // }
   
 
-}
+

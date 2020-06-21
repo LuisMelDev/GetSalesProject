@@ -5,10 +5,10 @@
 
 
 <div class="container-fluid">
-    <div class="alert alert-success" role="alert" *ngIf="register">
-        El usuario {{ register.nombre }} ha sido registrado ver <a 
-        [routerLink]="['/usuarios/usuario', register.id]" >aqui</a>
-      </div>
+    <div class="container-fluid">
+    <div class="alert alert-danger" role="alert" *ngIf="registrado">
+        El usuario ha sido registrado 
+    </div>
       <div class="alert alert-danger" role="alert" *ngIf="error">
         {{error}}
       </div>
@@ -62,8 +62,9 @@
             <p *ngIf="correo.invalid && correo.touched">Ingrese un correo valido</p>
             
         </div>
-        <p class="text-center" style="margin-top: 40px;">
-            <button [disabled]="!formUsuario.valid" (click)="registrar(formUsuario)" class="btn btn-raised btn-info btn-xl"><i class="far fa-save" ></i>Registrar</button>
+        <p class="text-center" >
+            &nbsp; &nbsp;
+            <button (click)="registrar(formUsuario)" type="submit" class="btn btn-raised btn-danger btn-lg" [disabled]="formUsuario.invalid"><i class="far fa-save"></i> &nbsp; Registrar</button>
         </p>
     </form>
 </div>
