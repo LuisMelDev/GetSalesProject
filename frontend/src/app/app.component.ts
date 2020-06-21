@@ -4,6 +4,7 @@ import { Usuario } from "./models/usuario.model";
 import { UsuarioService } from "./services/usuario.service";
 import {Cliente} from './models/cliente.model';
 import { Producto } from "./models/producto.model";
+import { Proveedor } from "./models/proveedor.model";
 
 @Component({
   selector: 'app-root',
@@ -53,6 +54,18 @@ export class AppComponent implements OnInit, DoCheck {
     let ven = localStorage.getItem('ventas')
     if(!ven){
       localStorage.setItem('ventas', JSON.stringify([]))
+    }
+    let comp = localStorage.getItem('compras')
+    if(!comp){
+      localStorage.setItem('compras', JSON.stringify([]))
+    }
+    let prove = localStorage.getItem('proveedores')
+    if(!prove){
+      localStorage.setItem('proveedores', JSON.stringify([
+        new Proveedor('1','proveedor 1','rif de proveedor'),
+        new Proveedor('2','proveedor 2','rif de proveedor'),
+        new Proveedor('3','proveedor 2','rif de proveedor'),
+   ]))
     }
 
   }

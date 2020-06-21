@@ -162,8 +162,8 @@
                         <td>{{i+1}}</td>
                         <td>{{detalle.bateria.nombre +' '+ detalle.bateria.marca_id+' '+detalle.bateria.amperaje_id+' '+detalle.bateria.grupo_id}}</td>
                         <td>{{detalle.cantidad}}</td>
-                        <td>{{detalle.precio}}</td>
-                        <td>{{ detalle.precioTotal }}</td>
+                        <td>{{detalle.precio |currency}}</td>
+                        <td>{{ detalle.precioTotal |currency }}</td>
                         <td>
                             <button (click)="deleteBateria(i)" type="button" class="btn btn-warning">
                                 <i class="far fa-trash-alt"></i>
@@ -178,7 +178,7 @@
                 </legend>
                 <div class="clearfix"></div>
                 <legend class="px-3 d-block">
-                    <span class="float-right">Precio total de Venta: <strong>{{ precioFac }}</strong></span>
+                    <span class="float-right">Precio total de Venta: <strong>{{ precioFac |currency }}</strong></span>
                 </legend>
                 <div class="clearfix"></div>
             </div>
