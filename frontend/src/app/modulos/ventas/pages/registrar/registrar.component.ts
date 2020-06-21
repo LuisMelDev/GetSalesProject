@@ -136,8 +136,8 @@ export class RegistrarComponent implements OnInit {
 
   registrar(){
     this.ventas.push(this.venta)
+    localStorage.setItem('ventas',JSON.stringify(this.ventas))
     this._router.navigate(['/ventas/factura', this.venta.id])
-    // localStorage.setItem('ventas',JSON.stringify(this.ventas))
     // this.venta = {
     //   id: this.ventas.length + 1 || 1,
     //   cliente: {

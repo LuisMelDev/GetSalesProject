@@ -6,6 +6,7 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ['./ver.component.scss']
 })
 export class VerComponent implements OnInit {
+  public precioDolar: number = 200000;
   public factura: any;
   public ventas: any;
   public subtotal:number;

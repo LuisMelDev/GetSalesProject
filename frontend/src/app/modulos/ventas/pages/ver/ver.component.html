@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid mt-3">
     <div class="container-fluid form-neon px-5 py-5">
         <div class="row ">
             <div class="col-6">
@@ -50,8 +50,8 @@
                             <td>{{detalle.bateria.id}}</td>
                             <td>{{detalle.bateria.nombre +' '+detalle.bateria.marca_id+' '+detalle.bateria.grupo_id+' '+detalle.bateria.amperaje_id}}</td>
                             <td>{{detalle.cantidad}}</td>
-                            <td>{{detalle.precio}}$</td>
-                            <td>{{detalle.precioTotal}}$</td>
+                            <td>{{detalle.precio*precioDolar |currency:'Bs.S '}}</td>
+                            <td>{{detalle.precioTotal*precioDolar |currency:'Bs.S '}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -64,14 +64,14 @@
                             <br/>
                             Impuestos (IVA 16%):
                             <br/>
-                            Total:
+                            Total: 
                         </strong></div>
                     <div class="col-2"><strong>
-                            {{subtotal}}$
+                            {{subtotal*precioDolar |currency:'Bs.S ' }}
                             <br/>
-                            {{impuesto}}$
+                            {{impuesto*precioDolar |currency:'Bs.S ' }}
                             <br/>
-                            {{subtotal+impuesto}}$
+                            {{ (subtotal+impuesto)*precioDolar |currency:'Bs.S ' }}
                         </strong></div>
                 </div>
             </div>
