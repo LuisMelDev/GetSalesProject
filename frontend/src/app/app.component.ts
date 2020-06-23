@@ -21,20 +21,20 @@ export class AppComponent implements OnInit, DoCheck {
     private _router :Router,
     private _usuarioService:UsuarioService
   ){
-    this.usuario = new Usuario('','','','','','',''); 
+    this.usuario = new Usuario("1","Administrador","Administrador","Pedro Fernandez","pedrito","pedrito","pedrito@gmail.com");
     this.hamburguer = false;
   }
 
   ngOnInit(){
-    this.getIdentity()
+    // this.getIdentity()
 
-    this.navigate()
+    // this.navigate()
 
     let user = localStorage.getItem('usuarios')
     if(!user){
       let usuarios = [
-    new Usuario("1","Administrador","1","Pedro Fernandez","pedrito","pedrito","pedrito@gmail.com"),
-    new Usuario("2","Administrador","1","Juan Perez","juanL","juanL","juan@gmail.com")
+    new Usuario("1","Administrador","Administrador","Pedro Fernandez","pedrito","pedrito","pedrito@gmail.com"),
+    new Usuario("2","Vendedor","Vendedor","Juan Perez","juanL","juanL","juan@gmail.com")
     ];
 
       localStorage.setItem('usuarios', JSON.stringify(usuarios))
@@ -82,7 +82,7 @@ export class AppComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck(){
-    this.getIdentity()
+    // this.getIdentity()
   }
 
   toggleMenu(){
