@@ -3,6 +3,7 @@ import { ActivatedRoute,Router } from "@angular/router";
 import { Usuario } from "src/app/models/usuario.model";
 import { UsuarioService } from "src/app/services/usuario.service";
 
+declare var jQuery:any;
 declare var $:any;
 
 @Component({
@@ -33,6 +34,7 @@ export class ActualizarUsuariosComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.usuario.password = ''
     this.usuarios = JSON.parse(localStorage.getItem('usuarios'))
     console.log(this.usuarios)
 

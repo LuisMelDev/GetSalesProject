@@ -27,16 +27,10 @@ const routes: Routes = [
   {path: 'productos', component: ProductosComponent},
   {path: 'usuarios', component: UsuariosComponent},
   {path: 'clientes', component: ClientesComponent},
-  {path: 'usuarios/agregar', component: AgregarUsuariosComponent },
-  {path: 'usuarios/actualizar', component: ActualizarUsuariosComponent },
   {path: 'clientes/agregar', component: AgregarClientesComponent }, 
   {path: 'clientes/actualizar', component: ActualizarClientesComponent },
   {path: 'proveedores', component: ProveedoresComponent }, 
   {path: 'proveedores/listar', component: ListarProveedoresComponent },
-  {path: 'proveedores/agregar', component: AgregarProveedoresComponent},
-  {path: 'proveedores/actualizar', component: ActualizarProveedoresComponent}
-
-
 
 ];
 

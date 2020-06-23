@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from 'src/app/models/cliente.model';
 
+declare var jQuery:any;
+declare var $:any;
+
 @Component({
   selector: 'app-agregar-cliente',
   templateUrl: './agregar.component.html',
@@ -12,6 +15,7 @@ export class AgregarClientesComponent implements OnInit {
 
   public clientes: any;
   public registrado: boolean;
+  public boton:string = "Registrar"
 
   constructor() {
     this.cliente = new Cliente('','','','','','','')
@@ -25,10 +29,11 @@ export class AgregarClientesComponent implements OnInit {
     console.log(this.clientes)
     form.reset();
     this.registrado = true;
+    $('#modarAgregar').modal('hide')
   }
 
   ngOnInit(): void {
     this.clientes = JSON.parse(localStorage.getItem('clientes'))
-    console.log(this.clientes)
+    this.cliente.id = (this.clientes.length+1).toString()
   }
 }

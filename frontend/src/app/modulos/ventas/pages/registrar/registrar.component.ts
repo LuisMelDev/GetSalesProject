@@ -47,7 +47,7 @@ export class RegistrarComponent implements OnInit {
     this.clientes = JSON.parse(localStorage.getItem('clientes'))
     this.baterias = JSON.parse(localStorage.getItem('baterias'))
     this.ventas = JSON.parse(localStorage.getItem('ventas'))
-    console.log(typeof this.ventas)
+    
     this.venta = {
       id: this.ventas.length + 1 || 1,
       cliente: {

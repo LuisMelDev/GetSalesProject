@@ -1,67 +1,4 @@
-<!--<div class="container-fluid">
-    <div class="container-fluid">
-    <div class="alert alert-danger" role="alert" *ngIf="registrado">
-        El usuario ha sido registrado 
-    </div>
-      <div class="alert alert-danger" role="alert" *ngIf="error">
-        {{error}}
-      </div>
-    <form class="form-neon" #formUsuario="ngForm">
-        <fieldset>
-            <legend><i class="far fa-address-card"></i> &nbsp; Información personal</legend>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="form-group">
-                            <label for="username" class="">Nombre de usuario</label>
-                            <input type="text" [(ngModel)]="usuario.username" #username="ngModel"
-                            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ 1-9]{1,20}" class="form-control" name="username" id="username" maxlength="20" required>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="form-group">
-                            <label for="nombre" class="">Nombres y Apellidos</label>
-                            <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,100}"  #nombre="ngModel" [(ngModel)]="usuario.nombre" class="form-control" name="nombre" id="nombre" maxlength="100" required >
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="form-group">
-                            <label for="correo" class="">Correo</label>
-                            <input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" [(ngModel)]="usuario.email" #correo="ngModel" name="correo" id="correo" maxlength="40" required >
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="form-group">
-                            <label class="">Nivel de Privilegio</label>
-                            <select class="form-control" name="rol" [(ngModel)]="usuario.rol_id" #rol="ngModel" required>
-                                <option value="" selected="" disabled=""></option>
-                                <option value="1">Administrador del Sistema</option>
-                                <option value="2">Vendedor</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="form-group">
-                            <label for="usuario_clave_1" class="">Contraseña</label>
-                            <input type="password" class="form-control" name="password" id="password" #password="ngModel" [(ngModel)]="usuario.password" maxlength="200" required>
-                        </div>
-                    </div>             
-                    
-                </div>
-            </div>
-        </fieldset>
-        <div class="bd-callout-danger bd-callout" *ngIf="formUsuario.touched && formUsuario.invalid">
-            <p *ngIf="formUsuario.invalid">Todos los campos son obligatorios</p>
-            <p *ngIf="nombre.invalid && nombre.touched">El campo nombre y apellido no admite numeros</p>
-            <p *ngIf="correo.invalid && correo.touched">Ingrese un correo valido</p>
-            
-        </div>
-        <p class="text-center" >
-            &nbsp; &nbsp;
-            <button (click)="registrar(formUsuario)" type="submit" class="btn btn-raised btn-danger btn-lg" [disabled]="formUsuario.invalid"><i class="far fa-save"></i> &nbsp; Registrar</button>
-        </p>
-    </form>
-</div>!-->
+
 
 
 <div class="container-fluid py-4">
@@ -75,21 +12,21 @@
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-group">
-                            <label for="username" class="">Nombre de usuario</label>
+                            <label for="username_user" class="">Nombre de usuario</label>
                             <input type="text" [(ngModel)]="usuario.username" #username="ngModel"
-                            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ 1-9]{1,20}" class="form-control" name="username" id="username" maxlength="20" required>
+                            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ 1-9]{1,20}" class="form-control" name="username" id="username_user" maxlength="20" required>
                         </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-group">
-                            <label for="nombre" class="">Nombres y Apellidos</label>
-                            <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,100}"  #nombre="ngModel" [(ngModel)]="usuario.nombre" class="form-control" name="nombre" id="nombre" maxlength="100" required >
+                            <label for="nombre_usuario" class="">Nombres y Apellidos</label>
+                            <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,100}"  #nombre="ngModel" [(ngModel)]="usuario.nombre" class="form-control" name="nombre" id="nombre_usuario" maxlength="100" required >
                         </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-group">
-                            <label for="correo" class="">Correo</label>
-                            <input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" [(ngModel)]="usuario.email" #correo="ngModel" name="correo" id="correo" maxlength="40" required >
+                            <label for="correo_usuario" class="">Correo</label>
+                            <input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" [(ngModel)]="usuario.email" #correo="ngModel" name="correo" id="correo_usuario" maxlength="40" required >
                         </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-4">
@@ -97,15 +34,15 @@
                             <label class="">Nivel de Privilegio</label>
                             <select class="form-control" name="rol" [(ngModel)]="usuario.rol_id" #rol="ngModel" required>
                                 <option value="" selected="" disabled=""></option>
-                                <option value="1">Administrador del Sistema</option>
-                                <option value="2">Vendedor</option>
+                                <option value="Administrador">Administrador del Sistema</option>
+                                <option value="Vendedor">Vendedor</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-group">
                             <label for="usuario_clave_1" class="">Contraseña</label>
-                            <input type="password" class="form-control" name="password" id="password" #password="ngModel" [(ngModel)]="usuario.password" maxlength="200" required>
+                            <input type="password" class="form-control" name="password" id="usuario_clave_1" #password="ngModel" [(ngModel)]="usuario.password" maxlength="200" required>
                         </div>
                     </div>             
                     

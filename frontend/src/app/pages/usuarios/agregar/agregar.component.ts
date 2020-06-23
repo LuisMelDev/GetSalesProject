@@ -12,7 +12,6 @@ export class AgregarUsuariosComponent implements OnInit {
   public titulo: string = 'Agregar';
   public icono: string = 'fa fa-home';
   public usuario: Usuario;
-  public password2: string;
   public register:any;
   public error:string;
   public usuarios: any;
@@ -20,7 +19,6 @@ export class AgregarUsuariosComponent implements OnInit {
 
   constructor(private _usuarioService: UsuarioService) {
     this.usuario = new Usuario('', '', '', '', '', '', '');
-    this.password2 = '';
     this.error = '';
     this.usuarios = [];
     this.registrado = false;
@@ -29,7 +27,7 @@ export class AgregarUsuariosComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuarios = JSON.parse(localStorage.getItem('usuarios'))
-    console.log(this.usuarios)
+    this.usuario.id =  (this.usuarios.length+1).toString()
   }
 
   /*registrar(form) {
@@ -52,7 +50,6 @@ export class AgregarUsuariosComponent implements OnInit {
   registrar(form){
     this.usuarios.push(this.usuario);
     localStorage.setItem('usuarios', JSON.stringify(this.usuarios));
-    console.log(this.usuarios)
     form.reset();
     this.registrado = true;
   }
