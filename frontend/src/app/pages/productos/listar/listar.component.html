@@ -1,78 +1,79 @@
-<div class="container-fluid">
-    <div class="container-fluid">
-        <form class="form-neon">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="form-group">
-                            <label for="inputSearch" class="bmd-label-floating">Ingresa nobre de producto que buscas</label>
-                            <input type="text" class="form-control" name="busqueda-" id="inputSearch" maxlength="30">
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="form-group bmd-form-group bmd-form-group-md">
-                            <label for="item_estado">Grupo</label>
-                            <select class="form-control" name="item_estado" id="item_estado">
-                                <option value="" selected="" disabled="">Seleccione una opción</option>
-                                <option selected="" value="Habilitado">Habilitado</option>
-                                <option value="Deshabilitado">Deshabilitado</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="form-group bmd-form-group bmd-form-group-md">
-                            <label for="item_estado">marca</label>
-                            <select class="form-control" name="item_estado" id="item_estado">
-                                <option value="" selected="" disabled="">Seleccione una opción</option>
-                                <option selected="" value="Habilitado">Habilitado</option>
-                                <option value="Deshabilitado">Deshabilitado</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-12 col-lg-4">
-                        <div class="form-group bmd-form-group bmd-form-group-md">
-                            <label for="item_estado">amperaje</label>
-                            <select class="form-control" name="item_estado" id="item_estado">
-                                <option value="" selected="" disabled="">Seleccione una opción</option>
-                                <option selected="" value="Habilitado">Habilitado</option>
-                                <option value="Deshabilitado">Deshabilitado</option>
-                            </select>
-                        </div>
-                    </div>
+<div class="modal fade bd-example-modal-lg " id="modarAgregar" tabindex="-1" role="document" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title mb-3 text-center"  id="exampleModalLabel">Agregar Producto</h3>
+                <button  type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          
+                        <app-agregar-producto
+                            [productos]="productos"
+                        ></app-agregar-producto>
+       </div>
+      </div>
+</div>
 
+<div class="modal fade bd-example-modal-lg " id="modalActualizar" tabindex="-1" role="document" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title mb-3" id="exampleModalLabel">Actualizar Producto </h3>
+                <button  type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          
+              <app-actualizar-producto
+              [productos]="productos"
+              [producto]="producto"
+              ></app-actualizar-producto>
+
+        </div>
+      </div>
+</div>
+<div class="container-fluid ">
+    <div class="container-fluid form-neon">
+        <button type="button" class="btn btn-raised btn-primary mb-3" data-toggle="modal" data-target="#modarAgregar"> <i class="fa fa-plus"></i>&nbsp; Nuevo Producto </button>
+        <form>
+            <div class="row d-flex justify-content-end">
+                <div class="col-12 col-md-5 col-lg-4">
+                   <div class="form-group bmd-form-group bmd-form-group-lg">
+                    <input type="search" name="buscar" id="buscar" placeholder="Buscar Producto" class="form-control">
+                   </div>
                 </div>
             </div>
         </form>
-    </div>
     <div class="table-responsive">
-        <table class="table table-dark table-sm">
+        
+        <table class="table table-dark table-md">
             <thead>
                 <tr class="text-center roboto-medium">
-                    <th>#</th>
-                    <th>CÓDIGO</th>
-                    <th>NOMBRE</th>
-                    <th>STOCK</th>
-                    <th>Accion</th>
+                    <th>Nombre</th>
+                    <th>Marca</th>
+                    <th>Amperaje</th>
+                    <th>Grupo</th>
+                    <th>Existencia</th>
+                    <th>Fecha de ingreso</th>
+                    <th>Acciones</th>
+                    
                 </tr>
             </thead>
             <tbody>
-                <tr class="text-center" >
-                    <td>1</td>
-                    <td>012342567</td>
-                    <td>NOMBRE DEL ITEM</td>
-                    <td>20</td>
+                <tr class="text-center" *ngFor="let producto of productos">
+                    <td>{{producto.nombre}}</td>
+                    <td>{{producto.marca_id}}</td>
+                    <td>{{producto.amperaje_id}}</td>
+                    <td>{{producto.grupo_id}}</td>
+                    <td>{{producto.inventario}}</td>
+                    <td>{{producto.fecha_ingreso | date:'dd/MM/yy'}}</td>
+                    
                     <td>
-                        <a [routerLink]="['/productos/actualizar',1]" class="btn btn-success">
-                            <i class="fas fa-sync-alt"></i> 
-                        </a>
-                        <button [routerLink]="['/productos/ver',1]" type="button" class="btn btn-warning">
-                            <i class="far fa-eye"></i>
-                        </button>
+                        <a class="btn btn-success" data-toggle="modal" data-target="#modalActualizar" (click)="setProducto(producto)">
+                            <i class="fas fa-sync-alt"></i>
+                        </a> 
                     </td>
-                    
-            
-                        
-                    
                 </tr>
             </tbody>
         </table>
@@ -90,4 +91,5 @@
             </li>
         </ul>
     </nav>
+    </div>
 </div>

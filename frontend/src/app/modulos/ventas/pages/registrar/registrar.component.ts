@@ -48,6 +48,7 @@ export class RegistrarComponent implements OnInit {
     this.baterias = JSON.parse(localStorage.getItem('baterias'))
     this.ventas = JSON.parse(localStorage.getItem('ventas'))
     
+    this.baterias = this.baterias.filter(bateria => bateria.inventario !== 0)
     this.venta = {
       id: this.ventas.length + 1 || 1,
       cliente: {

@@ -26,8 +26,11 @@ export class ActualizarProveedoresComponent implements OnInit {
     })
 
    localStorage.setItem('proveedores', JSON.stringify(this.proveedores));
-    form.reset();
-    $('#modalActualizar').modal('hide')
+   this.actualizado = true 
+   form.reset();
+    setTimeout(() => {
+      this.actualizado = false
+    }, 3000);
   }
 
   ngOnInit(): void {

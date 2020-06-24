@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    console.log('hola')
-    localStorage.setItem('usuario',JSON.stringify(new Usuario('13','Administrador','12','Luis Melendez','melendez','','')))   
+    localStorage.setItem('usuario',JSON.stringify(new Usuario('13','Administrador','12','Administrador','admin','admin','admin')))   
+    this._router.navigate(['/dashboard'])
     // this._userService.login(this.usuario).subscribe(
     //   res=>{
     //     localStorage.setItem('token', res.token) 

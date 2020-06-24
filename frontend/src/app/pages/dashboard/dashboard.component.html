@@ -1,16 +1,13 @@
 <div class="full-box page-header">
     <h3 class="text-left">
-        <i class="fab fa-dashcube fa-fw"></i> &nbsp; DASHBOARD
+        <i class="fab fa-dashcube fa-fw"></i> &nbsp; Bienvenido al Sistema GetSales
     </h3>
-    <p class="text-justify">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nostrum rerum animi natus beatae ex. Culpa blanditiis tempore amet alias placeat, obcaecati quaerat ullam, sunt est, odio aut veniam ratione.
-    </p>
 </div>
 
 <!-- Content -->
 <div class="full-box tile-container">
 
-    <a  class="tile">
+    <a  class="tile" [routerLink]="['/clientes']"  >
         <div class="tile-tittle">Clientes</div>
         <div class="tile-icon">
             <i class="fas fa-users fa-fw"></i>
@@ -18,7 +15,7 @@
         </div>
     </a>
 
-    <a  class="tile">
+    <a  class="tile" [routerLink]="['/proveedores']">
         <div class="tile-tittle">Proveedores</div>
         <div class="tile-icon">
             <i class="fas fa-pallet fa-fw"></i>
@@ -26,7 +23,7 @@
         </div>
     </a>
 
-    <a h class="tile">
+    <a h class="tile" [routerLink]="['/ventas/listado']">
         <div class="tile-tittle">Ventas</div>
         <div class="tile-icon">
             <i class="fas fa-file-invoice-dollar fa-fw"></i>
@@ -34,7 +31,7 @@
         </div>
     </a>
 
-    <a  class="tile">
+    <a  class="tile" [routerLink]="['/compras/consultar']">
         <div class="tile-tittle">Compras</div>
         <div class="tile-icon">
             <i class="fas fa-user-secret fa-fw"></i>
@@ -42,14 +39,14 @@
         </div>
     </a>
 
-    <a  class="tile">
+    <a  class="tile" [routerLink]="['/usuarios']">
         <div class="tile-tittle">Usuarios</div>
         <div class="tile-icon">
             <i class="fas fa-store-alt fa-fw"></i>
             <p>1 Registrada</p>
         </div>
     </a>
-    <a  class="tile">
+    <a  class="tile" [routerLink]="['/productos']">
         <div class="tile-tittle">Productos(baterias)</div>
         <div class="tile-icon">
             <i class="fas fa-store-alt fa-fw"></i>

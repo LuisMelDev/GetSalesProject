@@ -16,8 +16,8 @@
  
           </a>
           <div class="dropdown-menu dropdown-menu-right">
-            <button class="dropdown-item" type="button">Panel de Usuario</button>
-            <div class="dropdown-divider"></div>
+            <!-- <button class="dropdown-item" type="button">Panel de Usuario</button>
+            <div class="dropdown-divider"></div> -->
             <button class="dropdown-item" type="button" (click)="logout()">Salir</button>
           </div>
         </figcaption>
@@ -35,7 +35,7 @@
           <li>
             <a [routerLink]="['/productos']" ><i class="fas fa-car-battery fa-fw"></i> &nbsp; Productos</a>
           </li>
-
+ 
           <li>
             <a class="nav-btn-submenu"><i class="fas fa-shopping-cart fa-fw"></i> &nbsp; Ventas<i
                 class="fas fa-chevron-down"></i></a>
@@ -70,9 +70,9 @@
         <li>
           <a [routerLink]="['/reportes']"><i class="fas fa-file-contract fa-fw"></i> &nbsp; Reportes</a>
         </li>
-        <li>
+        <!-- <li>
           <a [routerLink]="['/bitacora']"><i class="fas fa-book fa-fw"></i> &nbsp; Bitacora</a>
-        </li>
+        </li> -->
 
         </ul>
       </nav>
@@ -82,8 +82,8 @@
   <!-- Page content -->
   <section class="full-box page-content ">
     <nav class="full-box navbar-info" >
-      <a (click)="toggleMenu()" class="float-left show-nav-lateral flex-center " id="show-nav-lateral">
-        <i class="fas fa-2x" [ngClass]="{'fa-bars':hamburguer,'fa-arrow-left':!hamburguer}"></i> 
+      <a  class="float-left show-nav-lateral flex-center d-md-none" id="show-nav-lateral">
+        <i class="fas fa-2x fa-bars"></i> 
       </a>
 
       
@@ -92,8 +92,8 @@
         </a>
       
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-          <button class="dropdown-item" type="button">Panel de Usuario</button>
-        <div class="dropdown-divider"></div>
+          <!-- <button class="dropdown-item" type="button">Panel de Usuario</button>
+        <div class="dropdown-divider"></div> -->
         <button class="dropdown-item" type="button" (click)="logout()">Salir</button>
         </div>
      

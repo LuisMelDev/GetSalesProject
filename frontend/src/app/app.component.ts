@@ -21,19 +21,19 @@ export class AppComponent implements OnInit, DoCheck {
     private _router :Router,
     private _usuarioService:UsuarioService
   ){
-    this.usuario = new Usuario("1","Administrador","Administrador","Pedro Fernandez","pedrito","pedrito","pedrito@gmail.com");
+    this.usuario = new Usuario("","","","","","","");
     this.hamburguer = false;
   }
 
   ngOnInit(){
-    // this.getIdentity()
+    this.getIdentity()
 
-    // this.navigate()
+    this.navigate()
 
     let user = localStorage.getItem('usuarios')
     if(!user){
       let usuarios = [
-    new Usuario("1","Administrador","Administrador","Pedro Fernandez","pedrito","pedrito","pedrito@gmail.com"),
+    new Usuario("1","Administrador","Administrador","Pedro Fernandez","admin","admin","pedrito@gmail.com"),
     new Usuario("2","Vendedor","Vendedor","Juan Perez","juanL","juanL","juan@gmail.com")
     ];
 
@@ -44,20 +44,20 @@ export class AppComponent implements OnInit, DoCheck {
     let cli = localStorage.getItem('clientes')
     if(!cli){
       let clientes = [
-        new Cliente('1','26136504','Luis Melendez','barquisimeto','27/02/1998', '04262782969','luis@luis.com'),
+        new Cliente('1','2054014','Roberto Smith','barquisimeto','27/02/1998', '04257524582','Roberto@Roberto.com'),
         new Cliente('2','15478256','jodefina','barquisimeto','5/12/1900', '04257524584','jodefina@jodefina.com')
       ];
 
       localStorage.setItem('clientes', JSON.stringify(clientes))
     }
 
-    let pro = localStorage.getItem('productos')
+    let pro = localStorage.getItem('baterias')
 
     if(!pro){
       let productos = [
-        new Producto('1','Bateria 1', '',10,'20/01/2019','700','24mr','ETNA'),
-        new Producto('2','Bateria 2', '',50,'20/05/2019','700','34mr','ETNA'),
-        new Producto('3','Bateria 3', '',60,'20/01/2020','1100','4d','ETNA'),
+        new Producto('1','Bateria 1', '',10,new Date(),'700','24mr','ETNA'),
+        new Producto('2','Bateria 2', '',50,new Date(),'700','34mr','ETNA'),
+        new Producto('3','Bateria 3', '',60,new Date(),'1100','4d','ETNA'),
       ]
       localStorage.setItem('baterias',JSON.stringify(productos))
     }
@@ -82,7 +82,7 @@ export class AppComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck(){
-    // this.getIdentity()
+    this.getIdentity()
   }
 
   toggleMenu(){
