@@ -8,7 +8,9 @@ import { Usuario } from 'src/app/models/usuario.model';
 export class LoginComponent implements OnInit {
 
     public usuario: Usuario;
-    public error: boolean = false;
+    public error: boolean = true;
+    public mensaje: string = "Correo o contrañea invalido";
+    public color: string = "bg-red-500"
 
   constructor() { 
     this.usuario = new Usuario('','','','','','','');
@@ -20,6 +22,10 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
     console.log('gola');
+  }
+
+  onCerrar(bandera){
+    this.error = bandera;
   }
  
 
