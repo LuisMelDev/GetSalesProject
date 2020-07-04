@@ -12,7 +12,7 @@ import { VerCliente } from "./pages/clientes/verCliente/verCliente.component";
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { AgregarUsuario } from './pages/usuarios/agregarUsuario/agregarUsuario.component';
 import { ModificarUsuario } from './pages/usuarios/modificarUsuario/modificarUsuario.component';
-import { VerUsuario } from './pages/usuarios/verCliente/verCliente.component';
+import { VerUsuario } from './pages/usuarios/verUsuario/verUsuario.component';
 import { ProductosComponent } from './pages/productos/productos.component';
 import { AgregarProducto } from './pages/productos/agregarProducto/agregarProducto.component';
 import { ModificarProducto } from './pages/productos/modificarProducto/modificarProducto.component';

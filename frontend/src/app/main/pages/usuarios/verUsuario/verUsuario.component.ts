@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 })
 export class VerUsuario {
   showModal = false;
-  toggleModal() {
+  toggleModal() { 
     this.showModal = !this.showModal;
   }
 }

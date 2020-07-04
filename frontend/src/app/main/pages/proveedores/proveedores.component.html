@@ -1,75 +1,52 @@
 <div class="relative mt-20 p-4">
     <div class="w-full flex justify-start mb-8">
-        <h3 class="text-4xl font-bold">Listado de Proveedores</h3>
+        <h3 class="text-3xl font-bold">Listado de Proveedores</h3>
     </div>
     <div class="w-full flex justify-start mb-4">
         <agregar-proveedor></agregar-proveedor>
     </div>
 
     <div class="bg-white w-full rounded shadow-lg py-4 px-1">
-        <div class="w-full flex justify-end align-middle py-2 mb-4">
-            <form class="w-full md:w-3/4 lg:w-1/2 grid grid-cols-6 gap-2">
-                <input type="text" class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-4" name="cedula" id="cedula" placeholder="Buscar cliente">
-                <button type="submit" class="px-4 py-1 bg-red-500 text-lg rounded text-white cursor-pointer hover:shadow-lg transition duration-700 ease-linear col-span-2">Buscar</button>
+        <div class="w-full flex justify-end align-middle py-2 mb-4 text-sm">
+            <form class="w-full md:w-3/4 lg:w-1/2 grid grid-cols-6 gap-1">
+                <select name="amperaje" id="amperaje" class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-2">
+                    <option value="rif">Rif</option>
+                    <option value="nombre">Nombre</option>
+                  </select>
+                <input type="text" class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-3" name="cedula" id="cedula" placeholder="Buscar Producto">
+                <button type="submit" class="px-3 py-1 bg-red-500 rounded text-white cursor-pointer hover:shadow-lg transition duration-700 ease-linear col-span-1">Buscar</button>
             </form>
         </div>
         <div class="overflow-y-auto w-full">
-            <table class="items-center w-full bg-transparent border-collapse shadow-md text-center">
+            <table class="items-center w-full text-xs table-auto shadow-md text-center">
                 <thead>
                     <tr>
                         <th
-                            class="bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold">
-                            Cedula
+                            class="bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 uppercase border-l-0 border-r-0  font-semibold">
+                            Rif
                         </th>
                         <th
-                            class="bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold">
+                            class="bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 uppercase border-l-0 border-r-0  font-semibold">
                             Nombre
                         </th>
+
                         <th
-                            class="bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold">
-                            Fecha de Nacimiento
-                        </th>
-                        <th
-                            class="bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold">
-                            Telefono
-                        </th>
-                        <th
-                            class="bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold">
-                            Correo
-                        </th>
-                        <th
-                            class="bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold">
-                            Dirección
-                        </th>
-                        <th
-                            class="bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold">
-                            Acciones
+                            class="bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 uppercase border-l-0 border-r-0  font-semibold">
+                            
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <th
-                            class="border-t-0 align-middle border-l-0 border-r-0 text-sm p-4">
+                            class="border-t-0 align-middle border-l-0 border-r-0 p-4">
                             26136504
                         </th>
-                        <td class="border-t-0 align-middle border-l-0 border-r-0 text-sm p-4">
+                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-4">
                             Luis Melendez
                         </td>
-                        <td class="border-t-0 align-middle border-l-0 border-r-0 text-sm p-4">
-                            27/02/1998
-                        </td>
-                        <td class="border-t-0 align-middle border-l-0 border-r-0 text-sm p-4">
-                            04262892969
-                        </td>
-                        <td class="border-t-0 align-middle border-l-0 border-r-0 text-sm p-4">
-                            melendez12341@gmail.com
-                        </td>
-                        <td class="border-t-0 align-middle border-l-0 border-r-0 text-sm p-4">
-                            Colinas del trompillo dsadsfdgragragagasgagsagsagsagsagsa
-                        </td>
                         <td
-                            class="flex items-center justify-center border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs p-4">
+                            class="flex items-center justify-center border-t-0 px-6 align-middle border-l-0 border-r-0 p-4">
                             <ver-proveedor></ver-proveedor>
                             <modificar-proveedor></modificar-proveedor>
                         </td>
@@ -79,9 +56,9 @@
         </div>
         <div class="w-full flex justify-center mt-4">
             <button
-                class="px-4 py-2 bg-blue-900 text-lg rounded text-white cursor-pointer hover:shadow-lg transition duration-500 ease-linear mr-4">Anterior</button>
+                class="px-4 py-2 bg-blue-900 text-sm rounded text-white cursor-pointer hover:shadow-lg transition duration-500 ease-linear mr-4">Anterior</button>
             <button
-                class="px-4 py-2 bg-blue-900 text-lg rounded text-white cursor-pointer hover:shadow-lg transition duration-500 ease-linear ">Siguiente</button>
+                class="px-4 py-2 bg-blue-900 text-sm rounded text-white cursor-pointer hover:shadow-lg transition duration-500 ease-linear ">Siguiente</button>
         </div>
     </div>
 </div>

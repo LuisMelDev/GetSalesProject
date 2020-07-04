@@ -115,7 +115,7 @@
     <!-- Collapse -->
     <div
       class="lg:flex lg:flex-col lg:items-stretch lg:opacity-100 lg:relative md:mt-4 lg:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded "
-      [ngClass]="collapseShow">
+      [ngClass]="collapseShow"> 
       <!-- Collapse header -->
       <div class="lg:min-w-full lg:hidden block pb-4 mb-4 border-b border-solid border-gray-300">
         <div class="flex flex-wrap">
@@ -161,10 +161,23 @@
             <i class="text-xl fas fa-fingerprint mr-3"></i>
             Usuarios</a>
         </li>
-        <li class="items-center ">
-          <a class="text-gray-80e lg:text-white cursor-pointer transition-all duration-500 ease-in-out transform hover:scale-105 text-md py-4 font-bold block">
+        <li class="items-center rounded transition-all duration-700 ease-in-out" [ngClass]="{ 'bg-blue-900 text-white p-2': collapse1}">
+          <a class="cursor-pointer transition-all duration-500 ease-in-out transform hover:scale-105 text-md py-4 font-bold block {{collapse1 ? 'pl-2 text-white':'text-gray-800 lg:text-white'}}"  (click)="collapse(1)">
             <i class="text-xl fas fa-fingerprint mr-3"></i>
-            otra cosa</a>
+            Ventas</a>
+            <ul class="{{(collapse1) ? '':'hidden' }} transition-all duration-700 ease-in-out" >
+              <li class="text-white cursor-pointer pl-4 text-sm py-2 font-bold block"><i class="text-md fas fa-fingerprint mr-3 transition-all duration-700 ease-in-out"></i> Agregar</li>
+              <li class="text-white cursor-pointer pl-4 text-sm py-2 font-bold block"><i class="text-md fas fa-fingerprint mr-3 transition-all duration-700 ease-in-out"></i> Consultar</li>
+            </ul>
+        </li>
+        <li class="items-center rounded transition-all duration-700 ease-in-out" [ngClass]="{ 'bg-blue-900 text-white p-2': collapse2}">
+          <a class="cursor-pointer transition-all duration-500 ease-in-out transform hover:scale-105 text-md py-4 font-bold block {{collapse2 ? ' pl-2 text-white':'text-gray-800 lg:text-white'}}"  (click)="collapse(2)">
+            <i class="text-xl fas fa-fingerprint mr-3"></i>
+            Compras</a>
+            <ul class="{{(collapse2) ? '':'hidden' }} transition-all duration-700 ease-in-out" >
+              <li class="text-white lg:text-gray-800 lg:text-white cursor-pointer pl-4 text-sm py-2 font-bold block"><i class="text-md fas fa-fingerprint mr-3 transition-all duration-700 ease-in-out"></i> Agregar</li>
+              <li class="text-white lg:text-gray-800 lg:text-white cursor-pointer pl-4 text-sm py-2 font-bold block"><i class="text-md fas fa-fingerprint mr-3 transition-all duration-700 ease-in-out"></i> Consultar</li>
+            </ul>
         </li>
       </ul>
     </div>
