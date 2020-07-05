@@ -22,12 +22,9 @@ class ProveedorController {
         }
     }
     async getAll(req, res, next) {
-        const { pageSize, pageNum } = req.query;
+        const { limit, page } = req.query;
         try {
-            const proveedores = await _proveedorService.getAll(
-                pageSize,
-                pageNum
-            );
+            const proveedores = await _proveedorService.getAll(limit, page);
             return res.send(proveedores);
         } catch (err) {
             console.error(err);

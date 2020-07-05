@@ -20,9 +20,9 @@ class CompraController {
         }
     }
     async getAll(req, res, next) {
-        const { pageSize, pageNum } = req;
+        const { limit, page } = req;
         try {
-            const compras = await _compraService.getAll(pageSize, pageNum);
+            const compras = await _compraService.getAll(limit, page);
             return res.send(compras);
         } catch (err) {
             console.error(err);

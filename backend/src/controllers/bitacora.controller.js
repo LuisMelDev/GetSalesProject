@@ -14,10 +14,10 @@ class BitacoraController {
             next(err);
         }
     }
-    async getAll(req, res) {
-        const { pageSize, pageNum } = req.query;
+    async getAll(req, res, next) {
+        const { limit, page } = req.query;
         try {
-            const bitacoras = await _bitacoraService.getAll(pageSize, pageNum);
+            const bitacoras = await _bitacoraService.getAll(limit, page);
             return res.send(bitacoras);
         } catch (err) {
             console.error(err);

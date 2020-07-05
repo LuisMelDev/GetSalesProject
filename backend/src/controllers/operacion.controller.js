@@ -20,12 +20,9 @@ class OperacionController {
         }
     }
     async getAll(req, res, next) {
-        const { pageSize, pageNum } = req.query;
+        const { limit, page } = req.query;
         try {
-            const operaciones = await _operacionService.getAll(
-                pageSize,
-                pageNum
-            );
+            const operaciones = await _operacionService.getAll(limit, page);
             return res.send(operaciones);
         } catch (err) {
             console.error(err);
