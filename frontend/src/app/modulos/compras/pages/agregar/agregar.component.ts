@@ -12,7 +12,7 @@ import { Producto } from "src/app/models/producto.model";
 })
 export class AgregarComponent implements OnInit {
   public titulo: string ="Registrar compra";
-  public icono: string ="fa fa-home";
+  public icono: string ="fa fa-truck";
   public fecha: any;
   public resultados: any;
   public cliente:Proveedor;
@@ -25,6 +25,7 @@ export class AgregarComponent implements OnInit {
   public impuesto: number = 0.16
   public precioFac:number = 0
   public ventas: any;
+  
   constructor( private _router: Router) {
     this.fecha = new Date();
 
@@ -50,7 +51,7 @@ export class AgregarComponent implements OnInit {
     this.venta = {
       id: this.ventas.length + 1 || 1,
       cliente: {
-        rif:' ',
+        rif:'',
         nombre: ''
       },
       usuario: 'Usuario',

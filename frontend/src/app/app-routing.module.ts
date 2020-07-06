@@ -11,6 +11,10 @@ import { AgregarUsuariosComponent } from './pages/usuarios/agregar/agregar.compo
 import { AgregarClientesComponent } from './pages/clientes/agregar/agregar.component';
 import { ActualizarUsuariosComponent } from './pages/usuarios/actualizar/actualizar.component';
 import { ActualizarClientesComponent } from './pages/clientes/actualizar/actualizar.component';
+import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
+import { ListarProveedoresComponent } from "./pages/proveedores/listar/listar.component";
+import { AgregarProveedoresComponent } from "./pages/proveedores/agregar/agregar.component";
+import { ActualizarProveedoresComponent } from "./pages/proveedores/actualizar/actualizar.component";
 
 
 
@@ -23,10 +27,11 @@ const routes: Routes = [
   {path: 'productos', component: ProductosComponent},
   {path: 'usuarios', component: UsuariosComponent},
   {path: 'clientes', component: ClientesComponent},
-  {path: 'usuarios/agregar', component: AgregarUsuariosComponent },
-  {path: 'usuarios/actualizar', component: ActualizarUsuariosComponent },
   {path: 'clientes/agregar', component: AgregarClientesComponent }, 
-  {path: 'clientes/actualizar', component: ActualizarClientesComponent }
+  {path: 'clientes/actualizar', component: ActualizarClientesComponent },
+  {path: 'proveedores', component: ProveedoresComponent }, 
+  {path: 'proveedores/listar', component: ListarProveedoresComponent },
+
 ];
 
 @NgModule({

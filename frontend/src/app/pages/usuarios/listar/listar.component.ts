@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Usuario } from 'src/app/models/usuario.model';
@@ -11,29 +11,27 @@ import { Usuario } from 'src/app/models/usuario.model';
 })
 export class ListarUsuariosComponent implements OnInit {
   public indice: number = 1;
-  public usuarios: any;
   public error: boolean = false;
   public titulo: string = 'Listado de Usuarios';
   public icono: string = 'fa fa-home';
   public busqueda: string;
   public ListUsers:any;
   public username: string;
+  @Input() usuarios:any = [];
+  public usuario:Usuario = new Usuario('','','','','','','')
 
   constructor(public _userService: UsuarioService) {
-    this.usuarios = [];
     this.busqueda = '';
     this.ListUsers= [];
         this.username = '';
+
 
   }
 
   ngOnInit(): void {
 
-    this.usuarios = JSON.parse(localStorage.getItem('usuarios'));
 
-
-
-    this._userService.getAll(this.indice).subscribe(
+    /*this._userService.getAll(this.indice).subscribe(
       (res) => {
         this.usuarios = res;
       },
@@ -41,11 +39,11 @@ export class ListarUsuariosComponent implements OnInit {
         this.error = true;
       }
     );
-
+*/
   }
 
   next(){
-    
+   
       this.indice++;
     
       this._userService.getAll(this.indice).subscribe(
@@ -110,6 +108,10 @@ delete(index){
 
  
 }
+
+  setUsuario(usuario){
+    this.usuario = usuario;
+  }
 
 
 }

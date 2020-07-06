@@ -25,10 +25,14 @@ export class AgregarProveedoresComponent implements OnInit {
     console.log(this.proveedores)
     form.reset();
     this.registrado = true;
+    setTimeout(() => {
+      this.registrado = false
+    }, 3000);
   }
 
   ngOnInit(): void {
     this.proveedores = JSON.parse(localStorage.getItem('proveedores'))
-    console.log(this.proveedores)
+    console.log(this.proveedores.lenght)
+    this.proveedor.id = (this.proveedores.length+1).toString()
   }
 }

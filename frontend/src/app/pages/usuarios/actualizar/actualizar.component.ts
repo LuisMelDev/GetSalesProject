@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute,Router } from "@angular/router";
 import { Usuario } from "src/app/models/usuario.model";
 import { UsuarioService } from "src/app/services/usuario.service";
+
+declare var jQuery:any;
+declare var $:any;
 
 @Component({
   selector: 'app-actualizar-usuario',
@@ -18,12 +21,23 @@ export class ActualizarUsuariosComponent implements OnInit {
   public register:any;
   public error:string;
   public id:string;*/
+
+
+  @Input() usuario: Usuario = new Usuario('','','','','','','');
+  public actualizado :boolean = false;
+  public usuarios: Usuario[];
+
   constructor(private _usuarioService: UsuarioService, private _activateRoute:ActivatedRoute, private _route:Router) {
     /*this.usuario = new Usuario('', '', '', '', '', '', '');
     this.error = '';*/
   }
 
   ngOnInit(): void {
+
+    this.usuario.password = ''
+    this.usuarios = JSON.parse(localStorage.getItem('usuarios'))
+    console.log(this.usuarios)
+
     /*console.log
     this._activateRoute.params.subscribe(params => {
       this.id = params["id"];
@@ -55,5 +69,20 @@ export class ActualizarUsuariosComponent implements OnInit {
       }
     );
   }*/
+
+
+  actualizar(form){
+    this.usuarios = this.usuarios.map(usu=>{
+      if(usu.id == this.usuario.id){
+        usu = this.usuario
+      }
+      return usu
+    })
+    
+
+   localStorage.setItem('usuarios', JSON.stringify(this.usuarios));
+    form.reset();
+    $('#modalActualizar').modal('hide')
+  }
 
 }

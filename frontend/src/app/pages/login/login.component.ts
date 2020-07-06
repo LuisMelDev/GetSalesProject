@@ -28,21 +28,22 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    console.log('hola')
-    this._userService.login(this.usuario).subscribe(
-      res=>{
-        localStorage.setItem('token', res.token) 
-        localStorage.setItem('usuario',JSON.stringify(res.user))     
-        this._router.navigate(['/dashboard'])
-      },
-      err=>{
-        if(err.status == 404){
-          this.status = "Usuario o contraseña invalida"
-        }else{
-          this.status = "Ha ocurrido un error al iniciar sesion"
-        }
-      }
-    )
+    localStorage.setItem('usuario',JSON.stringify(new Usuario('13','Administrador','12','Administrador','admin','admin','admin')))   
+    this._router.navigate(['/dashboard'])
+    // this._userService.login(this.usuario).subscribe(
+    //   res=>{
+    //     localStorage.setItem('token', res.token) 
+    //     localStorage.setItem('usuario',JSON.stringify(new Usuario('13','Administrador','12','Luis Melendez','melendez','','')))     
+    //     this._router.navigate(['/dashboard'])
+    //   },
+    //   err=>{
+    //     if(err.status == 404){
+    //       this.status = "Usuario o contraseña invalida"
+    //     }else{
+    //       this.status = "Ha ocurrido un error al iniciar sesion"
+    //     }
+    //   }
+    // )
   }
 
 

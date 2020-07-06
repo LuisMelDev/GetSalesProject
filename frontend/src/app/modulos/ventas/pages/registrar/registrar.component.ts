@@ -13,7 +13,7 @@ import { Router } from "@angular/router";
 })
 export class RegistrarComponent implements OnInit {
   public titulo: string ="Registrar Venta";
-  public icono: string ="fa fa-home";
+  public icono: string ="fa fa-shopping-cart";
   public fecha: any;
   public resultados: any;
   public cliente:Cliente;
@@ -47,7 +47,8 @@ export class RegistrarComponent implements OnInit {
     this.clientes = JSON.parse(localStorage.getItem('clientes'))
     this.baterias = JSON.parse(localStorage.getItem('baterias'))
     this.ventas = JSON.parse(localStorage.getItem('ventas'))
-    console.log(typeof this.ventas)
+    
+    this.baterias = this.baterias.filter(bateria => bateria.inventario !== 0)
     this.venta = {
       id: this.ventas.length + 1 || 1,
       cliente: {

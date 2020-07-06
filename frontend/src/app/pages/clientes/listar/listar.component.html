@@ -1,31 +1,76 @@
-<div class="container-fluid">
+<div class="modal fade bd-example-modal-lg " id="modarAgregar" tabindex="-1" role="document" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title mb-3 text-center"  id="exampleModalLabel">Agregar Cliente</h3>
+                <button  type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          
+              <app-agregar-cliente></app-agregar-cliente>
+          
+        </div>
+      </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg " id="modalActualizar" tabindex="-1" role="document" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title mb-3 text-center" id="exampleModalLabel">Actualizar Cliente: </h3>
+                <button  type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          
+              <app-actualizar-cliente
+              [cliente]="cliente"
+              [clientes]="clientes"
+              ></app-actualizar-cliente>
+          
+        </div>
+      </div>
+</div>
+<div class="container-fluid ">
+    <div class="container-fluid form-neon">
+        <button type="button" class="btn btn-raised btn-primary mb-3" data-toggle="modal" data-target="#modarAgregar"> <i class="fa fa-plus"></i>&nbsp; Nuevo Cliente </button>
+        <form>
+            <div class="row d-flex justify-content-end">
+                <div class="col-12 col-md-5 col-lg-4">
+                   <div class="form-group bmd-form-group bmd-form-group-lg">
+                    <input type="search" name="buscar" id="buscar" placeholder="Buscar cliente" class="form-control">
+                   </div>
+                </div>
+            </div>
+        </form>
     <div class="table-responsive">
+        
         <table class="table table-dark table-md">
             <thead>
                 <tr class="text-center roboto-medium">
-                    <th>#</th>
-                    <th>DNI</th>
-                    <th>NOMBRE</th>
-                    <th>APELLIDO</th>
-                    <th>TELEFONO</th>
-                    <th>Accion</th>
+                    <th>Cedula</th>
+                    <th>Nombre</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Telefono</th>
+                    <th>Correo</th>
+                    <th>Dirección</th>
+                    <th>Acciones</th>
                     
                 </tr>
             </thead>
             <tbody>
-                <tr class="text-center">
-                    <td>1</td>
-                    <td>012342567</td>
-                    <td>NOMBRE DEL CLIENTE</td>
-                    <td>APELLIDO DEL CLIENTE</td>
-                    <td>72349874</td>
+                <tr class="text-center" *ngFor="let cliente of clientes">
+                    <td>  {{cliente.cedula}}</td>
+                    <td>{{cliente.nombre}}</td>
+                    <td>{{cliente.fecha_nacimiento}}</td>
+                    <td>{{cliente.telefono}}</td>
+                    <td>{{cliente.email}}</td>
+                    <td>{{cliente.direccion}}</td>
                     <td>
-                        <a [routerLink]="['/clientes/actualizar', 1]" class="btn btn-success">
+                        <a class="btn btn-success" data-toggle="modal" data-target="#modalActualizar" (click)="agregarCliente(cliente)">
                             <i class="fas fa-sync-alt"></i>
                         </a> 
-                        <a [routerLink]="['/clientes/cliente', 1]" class="btn btn-success">
-                            <i class="fas fa-eye"></i>
-                        </a>
                     </td>
                 </tr>
             </tbody>
@@ -44,4 +89,5 @@
             </li>
         </ul>
     </nav>
+    </div>
 </div>
