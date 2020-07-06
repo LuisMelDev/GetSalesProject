@@ -1,0 +1,195 @@
+<app-page-header
+[titulo]="titulo"
+[icono]="icono"
+></app-page-header>
+<div class="modal fade" id="modalCli">
+    <div class="modal-dialog modal-xl" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Buscar Usuario</h5>
+                <button  type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #Formbuscar="ngForm" id="formBuscar" autocomplete="off">
+                    <div class="form-group">
+                        <label for="cedula" class="col-form-label">Cedula de cliente</label>
+                        <input type="text" class="form-control" id="cedula" name="cedula" #cedula="ngModel"
+                            (keyup)="buscarCliente()" [(ngModel)]="cliente.cedula">
+                    </div>
+                </form>
+                <p *ngIf="!clientes">No hay clientes registrados</p>
+                <div class="table-responsive" *ngIf="clientes">
+                    <table class="table table-dark table-sm">
+                        <thead>
+                            <tr class="text-center roboto-medium">
+                                <th>Cedula</th>
+                                <th>Nombre</th>
+                                <th>Fecha Nacimiento</th>
+                                <th>Direccion</th>
+                                <th>Telefono</th>
+                                <th>Correo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr  *ngFor="let persona of clientes" (click)="addCliente(persona)" class="modalEsconderCli text-center hand" >
+                                <td>{{persona.cedula}}</td>
+                                <td>{{persona.nombre}}</td>
+                                <td>{{persona.fecha_nacimiento}}</td>
+                                <td> {{persona.direccion}} </td>
+                                <td>{{persona.telefono}}</td>
+                                <td>{{persona.email}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalPro">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Buscar Producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #Formbuscar="ngForm" id="formBuscar" autocomplete="off">
+                    <div class="form-group">
+                        <label for="cedula" class="col-form-label">Nombre de producto</label>
+                        <input type="text" class="form-control" id="cedula" name="cedula" #cedula="ngModel"
+                            (keyup)="buscarCliente()" [(ngModel)]="cliente.cedula">
+                    </div>
+                </form>
+                <p *ngIf="!baterias">No hay baterias en el inventario</p>
+                <div class="table-responsive" *ngIf="baterias">
+                    <table class="table table-dark table-sm">
+                        <thead>
+                            <tr class="text-center roboto-medium">
+                                <th>Nombre</th>
+                                <th>Cantidad en inventario</th>
+                                <th>información</th>
+                                <th>fecha de ingreso</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr  *ngFor="let bate of baterias" (click)="addBateria(bate)" class="modalEsconderPro text-center hand" >
+                                <td>{{bate.nombre}}</td>
+                                <td>{{bate.inventario}}</td>
+                                <td>{{bate.marca_id +' '+bate.amperaje_id +' '+ bate.grupo_id }}</td>
+                                <td> {{bate.fecha_ingreso}} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <form>
+        <form class="form-neon" #form="ngForm">
+            <fieldset>
+                <legend class="px-3"><span class="float-left"><i class="far fa-plus-square"></i> &nbsp; Agrega detalles
+                        de venta</span>
+                    <span class="float-right "> <strong>Fecha </strong>{{ fecha | date:"dd/MM/yy" }} </span>
+                </legend>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-9 col-md-10">
+                            <div class="form-group bmd-form-group bmd-form-group-md">
+                                <label for="item_codigo">Cliente</label>
+                                <input type="text" pattern="[a-zA-Z0-9-]{1,45}" class="form-control" name="item_codigo"
+                                    id="item_codigo" maxlength="45" disabled
+                                    value="{{venta.cliente.cedula+' '+venta.cliente.nombre }}">
+                            </div>
+                        </div>
+                        <div class="col-3 col-md-2 flex-bottom">
+                            <div class="form-group bmd-form-group bmd-form-group-md">
+                                <button  type="button"
+                                    class="btn btn-raised btn-success btn-block" id="btnModalCli">Agregar</button>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group bmd-form-group bmd-form-group-md">
+                                <label for="btnModalPro">Bateria</label>
+                                <input type="text" class="form-control hand" name="item_codigo"
+                                    id="btnModalPro" value="{{bateria.nombre +' '+ bateria.marca_id+' '+bateria.amperaje_id+' '+bateria.grupo_id}}"  required [disabled]="!venta.cliente.cedula">
+                            </div>
+                        </div>
+                        <div class="col-9 col-md-2">
+                            <div class="form-group bmd-form-group bmd-form-group-md">
+                                <label for="precio">Precio</label>
+                                <input type="number"  pattern="[0-9\.]" class="form-control" name="precio"
+                                    id="precio" maxlength="45" required [(ngModel)]="precioProd" #precio="ngModel">
+                            </div>
+                        </div>
+                        <div class="col-9 col-md-2">
+                            <div class="form-group bmd-form-group bmd-form-group-md">
+                                <label for="catidad">Cantidad</label>
+                                <input type="number" pattern="[0-9]" class="form-control" name="catidad"
+                                    id="catidad" maxlength="45" required [(ngModel)]="cantidadProd" #cantidad="ngModel" >
+                            </div>
+                        </div>
+                        <div class="col-3 col-md-2 flex-bottom">
+                            <div class="form-group bmd-form-group bmd-form-group-mf">
+                                <button type="button" [disabled]="isValid()" (click)="agregarProducto()" class="btn btn-raised btn-success btn-block" >agregar</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </fieldset>
+            <br />
+            <table class="table table-dark table-sm">
+                <thead>
+                    <tr class="text-center roboto-medium">
+                        <th>N°</th>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th>Precio por producto</th>
+                        <th>Precio</th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center" *ngFor="let detalle of venta.detalle; index as i" >
+                        <td>{{i+1}}</td>
+                        <td>{{detalle.bateria.nombre +' '+ detalle.bateria.marca_id+' '+detalle.bateria.amperaje_id+' '+detalle.bateria.grupo_id}}</td>
+                        <td>{{detalle.cantidad}}</td>
+                        <td>{{detalle.precio |currency}}</td>
+                        <td>{{ detalle.precioTotal |currency }}</td>
+                        <td>
+                            <button (click)="deleteBateria(i)" type="button" class="btn btn-warning">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="col-12">
+                <legend class="px-3 d-block">
+                    <span class="float-right">impuesto  <strong>16%</strong></span>
+                </legend>
+                <div class="clearfix"></div>
+                <legend class="px-3 d-block">
+                    <span class="float-right">Precio total de Venta: <strong>{{ precioFac |currency }}</strong></span>
+                </legend>
+                <div class="clearfix"></div>
+            </div>
+            <br />
+            <div class="col-12">
+                <p class="text-center">
+                    <button type="submit" class="btn btn-raised btn-info btn-lg" [disabled]="enviar()" (click)="registrar()"><i class="far fa-save" ></i> &nbsp;
+                        Registrar venta</button>
+                </p>
+            </div>
+        </form>
+
+    </form>
+</div>

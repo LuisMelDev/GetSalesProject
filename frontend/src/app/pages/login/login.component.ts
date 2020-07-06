@@ -1,32 +1,50 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'src/app/models/usuario.model';
+import { Usuario } from "../../models/usuario.model";
+import { UsuarioService} from "../../services/usuario.service";
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
+  providers:[UsuarioService]
 })
 export class LoginComponent implements OnInit {
+  public usuario: Usuario;
+  public identificado: any;
+  public status: string;
+  constructor(
+    private _userService: UsuarioService,
+    private _router:Router
+  ) {
+    this.usuario = new Usuario('','','','','','','')
+    this.status = ''
+   }
 
-    public usuario: Usuario;
-    public error: boolean = true;
-    public mensaje: string = "Correo o contrañea invalido";
-    public color: string = "bg-red-500"
-
-  constructor() { 
-    this.usuario = new Usuario('','','','','','','');
+  ngOnInit(): void {
+    if(this._userService.getIdentity()){
+      this._router.navigate(['/dashboard'])
+    }
   }
 
-  ngOnInit() {
-
+  login(){
+    console.log('hola')
+    this._userService.login(this.usuario).subscribe(
+      res=>{
+        localStorage.setItem('token', res.token) 
+        localStorage.setItem('usuario',JSON.stringify(res.user))     
+        this._router.navigate(['/dashboard'])
+      },
+      err=>{
+        if(err.status == 404){
+          this.status = "Usuario o contraseña invalida"
+        }else{
+          this.status = "Ha ocurrido un error al iniciar sesion"
+        }
+      }
+    )
   }
 
-  onSubmit(){
-    console.log('gola');
-  }
-
-  onCerrar(bandera){
-    this.error = bandera;
-  }
- 
 
 }
+ 

@@ -1,1 +1,103 @@
-<router-outlet></router-outlet>
+<!-- Main container -->
+<main class="full-box main-container" *ngIf="usuario.id">
+  <!-- Nav lateral -->
+  <section class="full-box nav-lateral">
+    <div class="full-box nav-lateral-bg show-nav-lateral"></div>
+    <div class="full-box nav-lateral-content">
+      <figure class="full-box nav-lateral-avatar">
+        <i class="far fa-times-circle show-nav-lateral"></i>
+        <img src="./assets/assets/avatar/Avatar.png" class="img-fluid" alt="Avatar">
+        <figcaption class="roboto-medium text-center">
+
+          <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            {{usuario.nombre}} <br><small class="roboto-condensed-light">{{usuario.rol.rol}}</small>
+
+ 
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <button class="dropdown-item" type="button">Panel de Usuario</button>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item" type="button" (click)="logout()">Salir</button>
+          </div>
+        </figcaption>
+      </figure>
+      <div class="full-box nav-lateral-bar"></div>
+      <nav class="full-box nav-lateral-menu">
+        <ul>
+          <li>
+            <a [routerLink]="['/dashboard']" ><i class="fab fa-dashcube fa-fw"></i> &nbsp; Principal</a>
+          </li>
+          <li>
+            <a [routerLink]="['/clientes']"><i class="fas fa-users fa-fw"></i> &nbsp; Clientes </a>
+          </li>
+
+          <li>
+            <a [routerLink]="['/productos']" ><i class="fas fa-pallet fa-fw"></i> &nbsp; Productos</a>
+          </li>
+
+          <li>
+            <a class="nav-btn-submenu"><i class="fas fa-file-invoice-dollar fa-fw"></i> &nbsp; Ventas<i
+                class="fas fa-chevron-down"></i></a>
+            <ul>
+              <li>
+                <a href="/ventas/registrar" ><i class="fas fa-plus fa-fw"></i> &nbsp; Registrar venta</a>
+              </li>
+              <li>
+                <a [routerLink]="['/ventas/listado']" ><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Consultar Ventas</a>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <a class="nav-btn-submenu"><i class="fas  fa-user-secret fa-fw"></i> &nbsp; Compras <i
+                class="fas fa-chevron-down"></i></a>
+            <ul>
+              <li>
+                <a href="/compras/registrar" ><i class="fas fa-plus fa-fw"></i> &nbsp; Nueva Compra</a>
+              </li>
+              <li>
+                <a [routerLink]="['/compras/consultar']" ><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Listado de Compras</a>
+              </li>
+            </ul>
+          </li>
+          <li>               
+            <a [routerLink]="['/usuarios']"><i class="fas fa-file-invoice-dollar fa-fw"></i> &nbsp; Usuarios</a>
+        </li>
+        <li>
+          <a [routerLink]="['/reportes']"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Reportes</a>
+        </li>
+        <li>
+          <a [routerLink]="['/bitacora']"><i class="fas fa-search fa-fw"></i> &nbsp; Bitacora</a>
+        </li>
+
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Page content -->
+  <section class="full-box page-content ">
+    <nav class="full-box navbar-info" >
+      <a (click)="toggleMenu()" class="float-left show-nav-lateral flex-center " id="show-nav-lateral">
+        <i class="fas fa-2x" [ngClass]="{'fa-bars':hamburguer,'fa-arrow-left':!hamburguer}"></i> 
+      </a>
+
+      
+        <a class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img src="./assets/assets/avatar/Avatar.png" alt="nombreUser" class="rounded-circle" height="40"> {{usuario.nombre}}
+        </a>
+      
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+          <button class="dropdown-item" type="button">Panel de Usuario</button>
+        <div class="dropdown-divider"></div>
+        <button class="dropdown-item" type="button" (click)="logout()">Salir</button>
+        </div>
+     
+    </nav>
+    
+      <router-outlet></router-outlet>
+  
+  </section>
+</main>
+<router-outlet *ngIf="!usuario.id"></router-outlet>

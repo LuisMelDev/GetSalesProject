@@ -1,0 +1,81 @@
+<div class="container-fluid mt-3">
+    <div class="container-fluid form-neon px-5 py-5">
+        <div class="row ">
+            <div class="col-6">
+                <h2><a href="javascript:void(0)">GetSales</a></h2>
+            </div>
+            <div class="col-6 text-right">
+                <h5>Comprobante</h5>
+                <h5><small>Comprobante #00{{factura.id}}</small></h5>
+                <h5><small>Fecha {{factura.fecha | date:'dd/MM/yy'}}</small></h5>
+            </div>
+            <div class="col-12 mt-5">
+                <div>
+                    <div>
+                        <h5>Rif: {{factura.cliente.rif}}</h5>
+                    </div>
+                    <div>
+                        <h5>Proveedor: {{factura.cliente.nombre}}</h5>
+                    </div>
+                    <!-- <div>
+                        <h5>Telefono: {{factura.cliente.telefono}}</h5>
+                    </div>
+                    <div>Dirección: {{factura.cliente.direccion}}</div> -->
+                </div>
+            </div>
+            <div class="table-responsive px-2 mt-5">
+                <table class="table table-dark table-sm">
+                    <thead>
+                        <tr class="text-center roboto-medium">
+
+                            <th>
+                                Codigo de Producto
+                            </th>
+                            <th>
+                                Producto
+                            </th>
+                            <th>
+                                Cantidad
+                            </th>
+                            <th>
+                                Precio Por unidad
+                            </th>
+                            <th>
+                                Sub-Total
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center" *ngFor="let detalle of factura.detalle">
+                            <td>{{detalle.bateria.id}}</td>
+                            <td>{{detalle.bateria.nombre +' '+detalle.bateria.marca_id+' '+detalle.bateria.grupo_id+' '+detalle.bateria.amperaje_id}}</td>
+                            <td>{{detalle.cantidad}}</td>
+                            <td>{{detalle.precio  | currency}} </td>
+                            <td>{{detalle.precioTotal | currency }} </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12">
+                <div class="row justify-content-end">
+                    <div class="col-3 ">
+                        <strong>
+                            Sub Total:
+                            <br/>
+                            Impuestos (IVA 16%):
+                            <br/>
+                            Total:
+                        </strong></div>
+                    <div class="col-2"><strong>
+                            {{subtotal |currency}} 
+                            <br/>
+                            {{impuesto  |currency}} 
+                            <br/>
+                            {{subtotal+impuesto  |currency}} 
+                        </strong></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
