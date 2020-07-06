@@ -3,16 +3,41 @@ class BaseRepository {
         this.model = model;
     }
 
-    async get(id) {
-        return await this.model.findByPk(id);
+    getPaginate(limit, page, count) {
+        const startIndex = (page - 1) * limit;
+        const endIndex = page * limit;
+        const totalPages = Math.ceil(count / limit);
+        const paginationData = {};
+        if (endIndex < count) {
+            paginationData.next = {
+                page: page + 1,
+                limit,
+            };
+        }
+        if (startIndex > 0) {
+            paginationData.previous = {
+                page: page + 1,
+                limit,
+            };
+        }
+        if (page > 1) {
+            paginationData.first = {
+                page: 1,
+                limit,
+            };
+        }
+        if (page != totalPages) {
+            paginationData.last = {
+                page: totalPages,
+                limit,
+            };
+        }
+        paginationData.totalPages = totalPages;
+        return paginationData;
     }
 
-    async getAll(limit = 10, pageNum = 1) {
-        const offset = limit * (pageNum - 1);
-        return await this.model.findAll({
-            offset,
-            limit,
-        });
+    async get(id) {
+        return await this.model.findByPk(id);
     }
 
     async create(entity) {

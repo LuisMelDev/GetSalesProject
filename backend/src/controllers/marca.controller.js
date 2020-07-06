@@ -22,9 +22,9 @@ class MarcaController {
         }
     }
     async getAll(req, res, next) {
-        const { pageSize, pageNum } = req.query;
+        const { limit, page } = req.query;
         try {
-            const marcas = await _marcaService.getAll(pageSize, pageNum);
+            const marcas = await _marcaService.getAll(limit, page);
             return res.send(marcas);
         } catch (err) {
             console.error(err);

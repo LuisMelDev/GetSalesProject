@@ -22,9 +22,9 @@ class UsuarioController {
         }
     }
     async getAll(req, res, next) {
-        const { pageSize, pageNum } = req.query;
+        const { limit, page } = req.query;
         try {
-            const usuarios = await _usuarioService.getAll(pageSize, pageNum);
+            const usuarios = await _usuarioService.getAll(limit, page);
             return res.send(usuarios);
         } catch (err) {
             console.error(err);

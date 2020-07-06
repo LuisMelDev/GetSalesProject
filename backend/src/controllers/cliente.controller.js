@@ -22,9 +22,9 @@ class ClienteController {
         }
     }
     async getAll(req, res, next) {
-        const { pageSize, pageNum } = req.query;
+        const { limit, page } = req.query;
         try {
-            const clientes = await _clienteService.getAll(pageSize, pageNum);
+            const clientes = await _clienteService.getAll(limit, page);
             return res.send(clientes);
         } catch (err) {
             console.log(err);
