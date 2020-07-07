@@ -6,15 +6,22 @@ class GrupoRepository extends BaseRepository {
         super(Grupo);
         _grupo = Grupo;
     }
-    async getAll(limitResults, pageNum) {
+    async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
+        // Check if sort key is an actual attribute of model
+        if (!this.validSort(_grupo, sortBy)) {
+            return [];
+        }
         if (!limitResults || !pageNum) {
-            return await _grupo.findAll();
+            return await _grupo.findAll({
+                order: [[sortBy, orderBy]],
+            });
         }
         const page = parseInt(pageNum);
         const limit = parseInt(limitResults);
         const results = await _grupo.findAll({
             limit,
             offset: (page - 1) * limit,
+            order: [[sortBy, orderBy]],
         });
         const count = await _grupo.count();
         const paginationResults = this.getPaginate(limit, page, count);

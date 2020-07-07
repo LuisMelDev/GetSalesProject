@@ -22,9 +22,14 @@ class RolController {
         }
     }
     async getAll(req, res, next) {
-        const { limit, page } = req.query;
+        const { limit, page, sort_by, order_by } = req.query;
         try {
-            const roles = await _rolService.getAll(limit, page);
+            const roles = await _rolService.getAll(
+                limit,
+                page,
+                sort_by,
+                order_by
+            );
             return res.send(roles);
         } catch (err) {
             console.error(err);

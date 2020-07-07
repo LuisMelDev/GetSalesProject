@@ -6,15 +6,22 @@ class AmperajeRepository extends BaseRepository {
         super(Amperaje);
         _amperaje = Amperaje;
     }
-    async getAll(limitResults, pageNum) {
+    async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
+        // Check if sort key is an actual attribute of model
+        if (!this.validSort(_amperaje, sortBy)) {
+            return [];
+        }
         if (!limitResults || !pageNum) {
-            return await _amperaje.findAll();
+            return await _amperaje.findAll({
+                order: [[sortBy, orderBy]],
+            });
         }
         const page = parseInt(pageNum);
         const limit = parseInt(limitResults);
         const results = await _amperaje.findAll({
             limit,
             offset: (page - 1) * limit,
+            order: [[sortBy, orderBy]],
         });
         const count = await _amperaje.count();
         const paginationResults = this.getPaginate(limit, page, count);

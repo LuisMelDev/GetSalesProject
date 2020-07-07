@@ -3,6 +3,35 @@ class BaseRepository {
         this.model = model;
     }
 
+    async get(id) {
+        return await this.model.findByPk(id);
+    }
+
+    async create(entity) {
+        return await this.model.create(entity);
+    }
+
+    async update(id, entity) {
+        return this.model.update(entity, {
+            where: {
+                id: id,
+            },
+        });
+    }
+
+    async delete(id) {
+        await this.model.destroy({
+            where: {
+                id,
+            },
+        });
+
+        return true;
+    }
+    async searchAll(options) {
+        return await this.model.findAll(options);
+    }
+
     getPaginate(limit, page, count) {
         const startIndex = (page - 1) * limit;
         const endIndex = page * limit;
@@ -36,33 +65,8 @@ class BaseRepository {
         return paginationData;
     }
 
-    async get(id) {
-        return await this.model.findByPk(id);
-    }
-
-    async create(entity) {
-        return await this.model.create(entity);
-    }
-
-    async update(id, entity) {
-        return this.model.update(entity, {
-            where: {
-                id: id,
-            },
-        });
-    }
-
-    async delete(id) {
-        await this.model.destroy({
-            where: {
-                id,
-            },
-        });
-
-        return true;
-    }
-    async searchAll(options) {
-        return await this.model.findAll(options);
+    validSort(model, sortKey) {
+        return model.rawAttributes.hasOwnProperty(sortKey);
     }
 }
 

@@ -22,9 +22,14 @@ class ProductoController {
         }
     }
     async getAll(req, res, next) {
-        const { limit, page } = req.query;
+        const { limit, page, sort_by, order_by } = req.query;
         try {
-            const productos = await _productoService.getAll(limit, page);
+            const productos = await _productoService.getAll(
+                limit,
+                page,
+                sort_by,
+                order_by
+            );
             return res.send(productos);
         } catch (err) {
             console.error(err);

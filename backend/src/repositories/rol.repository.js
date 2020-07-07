@@ -6,15 +6,22 @@ class RolRepository extends BaseRepository {
         super(Rol);
         _rol = Rol;
     }
-    async getAll(limitResults, pageNum) {
+    async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
+        // Check if sort key is an actual attribute of model
+        if (!this.validSort(_rol, sortBy)) {
+            return [];
+        }
         if (!limitResults || !pageNum) {
-            return await _rol.findAll();
+            return await _rol.findAll({
+                order: [[sortBy, orderBy]],
+            });
         }
         const page = parseInt(pageNum);
         const limit = parseInt(limitResults);
         const results = await _rol.findAll({
             limit,
             offset: (page - 1) * limit,
+            order: [[sortBy, orderBy]],
         });
         const count = await _rol.count();
         const paginationResults = this.getPaginate(limit, page, count);

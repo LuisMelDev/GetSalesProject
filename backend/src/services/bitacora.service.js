@@ -18,8 +18,13 @@ class BitacoraService {
     async getByOperacion(operacionId) {
         return await _bitacoraRepository.getByOperacion(operacionId);
     }
-    async getAll(limit, pageNum) {
-        return await _bitacoraRepository.getAll(limit, pageNum);
+    async getAll(limitResults, pageNum, sortBy, orderBy) {
+        return await _bitacoraRepository.getAll(
+            limitResults,
+            pageNum,
+            sortBy,
+            orderBy
+        );
     }
     async register(operacionName, description, usuarioId) {
         const operacion = await _operacionRepository.getByOperacion(

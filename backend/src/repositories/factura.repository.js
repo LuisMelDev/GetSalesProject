@@ -8,15 +8,22 @@ class FacturaRepository extends BaseRepository {
         _factura = Factura;
         _detalleFactura = DetalleFactura;
     }
-    async getAll(limitResults, pageNum) {
+    async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
+        // Check if sort key is an actual attribute of model
+        if (!this.validSort(_factura, sortBy)) {
+            return [];
+        }
         if (!limitResults || !pageNum) {
-            return await _factura.findAll();
+            return await _factura.findAll({
+                order: [[sortBy, orderBy]],
+            });
         }
         const page = parseInt(pageNum);
         const limit = parseInt(limitResults);
         const results = await _factura.findAll({
             limit,
             offset: (page - 1) * limit,
+            order: [[sortBy, orderBy]],
         });
         const count = await _factura.count();
         const paginationResults = this.getPaginate(limit, page, count);

@@ -15,9 +15,14 @@ class InventarioController {
         }
     }
     async getAll(req, res, next) {
-        const { limit, page } = req.query;
+        const { limit, page, sort_by, order_by } = req.query;
         try {
-            const inventarios = await _inventarioService.getAll(limit, page);
+            const inventarios = await _inventarioService.getAll(
+                limit,
+                page,
+                sort_by,
+                order_by
+            );
             return res.send(inventarios);
         } catch (err) {
             console.error(err);

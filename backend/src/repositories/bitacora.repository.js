@@ -8,9 +8,29 @@ class BitacoraRepository {
         _usuario = Usuario;
         _operacion = Operacion;
     }
-    async getAll(limitResults, pageNum) {
+    async getAll(limitResults, pageNum, sortBy = "fecha", orderBy = "desc") {
+        let order;
+        if (sortBy === "username") {
+            order = [[{ model: _usuario, as: "usuario" }, "username", orderBy]];
+        } else if (sortBy === "operacion") {
+            order = [
+                [{ model: _operacion, as: "operacion" }, "operacion", orderBy],
+            ];
+        } else {
+            // Check if sort key is an actual attribute of model
+            if (!this.validSort(_bitacora, sortBy)) {
+                return [];
+            }
+            order = [[sortBy, orderBy]];
+        }
         if (!limitResults || !pageNum) {
-            return await _bitacora.findAll();
+            return await _bitacora.findAll({
+                include: [
+                    { model: _usuario, as: "usuario" },
+                    { model: _operacion, as: "operacion" },
+                ],
+                order,
+            });
         }
         const page = parseInt(pageNum);
         const limit = parseInt(limitResults);
@@ -21,6 +41,7 @@ class BitacoraRepository {
                 { model: _usuario, as: "usuario" },
                 { model: _operacion, as: "operacion" },
             ],
+            order,
         });
         const count = await _bitacora.count();
         const paginationResults = this.getPaginate(limit, page, count);
@@ -80,6 +101,9 @@ class BitacoraRepository {
         }
         paginationData.totalPages = totalPages;
         return paginationData;
+    }
+    validSort(model, sortKey) {
+        return model.rawAttributes.hasOwnProperty(sortKey);
     }
 }
 

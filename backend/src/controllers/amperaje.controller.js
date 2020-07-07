@@ -20,9 +20,14 @@ class AmperajeController {
         }
     }
     async getAll(req, res, next) {
-        const { limit, page, amperaje } = req.query;
+        const { limit, page, sort_by, order_by } = req.query;
         try {
-            const amperajes = await _amperajeService.getAll(pageSize, pageNum);
+            const amperajes = await _amperajeService.getAll(
+                limit,
+                page,
+                sort_by,
+                order_by
+            );
             return res.send(amperajes);
         } catch (err) {
             console.error(err);

@@ -22,9 +22,14 @@ class MarcaController {
         }
     }
     async getAll(req, res, next) {
-        const { limit, page } = req.query;
+        const { limit, page, sort_by, order_by } = req.query;
         try {
-            const marcas = await _marcaService.getAll(limit, page);
+            const marcas = await _marcaService.getAll(
+                limit,
+                page,
+                sort_by,
+                order_by
+            );
             return res.send(marcas);
         } catch (err) {
             console.error(err);

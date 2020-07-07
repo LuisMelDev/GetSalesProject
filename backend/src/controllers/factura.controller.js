@@ -20,9 +20,14 @@ class FacturaController {
         }
     }
     async getAll(req, res, next) {
-        const { limit, page } = req.query;
+        const { limit, page, sort_by, order_by } = req.query;
         try {
-            const facturas = await _facturaService.getAll(limit, page);
+            const facturas = await _facturaService.getAll(
+                limit,
+                page,
+                sort_by,
+                order_by
+            );
             return res.send(facturas);
         } catch (err) {
             console.error(err);

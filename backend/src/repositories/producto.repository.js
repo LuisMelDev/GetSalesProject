@@ -5,7 +5,7 @@ let _grupo = null;
 let _amperaje = null;
 
 class ProductoRepository extends BaseRepository {
-    constructor({ Producto, Marca, Grupo, _amperaje }) {
+    constructor({ Producto, Marca, Grupo, Amperaje }) {
         super(Producto);
         _producto = Producto;
         _marca = Marca;
@@ -13,9 +13,44 @@ class ProductoRepository extends BaseRepository {
         _amperaje = Amperaje;
     }
 
-    async getAll(limitResults, pageNum) {
+    async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
+        let order;
+        if (sortBy === "marca") {
+            order = [[{ model: _marca, as: "marca" }, "nombre", orderBy]];
+        } else if (sortBy === "grupo") {
+            order = [[{ model: _grupo, as: "grupo" }, "nombre", orderBy]];
+        } else if (sortBy === "amperaje") {
+            order = [[{ model: _amperaje, as: "amperaje" }, "amp", orderBy]];
+        } else {
+            // Check if sort key is an actual attribute of model
+            if (
+                !this.validSort(_producto, sortBy) &&
+                !this.validSort(_marca, sortBy) &&
+                !this.validSort(_grupo, sortBy) &&
+                !this.validSort(_amperaje, sortBy)
+            ) {
+                return [];
+            }
+            order = [[sortBy, orderBy]];
+        }
         if (!limitResults || !pageNum) {
-            return await _producto.findAll();
+            return await _producto.findAll({
+                include: [
+                    {
+                        model: _marca,
+                        as: "marca",
+                    },
+                    {
+                        model: _grupo,
+                        as: "grupo",
+                    },
+                    {
+                        model: _amperaje,
+                        as: "amperaje",
+                    },
+                ],
+                order,
+            });
         }
         const page = parseInt(pageNum);
         const limit = parseInt(limitResults);
@@ -36,6 +71,7 @@ class ProductoRepository extends BaseRepository {
                     as: "amperaje",
                 },
             ],
+            order,
         });
         const count = await _producto.count();
         const paginationResults = this.getPaginate(limit, page, count);

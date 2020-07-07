@@ -15,7 +15,12 @@ class InventarioRepository extends BaseRepository {
         _amperaje = Amperaje;
     }
 
-    async getAll(limitResults, pageNum) {
+    async getAll(
+        limitResults,
+        pageNum,
+        sortBy = "fecha_entrada",
+        orderBy = "desc"
+    ) {
         const includeParams = [
             {
                 model: _producto,
@@ -36,8 +41,23 @@ class InventarioRepository extends BaseRepository {
                 ],
             },
         ];
+        let order;
+        if (sortBy === "nombre") {
+            order = [[{ model: _producto, as: "producto" }, "nombre", orderBy]];
+        } else if (sortBy === "id") {
+            order = [[{ model: _producto, as: "producto" }, "id", orderBy]];
+        } else {
+            // Check if sort key is an actual attribute of model
+            if (!this.validSort(_inventario, sortBy)) {
+                return [];
+            }
+            order = [[sortBy, orderBy]];
+        }
         if (!limitResults || !pageNum) {
-            return await _inventario.findAll({ include: includeParams });
+            return await _inventario.findAll({
+                include: includeParams,
+                order,
+            });
         }
         const page = parseInt(pageNum);
         const limit = parseInt(limitResults);
@@ -45,6 +65,7 @@ class InventarioRepository extends BaseRepository {
             limit,
             offset: (page - 1) * limit,
             include: includeParams,
+            order,
         });
         const count = await _inventario.count();
         const paginationResults = this.getPaginate(limit, page, count);

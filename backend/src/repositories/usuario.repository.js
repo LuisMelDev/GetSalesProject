@@ -9,9 +9,19 @@ class UsuarioRepository extends BaseRepository {
         _rol = Rol;
     }
 
-    async getAll(limitResults, pageNum) {
+    async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
+        // Check if sort key is an actual attribute of model
+        if (
+            !this.validSort(_usuario, sortBy) &&
+            !this.validSort(_rol, sortBy)
+        ) {
+            return [];
+        }
         if (!limitResults || !pageNum) {
-            return await _usuario.findAll();
+            return await _usuario.findAll({
+                include: [{ model: _rol, as: "rol" }],
+                order: [[sortBy, orderBy]],
+            });
         }
         const page = parseInt(pageNum);
         const limit = parseInt(limitResults);
@@ -19,6 +29,7 @@ class UsuarioRepository extends BaseRepository {
             limit,
             offset: (page - 1) * limit,
             include: [{ model: _rol, as: "rol" }],
+            order: [[sortBy ? sortBy : "id", orderBy ? orderBy : "desc"]],
         });
         const count = await _usuario.count();
         const paginatedResults = this.getPaginate(limit, page, count);

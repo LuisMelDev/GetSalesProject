@@ -22,9 +22,14 @@ class GrupoController {
         }
     }
     async getAll(req, res, next) {
-        const { limit, page } = req.query;
+        const { limit, page, sort_by, order_by } = req.query;
         try {
-            const grupos = await _grupoService.getAll(limit, page);
+            const grupos = await _grupoService.getAll(
+                limit,
+                page,
+                sort_by,
+                order_by
+            );
             return res.send(grupos);
         } catch (err) {
             console.error(err);
