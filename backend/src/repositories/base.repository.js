@@ -45,7 +45,7 @@ class BaseRepository {
         }
         if (startIndex > 0) {
             paginationData.previous = {
-                page: page + 1,
+                page: page - 1,
                 limit,
             };
         }
