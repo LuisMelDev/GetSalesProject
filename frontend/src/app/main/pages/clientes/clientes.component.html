@@ -1,0 +1,85 @@
+<div class="relative mt-20 p-4">
+    <div class="w-full flex justify-start mb-8">
+        <h3 class="text-3xl font-bold">Listado de clientes</h3>
+    </div>
+    <div class="w-full flex justify-start mb-4">
+        <agregar-cliente (registrado)="traerClientes()"></agregar-cliente>
+    </div>
+
+    <div class="bg-white w-full rounded shadow-lg py-4 px-1 ">
+        <div class="w-full flex justify-end align-middle mb-4 text-sm">
+            <form [formGroup]="formBusqueda" (ngSubmit)="busqueda()"class="w-full md:w-3/4 lg:w-1/2 grid grid-cols-6 gap-1">
+                <select name="parametro" class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-2" 
+                formControlName="parametro">
+                    <option value="cedula">Cedula</option>
+                    <option value="nombre">Nombre</option>
+                  </select>
+                <input type="text" class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-3" name="valorParametro"  placeholder="Ingrese su busqueda"
+                formControlName="valorParametro">
+                <button type="submit" class="px-3 py-1 bg-red-500 rounded text-white cursor-pointer hover:shadow-lg transition duration-700 ease-linear col-span-1">Buscar</button>
+            </form>
+        </div>
+        <div class="overflow-y-auto w-full text-xs text-center">
+             <table class="table-auto shadow-lg bg-white w-full">
+                <thead class="bg-blue-900 text-white">
+                    <tr>
+                        <th
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                            Cedula
+                        </th>
+                        <th
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                            Nombre
+                        </th>
+                        <th
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                            Fecha de Nacimiento
+                        </th>
+                        <th
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                            Telefono
+                        </th>
+                        <th
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                            Correo
+                        </th>
+                        <th
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="clientes">
+                    <tr *ngFor="let cliente of clientes">
+                        <th
+                            class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            {{cliente.cedula}}
+                        </th>
+                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            {{cliente.nombre}}
+                        </td>
+                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            {{cliente.fecha_nacimiento | date:'dd/MM/yy' }}
+                        </td>
+                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            {{cliente.telefono}}
+                        </td>
+                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            {{cliente.email}}
+                        </td>
+                        <td
+                            class="flex items-center justify-center border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            <ver-cliente [cliente]="cliente"></ver-cliente>
+                            <modificar-cliente [cliente]="cliente" (actualizado)="traerClientes()"></modificar-cliente>
+                        </td>
+                    </tr>
+                </tbody>
+            </table> 
+        </div>
+        <div class="w-full flex justify-center mt-4 text-sm" *ngIf="totalPages > 1">
+            <button
+                class="px-4 py-2 bg-blue-900 rounded text-white cursor-pointer hover:shadow-lg transition duration-500 ease-linear mr-4" *ngIf="page !== 1" (click)="paginaAnterior()">Anterior</button>
+            <button
+                class="px-4 py-2 bg-blue-900 rounded text-white cursor-pointer hover:shadow-lg transition duration-500 ease-linear" *ngIf="page !== totalPages" (click)="paginaSiguiente()">Siguiente</button>
+        </div>
+    </div>
+</div>

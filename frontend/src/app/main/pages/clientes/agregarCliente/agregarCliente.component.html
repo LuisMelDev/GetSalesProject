@@ -1,0 +1,114 @@
+<button
+  class="px-4 py-2 bg-red-500 text-sm rounded text-white cursor-pointer hover:shadow-lg transition duration-700 ease-linear"
+  type="button" (click)="toggleModal()">
+  Agregar Cliente
+</button>
+<div *ngIf="showModal"
+  class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center flex">
+  <div class="relative w-auto my-6 mx-auto w-11/12 md:w-5/6 lg:w-4/6">
+    <!--content-->
+    <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+      <!--header-->
+      <div class="flex items-start justify-between py-6 p-6 border-b border-solid border-gray-300 rounded">
+        <h3 class="text-2xl font-semibold">
+          Agrega un Cliente
+        </h3>
+        <button
+          class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+          (click)="toggleModal()">
+          <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+            ×
+          </span>
+        </button>
+      </div>
+      <!--body-->
+      <div class="relative p-6 flex-auto">
+        <div class="w-full pb-6 pt-2">
+          <h3 class="text-xl font-bold">Informacion de Cliente</h3>
+        </div>
+        <div class="w-full">
+          <app-alert *ngIf="alerta" [mensaje]="mensaje" [color]="color" (cerrar)="cerrarAlerta($event)"></app-alert>
+        </div>
+        <form [formGroup]="clienteForm" (ngSubmit)="enviar()" class="my-4 text-gray-600 text-sm">
+          <div class="w-full grid grid-cols-2 lg:grid-cols-6 gap-2">
+            <div class="col-span-2 md:col-span-1 lg:col-span-2">
+              <label for="cedula" class=" text-gray-800 mb-2 font-bold">Cedula</label>
+              <input type="text"
+                [class]="clasesInput"
+                name="cedula" 
+                id="cedula" 
+                placeholder="ej. 13567439"
+                formControlName="cedula"  
+              >
+            </div>
+            <div class="col-span-2 md:col-span-1 lg:col-span-4">
+              <label for="nombre" class=" text-gray-800 mb-2 font-bold">Nombres Y Apellidos</label>
+              <input type="text"
+                [class]="clasesInput"
+                name="nombre" 
+                id="nombre" 
+                placeholder="ej. Juanito Perez"
+                formControlName="nombre"  
+              >
+            </div>
+            <div class="col-span-2 md:col-span-1 lg:col-span-2">
+              <label for="fechaNacimiento" class=" text-gray-800 mb-2 font-bold">Fecha Nacimiento</label>
+              <input type="date"
+                [class]="clasesInput"
+                name="fechan_nacimiento" 
+                id="fechaNacimiento"
+                formControlName="fecha_nacimiento"  
+                min="1910-01-01" max="2002-12-31"  
+              >
+
+            </div>
+            <div class="col-span-2 md:col-span-1 lg:col-span-2">
+              <label for="telefono" class=" text-gray-800 mb-2 font-bold">Telefono</label>
+              <input type="text"
+                [class]="clasesInput"
+                name="telefono" 
+                id="telefono" 
+                placeholder="ej. 04262852415"
+                formControlName="telefono"    
+               >
+
+            </div>
+            <div class="col-span-2 md:col-span-1 lg:col-span-2">
+              <label for="correo" class=" text-gray-800 mb-2 font-bold">Correo</label>
+              <input type="text"
+                [class]="clasesInput"
+                name="email" 
+                id="correo" 
+                placeholder="ej. correo@correo.com"
+                formControlName="email"  
+              >
+              <error-form [mensaje]="'El campo es obligatorio'" *ngIf="clienteForm.get('email').hasError('required') && clienteForm.get('email').touched"></error-form>
+            </div>
+            <div class="col-span-2 md:col-span-1 lg:col-span-6">
+              <label for="direccion" class=" text-gray-800 mb-2 font-bold">Direccion</label>
+              <textarea type="text"
+                [class]="clasesInput"
+                name="direccion" 
+                id="direccion" 
+                placeholder="ej. barquisimeto casa s/n"
+                formControlName="direccion"    
+              ></textarea>
+
+            </div>
+            <div class="col-span-2 lg:col-span-6"*ngIf="errors">
+              <error-form [mensaje]="errors"></error-form>
+            </div>
+            <div class="col-span-2 lg:col-span-6">
+              <input 
+                type="submit"
+                placeholder="Registrar"
+                class="px-6 py-2 bg-red-500 text-sm rounded text-white cursor-pointer hover:shadow-lg transition duration-700 ease-linear mx-auto block" 
+                 >
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>

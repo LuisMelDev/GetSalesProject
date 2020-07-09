@@ -1,0 +1,79 @@
+<div class="relative mt-20 p-4">
+
+    <div class="w-full flex justify-start mb-6">
+        <h3 class="text-3xl font-bold">Consultar Compras</h3>
+    </div>
+    <div class="rounded w-full bg-white mt-4 p-4">
+        <div class="w-full  flex justify-between py-2 px-2 mb-6">
+            <h3 class="text-2xl">Listado de Compras</h3>
+        </div>
+        <div class="w-full flex justify-end align-middle mb-6 text-sm">
+            <form class="w-full md:w-3/4 lg:w-3/5 grid grid-cols-12 gap-1">
+                <select name="amperaje" id="amperaje" class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-3">
+                    <option value="comprobante">Numero de Comprobante</option>
+                    <option value="rango">Rango de fechas</option>
+                    <option value="fecha">fecha</option>
+                    <option value="usuario">Usuario</option>
+                    <option value="proveedor">Proveedor</option>
+                  </select>
+                <input type="text" class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-7" name="usuario" id="usuario" placeholder="Ingrese su busqueda">
+                <button type="submit" class="px-3 py-1 bg-red-500 rounded text-white cursor-pointer hover:shadow-lg transition duration-700 ease-linear col-span-2">Buscar</button>
+            </form>
+        </div>
+        <div class="w-full mb-6">
+            <table class="table-auto shadow-lg bg-white w-full text-xs text-center">
+                <thead class="bg-blue-900 text-white">
+                    <tr>
+                        <th
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                            #
+                        </th>
+                        <th
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                            Fecha
+                        </th>
+                        <th
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                            Proveedor
+                        </th>
+                        <th
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                            Usuario
+                        </th>
+                        <th
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                            Total
+                        </th>
+                        <th
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            0001
+                        </th>
+                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            20/12/2020
+                        </td>
+                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            Proveedor
+                        </td>
+                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            Usuario
+                        </td>
+                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            1000$
+                        </td>
+                        <td class="flex items-center justify-center border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            <button class="h-8 w-8 rounded-full bg-blue-600 mr-2">V</button>
+                            
+                            <button class="h-8 w-8 rounded-full bg-red-600">E</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

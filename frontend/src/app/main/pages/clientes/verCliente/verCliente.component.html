@@ -1,0 +1,54 @@
+<button class="mr-3" (click)="toggleModal()" title="Ver informacion de cliente">
+    <i class="fas fa-eye text-gray-700 fa-lg"></i>
+  </button>
+  <div *ngIf="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center flex"> 
+    <div class=" w-auto my-6 mx-auto w-11/12 md:w-3/4 lg:w-2/4 ">
+      <!--content-->
+      <div class="border-0 rounded-lg shadow-lg  flex flex-col w-full bg-white outline-none focus:outline-none">
+        <!--header-->
+        <div class="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
+          <h3 class="text-2xl font-semibold">
+            Cliente {{cliente.nombre}}
+          </h3>
+          <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" (click)="toggleModal()">
+            <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+              ×
+            </span>
+          </button>
+        </div>
+        <!--body-->
+        <div class="p-6 text-left text-md"> 
+          <table class="flex rounded">
+            <thead>
+                <tr class="text-left flex flex-col uppercase bg-gray-200 ">
+                    <th class="py-3 px-2">Cedula</th>
+                    <th class="py-3 px-2">Nombre y Apellido</th>
+                    <th class="py-3 px-2">Fecha de Nacimiento</th>
+                    <th class="py-3 px-2">Telefono</th>
+                    <th class="py-3 px-2">Correo</th>
+                    <th class="py-3 px-2">Direccion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-left flex flex-col">
+
+                    <td class="py-3 px-2">{{cliente.cedula}}</td>
+                    <td class="py-3 px-2">{{cliente.nombre}}</td>
+                    <td class="py-3 px-2">{{cliente.fecha_nacimiento | date:'dd/MM/yyyy'}}</td>
+                    <td class="py-3 px-2">{{cliente.telefono}}</td> 
+                    <td class="py-3 px-2">{{cliente.email}}</td> 
+                    <td class="py-3 px-2">{{cliente.direccion}}</td> 
+                </tr>
+            </tbody>
+        </table>           
+        </div>
+        <!--footer-->
+        <div class="flex items-center p-6 border-t border-solid border-gray-300 rounded-b">
+          <button class="bg-red-500 text-white active:bg-green-600 text-sm px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease" [routerLink]="['/main/registrar-venta', cliente.id]">
+            Registrar una venta
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
