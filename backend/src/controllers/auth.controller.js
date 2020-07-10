@@ -1,5 +1,5 @@
-const { usuarioSchema } = require('../validations');
-const { ErrorHelper } = require('../helpers');
+const { usuarioSchema } = require("../validations");
+const { ErrorHelper } = require("../helpers");
 
 let _authService = null;
 let _bitacoraService = null;
@@ -13,8 +13,16 @@ class AuthController {
     async signUp(req, res, next) {
         const { body } = req;
         try {
-        	await usuarioSchema.validate(body).catch((err) => ErrorHelper(401, err.errors[0]));
+            await usuarioSchema
+                .validate(body)
+                .catch((err) => ErrorHelper(401, err.errors[0]));
+
             const createdUser = await _authService.signUp(body);
+            await _bitacoraService.register(
+                "REGISTER",
+                "El usuario se ha registrado exitosamente.",
+                createdUser.id
+            );
             return res.status(201).send(createdUser);
         } catch (err) {
             console.error(err);
@@ -28,7 +36,7 @@ class AuthController {
             const creds = await _authService.signIn(body);
             await _bitacoraService.register(
                 "LOGIN",
-                "The user has sign in",
+                "El usuario ha iniciado sesion.",
                 creds.user.id
             );
             return res.send(creds);
@@ -38,7 +46,22 @@ class AuthController {
         }
     }
 
-    async signOut(req, res) {}
+    async signOut(req, res) {
+        const { user } = req;
+        try {
+            await _bitacoraService.register(
+                "LOGOUT",
+                "El usuario ha cerrado sesion.",
+                user.id
+            );
+            return res.send({
+                message: `${user.username} ha cerrado sesion satisfactoriamente.`,
+            });
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
+    }
 }
 
 module.exports = AuthController;

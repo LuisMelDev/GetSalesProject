@@ -15,6 +15,9 @@ module.exports = {
                     operacion: "DELETE",
                 },
                 {
+                    operacion: "REGISTER",
+                },
+                {
                     operacion: "LOGIN",
                 },
                 {
