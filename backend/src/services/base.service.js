@@ -4,6 +4,13 @@ class BaseService {
     constructor(repository) {
         this.repository = repository;
     }
+    async find(parameter) {
+        if (!parameter) {
+            ErrorHelper(400, "field must be sent");
+        }
+        return await this.repository.find(parameter);
+    }
+
     async get(id) {
         if (!id) {
             ErrorHelper(400, "id must be sent");

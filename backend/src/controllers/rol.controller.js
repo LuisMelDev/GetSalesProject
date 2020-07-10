@@ -39,9 +39,15 @@ class RolController {
     async create(req, res, next) {
         const { body, user } = req;
         try {
+            // Validate input
             await rolSchema
                 .validate(body)
                 .catch((err) => ErrorHelper(401, err.errors[0]));
+            // Check if record already exist
+            const rolExist = await _rolService.find(body.rol);
+            if (rolExist) {
+                return ErrorHelper(403, "El rol ya se encuentra registrado.");
+            }
             const createdRol = await _rolService.create(body);
             await _bitacoraService.register(
                 "CREATE",
