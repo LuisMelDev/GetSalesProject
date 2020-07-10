@@ -39,9 +39,18 @@ class ProveedorController {
     async create(req, res, next) {
         const { body, user } = req;
         try {
+            // Validate input
             await proveedorSchema
                 .validate(body)
                 .catch((err) => ErrorHelper(401, err.errors[0]));
+            // Check if record already exist
+            const proveedorExist = await _proveedorService.find(body.nombre);
+            if (proveedorExist) {
+                return ErrorHelper(
+                    403,
+                    "El proveedor ya se encuentra registrado."
+                );
+            }
             const createdProveedor = await _proveedorService.create(body);
             await _bitacoraService.register(
                 "CREATE",

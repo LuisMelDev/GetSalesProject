@@ -7,6 +7,7 @@ module.exports = {
                 type: Sequelize.DATE,
                 allowNull: false,
                 defaultValue: Sequelize.NOW,
+                primaryKey: true,
             },
             operacion_id: {
                 type: Sequelize.INTEGER,

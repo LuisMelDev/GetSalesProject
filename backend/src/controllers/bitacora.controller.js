@@ -16,7 +16,6 @@ class BitacoraController {
     }
     async getAll(req, res, next) {
         const { limit, page, sort_by, order_by } = req.query;
-        console.log(`\n${sort_by} / ${order_by}\n`);
         try {
             const bitacoras = await _bitacoraService.getAll(
                 limit,

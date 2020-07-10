@@ -42,10 +42,16 @@ class InventarioRepository extends BaseRepository {
             },
         ];
         let order;
-        if (sortBy === "nombre") {
-            order = [[{ model: _producto, as: "producto" }, "nombre", orderBy]];
+        if (sortBy === "marca") {
+            order = [["producto", "marca", "nombre", orderBy]];
+        } else if (sortBy === "grupo") {
+            order = [["producto", "grupo", "nombre", orderBy]];
+        } else if (sortBy === "amperaje") {
+            order = [["producto", "amperaje", "amp", orderBy]];
+        } else if (sortBy === "nombre") {
+            order = [["producto", "nombre", orderBy]];
         } else if (sortBy === "id") {
-            order = [[{ model: _producto, as: "producto" }, "id", orderBy]];
+            order = [["producto", "id", orderBy]];
         } else {
             // Check if sort key is an actual attribute of model
             if (!this.validSort(_inventario, sortBy)) {

@@ -16,11 +16,11 @@ class ProductoRepository extends BaseRepository {
     async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
         let order;
         if (sortBy === "marca") {
-            order = [[{ model: _marca, as: "marca" }, "nombre", orderBy]];
+            order = [["marca", "nombre", orderBy]];
         } else if (sortBy === "grupo") {
-            order = [[{ model: _grupo, as: "grupo" }, "nombre", orderBy]];
+            order = [["grupo", "nombre", orderBy]];
         } else if (sortBy === "amperaje") {
-            order = [[{ model: _amperaje, as: "amperaje" }, "amp", orderBy]];
+            order = [["amperaje", "amp", orderBy]];
         } else {
             // Check if sort key is an actual attribute of model
             if (

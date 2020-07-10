@@ -13,10 +13,14 @@ module.exports = (sequelize, DataTypes) => {
         }
     );
     Operacion.associate = function (models) {
-        Operacion.belongsToMany(models.usuarios, {
-            through: models.bitacora,
-            as: "usuarios",
+        // Operacion.belongsToMany(models.usuarios, {
+        //     through: models.bitacora,
+        //     as: "usuarios",
+        //     foreignKey: "operacion_id",
+        // });
+        Operacion.hasMany(models.bitacora, {
             foreignKey: "operacion_id",
+            as: "bitacoras",
         });
     };
     return Operacion;
