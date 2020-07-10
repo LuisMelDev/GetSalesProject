@@ -39,9 +39,16 @@ class GrupoController {
     async create(req, res, next) {
         const { body, user } = req;
         try {
+            // Validate input
             await grupoSchema
                 .validate(body)
                 .catch((err) => ErrorHelper(401, err.errors[0]));
+
+            // Check if record already exist
+            const grupoExist = await _grupoService.find(body.nombre);
+            if (grupoExist) {
+                return ErrorHelper(403, "El grupo ya se encuentra registrado.");
+            }
             const createdGrupo = await _grupoService.create(body);
             await _bitacoraService.register(
                 "CREATE",

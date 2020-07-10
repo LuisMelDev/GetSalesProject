@@ -11,11 +11,9 @@ class BitacoraRepository {
     async getAll(limitResults, pageNum, sortBy = "fecha", orderBy = "desc") {
         let order;
         if (sortBy === "username") {
-            order = [[{ model: _usuario, as: "usuario" }, "username", orderBy]];
+            order = [["usuario", "username", orderBy]];
         } else if (sortBy === "operacion") {
-            order = [
-                [{ model: _operacion, as: "operacion" }, "operacion", orderBy],
-            ];
+            order = [["operacion", "operacion", orderBy]];
         } else {
             // Check if sort key is an actual attribute of model
             if (!this.validSort(_bitacora, sortBy)) {

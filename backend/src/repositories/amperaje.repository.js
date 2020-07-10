@@ -6,6 +6,13 @@ class AmperajeRepository extends BaseRepository {
         super(Amperaje);
         _amperaje = Amperaje;
     }
+    async find(amp) {
+        return await _amperaje.findOne({
+            where: {
+                amp,
+            },
+        });
+    }
     async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
         // Check if sort key is an actual attribute of model
         if (!this.validSort(_amperaje, sortBy)) {

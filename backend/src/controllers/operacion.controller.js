@@ -37,9 +37,19 @@ class OperacionController {
     async create(req, res, next) {
         const { body, user } = req;
         try {
+            // Validate input
             await operacionSchema
                 .validate(body)
                 .catch((err) => ErrorHelper(401, err.errors[0]));
+
+            // Check if record already exist
+            const operacionExist = await _operacionService.find(body.operacion);
+            if (operacionExist) {
+                return ErrorHelper(
+                    403,
+                    "La operacion ya se encuentra registrada."
+                );
+            }
             const createdOperacion = await _operacionService.create(body);
             await _bitacoraService.register(
                 "CREATE",

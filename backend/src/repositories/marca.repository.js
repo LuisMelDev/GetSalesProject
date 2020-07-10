@@ -6,6 +6,15 @@ class MarcaRepository extends BaseRepository {
         super(Marca);
         _marca = Marca;
     }
+
+    async find(nombre) {
+        return await _marca.findOne({
+            where: {
+                nombre,
+            },
+        });
+    }
+
     async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
         // Check if sort key is an actual attribute of model
         if (!this.validSort(_marca, sortBy)) {

@@ -6,7 +6,13 @@ class ProveedorRepository extends BaseRepository {
         super(Proveedor);
         _proveedor = Proveedor;
     }
-
+    async find(nombre) {
+        return await _proveedor.findOne({
+            where: {
+                nombre,
+            },
+        });
+    }
     async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
         // Check if sort key is an actual attribute of model
         if (!this.validSort(_proveedor, sortBy)) {

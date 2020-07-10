@@ -12,6 +12,7 @@ module.exports = {
             amp: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
+                unique: true,
             },
         });
     },

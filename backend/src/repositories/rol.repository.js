@@ -6,6 +6,13 @@ class RolRepository extends BaseRepository {
         super(Rol);
         _rol = Rol;
     }
+    async find(rol) {
+        return await _rol.findOne({
+            where: {
+                rol,
+            },
+        });
+    }
     async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
         // Check if sort key is an actual attribute of model
         if (!this.validSort(_rol, sortBy)) {

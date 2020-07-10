@@ -37,9 +37,18 @@ class AmperajeController {
     async create(req, res, next) {
         const { body, user } = req;
         try {
+            // Validate input
             await amperajeSchema
                 .validate(body)
                 .catch((err) => ErrorHelper(401, err.errors[0]));
+            // Check if record already exist
+            const amperajeExist = await _amperajeService.find(body.amp);
+            if (amperajeExist) {
+                return ErrorHelper(
+                    403,
+                    "El valor del amperaje ya se encuentra registrado."
+                );
+            }
             const createdAmperaje = await _amperajeService.create(body);
             await _bitacoraService.register(
                 "CREATE",

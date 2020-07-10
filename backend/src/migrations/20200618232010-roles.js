@@ -12,6 +12,7 @@ module.exports = {
             rol: {
                 type: Sequelize.STRING,
                 allowNull: false,
+                unique: true,
             },
         });
     },

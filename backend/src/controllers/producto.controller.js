@@ -39,9 +39,11 @@ class ProductoController {
     async create(req, res, next) {
         const { body, user } = req;
         try {
+            // Validate input
             await productoSchema
                 .validate(body)
                 .catch((err) => ErrorHelper(401, err.errors[0]));
+
             const createdProducto = await _productoService.create(body);
             await _bitacoraService.register(
                 "CREATE",

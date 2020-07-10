@@ -6,13 +6,12 @@ class ClienteRepository extends BaseRepository {
         super(Cliente);
         _cliente = Cliente;
     }
-
     async find(cedula) {
-    	return await _cliente.findOne({
-    		where: {
-    			cedula
-    		}
-    	});
+        return await _cliente.findOne({
+            where: {
+                cedula,
+            },
+        });
     }
 
     async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {

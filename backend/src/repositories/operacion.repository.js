@@ -6,6 +6,13 @@ class OperacionRepository extends BaseRepository {
         super(Operacion);
         _operacion = Operacion;
     }
+    async find(operacion) {
+        return await _operacion.findOne({
+            where: {
+                operacion,
+            },
+        });
+    }
     async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
         // Check if sort key is an actual attribute of model
         if (!this.validSort(_operacion, sortBy)) {

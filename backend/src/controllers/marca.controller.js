@@ -58,9 +58,16 @@ class MarcaController {
         const { body, user } = req;
         const { id } = req.params;
         try {
+            // Validate input
             await marcaSchema
                 .validate(body)
                 .catch((err) => ErrorHelper(401, err.errors[0]));
+
+            // Check if record already exist
+            const marcaExist = await _marcaService.find(body.nombre);
+            if (marcaExist) {
+                return ErrorHelper(403, "La marca ya se encuentra registrada.");
+            }
             const updatedMarca = await _marcaService.update(id, body);
             await _bitacoraService.register(
                 "UPDATE",

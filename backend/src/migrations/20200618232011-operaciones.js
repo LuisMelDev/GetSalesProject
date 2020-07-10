@@ -12,6 +12,7 @@ module.exports = {
             operacion: {
                 type: Sequelize.STRING,
                 allowNull: false,
+                unique: true,
             },
         });
     },

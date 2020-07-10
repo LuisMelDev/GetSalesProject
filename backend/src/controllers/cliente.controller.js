@@ -39,13 +39,15 @@ class ClienteController {
     async create(req, res, next) {
         const { body, user } = req;
         try {
+            // Validate input
             await clienteSchema
                 .validate(body)
                 .catch((err) => ErrorHelper(401, err.errors[0]));
+            // Check if record already exist
             const exists = await _clienteService.find(body.cedula);
             if (exists) {
                 return ErrorHelper(
-                    401,
+                    403,
                     "El cliente ya se encuentra registrado."
                 );
             }

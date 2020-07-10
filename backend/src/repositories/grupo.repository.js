@@ -6,6 +6,14 @@ class GrupoRepository extends BaseRepository {
         super(Grupo);
         _grupo = Grupo;
     }
+    async find(nombre) {
+        return await _grupo.findOne({
+            where: {
+                nombre,
+            },
+        });
+    }
+
     async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
         // Check if sort key is an actual attribute of model
         if (!this.validSort(_grupo, sortBy)) {
