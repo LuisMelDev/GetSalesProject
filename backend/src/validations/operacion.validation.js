@@ -1,7 +1,7 @@
 const yup = require("yup");
 
 const operacionSchema = yup.object().shape({
-    operaciones: yup.string().required("Campo obligatorio"),
+    operacion: yup.string().required("'operacion' es un campo obligatorio."),
 });
 
 module.exports = operacionSchema;
