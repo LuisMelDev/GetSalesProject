@@ -43,6 +43,11 @@ class UsuarioController {
             await usuarioSchema
                 .validate(body)
                 .catch((err) => ErrorHelper(401, err.errors[0]));
+            
+            const userExist = await _usuarioService.getUsuarioByUsername(body.username);
+            if (userExist) {
+            	return ErrorHelper(401, 'El usuario ya se encuentra registrado.');
+            }
             const createdUsuario = await _usuarioService.create(body);
             await _bitacoraService.register(
                 "CREATE",

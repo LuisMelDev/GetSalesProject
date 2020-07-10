@@ -7,6 +7,14 @@ class ClienteRepository extends BaseRepository {
         _cliente = Cliente;
     }
 
+    async find(cedula) {
+    	return await _cliente.findOne({
+    		where: {
+    			cedula
+    		}
+    	});
+    }
+
     async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
         // Check if sort key is an actual attribute of model
         if (!this.validSort(_cliente, sortBy)) {

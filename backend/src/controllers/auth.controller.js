@@ -1,3 +1,6 @@
+const { usuarioSchema } = require('../validations');
+const { ErrorHelper } = require('../helpers');
+
 let _authService = null;
 let _bitacoraService = null;
 
@@ -10,6 +13,7 @@ class AuthController {
     async signUp(req, res, next) {
         const { body } = req;
         try {
+        	await usuarioSchema.validate(body).catch((err) => ErrorHelper(401, err.errors[0]));
             const createdUser = await _authService.signUp(body);
             return res.status(201).send(createdUser);
         } catch (err) {

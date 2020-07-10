@@ -12,6 +12,7 @@ module.exports = {
             cedula: {
                 type: Sequelize.STRING,
                 allowNull: false,
+                unique: true
             },
             nombre: {
                 type: Sequelize.STRING,

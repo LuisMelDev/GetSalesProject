@@ -42,10 +42,17 @@ class ClienteController {
             await clienteSchema
                 .validate(body)
                 .catch((err) => ErrorHelper(401, err.errors[0]));
+            const exists = await _clienteService.find(body.cedula);
+            if (exists) {
+                return ErrorHelper(
+                    401,
+                    "El cliente ya se encuentra registrado."
+                );
+            }
             const createdCliente = await _clienteService.create(body);
             await _bitacoraService.register(
                 "CREATE",
-                `CLIENTES(ID: ${id})`,
+                `CLIENTES(ID: ${createdCliente.id})`,
                 user.id
             );
             return res.send(createdCliente);

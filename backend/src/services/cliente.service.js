@@ -6,6 +6,10 @@ class ClienteService extends BaseService {
         super(ClienteRepository);
         _clienteRepository = ClienteRepository;
     }
+
+    async find(cedula) {
+    	return await _clienteRepository.find(cedula);
+    }
     async getFacturas(clienteId) {
         return await _clienteRepository.getFacturas(clienteId);
     }
