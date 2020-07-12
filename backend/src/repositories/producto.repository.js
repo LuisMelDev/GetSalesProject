@@ -65,6 +65,10 @@ class ProductoRepository extends BaseRepository {
             offset: (page - 1) * limit,
             include: [
                 {
+                    model: _inventario,
+                    as: "inventario",
+                },
+                {
                     model: _marca,
                     as: "marca",
                 },
