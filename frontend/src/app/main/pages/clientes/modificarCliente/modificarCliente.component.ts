@@ -30,9 +30,10 @@ export class ModificarCliente implements OnInit{
 
   ngOnInit(){
     let date = new Date(this.cliente.fecha_nacimiento);
-    let dia = date.getDate();
-    let fecha = `${date.getFullYear()}-${date.getMonth()+1}-${(dia < 10 && dia >0) ? `0${dia}` : dia}`
-    // console.log(fecha)
+    let dia = date.getDate()+1;
+    let mes = date.getMonth()+1;
+    let fecha = `${date.getFullYear()}-${(mes < 10 && mes >0) ? `0${mes}` : mes}-${(dia < 10 && dia >0) ? `0${dia}` : dia}`;
+    console.log(fecha)
     this.clienteForm = this.fb.group({
       cedula: [
         this.cliente.cedula,

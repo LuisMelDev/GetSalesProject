@@ -58,7 +58,7 @@ export class ClientesComponent implements OnInit {
 
 
   busqueda(){
-    if(this.formBusqueda.invalid) return;
+    if(this.formBusqueda.invalid) this.traerClientes();
     let {parametro, valorParametro} = this.formBusqueda.value;
     this._clienteService.search(parametro, valorParametro).subscribe(
       (res:any)=>{

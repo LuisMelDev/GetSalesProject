@@ -117,7 +117,7 @@ export class AgregarCliente {
         this.registrado.emit(true);
       },
       err =>{
-        this.mostrarAlerta(`ha ocurrio un error al registrar cliente`,'bg-red-600')
+        this.mostrarAlerta(err.error.message,'bg-red-600')
         console.log(err)
       }
     )
