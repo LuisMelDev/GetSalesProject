@@ -16,28 +16,28 @@
             </span>
           </button>
         </div>
-        <!--body-->
+        <!--body--> 
         <div class="p-6 text-left">
-          <table class="flex rounded">
+          <table class="flex rounded text-sm">
             <thead>
                 <tr class="text-left flex flex-col uppercase bg-gray-200 ">
-                    <th class="py-3 px-2">Cedula</th>
-                    <th class="py-3 px-2">Nombre y Apellido</th>
-                    <th class="py-3 px-2">Fecha de Nacimiento</th>
-                    <th class="py-3 px-2">Telefono</th>
-                    <th class="py-3 px-2">Correo</th>
-                    <th class="py-3 px-2">Direccion</th>
+                    <th class="py-3 px-2">Codigo</th>
+                    <th class="py-3 px-2">Grupo</th>
+                    <th class="py-3 px-2">Amperaje</th>
+                    <th class="py-3 px-2">Marca</th>
+                    <th class="py-3 px-2">Existencia de Producto</th>
+                    <th class="py-3 px-2">Fecha de registro</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="text-left flex flex-col">
 
-                    <td class="py-3 px-2">26136504</td>
-                    <td class="py-3 px-2">Luis Melendez</td>
-                    <td class="py-3 px-2">27/02/1998</td>
-                    <td class="py-3 px-2">72349874</td> 
-                    <td class="py-3 px-2">mail@mail.com</td> 
-                    <td class="py-3 px-2">Barrio colinas del trompillo</td> 
+                    <td class="py-3 px-2">{{producto.producto.nombre}}</td>
+                    <td class="py-3 px-2">{{producto.producto.grupo.nombre}}</td>
+                    <td class="py-3 px-2">{{producto.producto.amperaje.amp}}</td>
+                    <td class="py-3 px-2">{{producto.producto.marca.nombre}}</td> 
+                    <td class="py-3 px-2">{{producto.existencia_producto}}</td> 
+                    <td class="py-3 px-2">{{producto.fecha_entrada | date:'dd/MM/yyyy'}}</td> 
                 </tr>
             </tbody>
         </table>      
@@ -45,11 +45,11 @@
         <!--footer-->
         <div class="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
           <button class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease" (click)="toggleModal()">
-            Close
+            Cerrar
           </button>
-          <button class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease" (click)="toggleModal()">
+          <!-- <button class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease" (click)="toggleModal()">
             Save Changes
-          </button>
+          </button> -->
         </div>
       </div>
     </div>

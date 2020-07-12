@@ -3,84 +3,105 @@
         <h3 class="text-3xl font-bold">Listado de Productos</h3>
     </div>
     <div class="w-full flex justify-start mb-4">
-        <agregar-producto></agregar-producto>
+        <agregar-producto (registrado)="traerProductos()"></agregar-producto>
     </div>
 
     <div class="bg-white w-full rounded shadow-lg py-4 px-1">
         <div class="w-full flex justify-end align-middle mb-4 text-sm">
-            <form class="w-full md:w-3/4 lg:w-1/2 grid grid-cols-6 gap-1">
-                <select name="amperaje" id="amperaje" class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-2">
-                    <option value="codigo">Codigo</option>
+            <form [formGroup]="formBuscar" class="w-full md:w-3/4 lg:w-1/2 grid grid-cols-6 gap-1"
+                (ngSubmit)="busqueda()">
+                <select name="parametro"
+                    class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-2"
+                    formControlName="parametro">
+                    <option value="nombre">Codigo</option>
                     <option value="marca">Marca</option>
                     <option value="amperaje">Amperaje</option>
                     <option value="grupo">Grupo</option>
-                  </select>
-                <input type="text" class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-3" name="cedula" id="cedula" placeholder="Buscar Producto">
-                <button type="submit" class="px-3 py-1 bg-red-500 rounded text-white cursor-pointer hover:shadow-lg transition duration-700 ease-linear col-span-1">Buscar</button>
+                </select>
+                <input type="text"
+                    class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-3"
+                    name="valorParametro" placeholder="Buscar Producto" formControlName="valorParametro"
+                    *ngIf="formBuscar.value.parametro === 'nombre'">
+                <select name="valorParametro"
+                    class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-3"
+                    formControlName="valorParametro" *ngIf="formBuscar.value.parametro === 'amperaje'">
+                    <option *ngFor="let amperaje of amperajes" value="{{amperaje.id}}">{{amperaje.amp}}</option>
+                </select>
+                <select name="valorParametro"
+                    class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-3"
+                    formControlName="valorParametro" *ngIf="formBuscar.value.parametro === 'marca'">
+                    <option *ngFor="let marca of marcas" value="{{marca.id}}">{{marca.nombre}}</option>
+                </select>
+                <select name="valorParametro"
+                    class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-3"
+                    formControlName="valorParametro" *ngIf="formBuscar.value.parametro === 'grupo'">
+                    <option *ngFor="let grupo of grupos" value="{{grupo.id}}">{{grupo.nombre}}</option>
+                </select>
+                <button type="submit"
+                    class="px-3 py-1 bg-red-500 rounded text-white cursor-pointer hover:shadow-lg transition duration-700 ease-linear col-span-1">Buscar</button>
             </form>
         </div>
         <div class="overflow-y-auto w-full">
             <table class="items-center w-full table-auto shadow-md text-center text-xs">
-                <thead>
+                <thead class="bg-blue-900 text-white">
                     <tr>
                         <th
-                            class="bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
                             Codigo
                         </th>
                         <th
-                            class="bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-2 uppercase border-l-0 border-r-0 font-semibold">
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
                             Grupo
                         </th>
                         <th
-                            class="bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-2 uppercase border-l-0 border-r-0 font-semibold">
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
                             Amperaje
                         </th>
                         <th
-                            class="bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-2 uppercase border-l-0 border-r-0 font-semibold">
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
                             Marca
                         </th>
                         <th
-                            class="bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
                             Cantidad en inventario
                         </th>
                         <th
-                            class="bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-2 uppercase border-l-0 border-r-0 font-semibold">
-                              
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th
-                            class="border-t-0 align-middle border-l-0 border-r-0 p-3 ">
-                            B0001
+                    <tr *ngFor="let inventario of productos">
+                        <th class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            {{inventario.producto.nombre}}
                         </th>
-                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-3 ">
-                            24-MR
+                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            {{inventario.producto.grupo.nombre}}
                         </td>
-                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-3 ">
-                           700amp
+                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            {{inventario.producto.amperaje.amp}}
                         </td>
-                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-3 ">
-                            ETNA
+                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            {{inventario.producto.marca.nombre}}
                         </td>
-                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-3 ">
-                            100
+                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            {{inventario.existencia_producto}}
                         </td>
                         <td
                             class="flex items-center justify-center border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs p-4">
-                            <ver-producto></ver-producto>
-                            <modificar-producto></modificar-producto>
+                            <ver-producto [producto]="inventario"></ver-producto>
+                            <modificar-producto [producto]="inventario.producto" (actualizado)="traerProductos()"></modificar-producto>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="w-full flex justify-center mt-4 text-sm">
+        <div class="w-full flex justify-center mt-4 text-sm" *ngIf="totalPages > 1">
             <button
-                class="px-4 py-2 bg-blue-900 rounded text-white cursor-pointer hover:shadow-lg transition duration-500 ease-linear mr-4">Anterior</button>
+                class="px-4 py-2 bg-blue-900 rounded text-white cursor-pointer hover:shadow-lg transition duration-500 ease-linear mr-4" *ngIf="page !== 1" (click)="paginaAnterior()">Anterior</button>
             <button
-                class="px-4 py-2 bg-blue-900 rounded text-white cursor-pointer hover:shadow-lg transition duration-500 ease-linear ">Siguiente</button>
+                class="px-4 py-2 bg-blue-900 rounded text-white cursor-pointer hover:shadow-lg transition duration-500 ease-linear" *ngIf="page !== totalPages" (click)="paginaSiguiente()">Siguiente</button>
         </div>
     </div>
 </div>
