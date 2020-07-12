@@ -3,14 +3,16 @@ let _producto = null;
 let _marca = null;
 let _grupo = null;
 let _amperaje = null;
+let _inventario = null;
 
 class ProductoRepository extends BaseRepository {
-    constructor({ Producto, Marca, Grupo, Amperaje }) {
+    constructor({ Producto, Marca, Grupo, Amperaje, Inventario }) {
         super(Producto);
         _producto = Producto;
         _marca = Marca;
         _grupo = Grupo;
         _amperaje = Amperaje;
+        _inventario = Inventario;
     }
 
     async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
@@ -36,6 +38,10 @@ class ProductoRepository extends BaseRepository {
         if (!limitResults || !pageNum) {
             return await _producto.findAll({
                 include: [
+                    {
+                        model: _inventario,
+                        as: "inventario",
+                    },
                     {
                         model: _marca,
                         as: "marca",
