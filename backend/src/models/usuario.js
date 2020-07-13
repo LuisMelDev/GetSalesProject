@@ -49,11 +49,11 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "usuario_id",
             as: "bitacoras",
         });
-        // Usuario.belongsToMany(models.operaciones, {
-        //     through: models.bitacora,
-        //     as: "operaciones",
-        //     foreignKey: "usuario_id",
-        // });
+        Usuario.belongsToMany(models.operaciones, {
+            through: models.bitacora,
+            as: "operaciones",
+            foreignKey: "usuario_id",
+        });
     };
 
     // hooks

@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
             cedula: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                unique: true,
             },
             nombre: {
                 type: DataTypes.STRING,

@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
             rol: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                unique: true,
             },
         },
         {

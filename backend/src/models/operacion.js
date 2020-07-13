@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
             operacion: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                unique: true,
             },
         },
         {
@@ -13,11 +14,11 @@ module.exports = (sequelize, DataTypes) => {
         }
     );
     Operacion.associate = function (models) {
-        // Operacion.belongsToMany(models.usuarios, {
-        //     through: models.bitacora,
-        //     as: "usuarios",
-        //     foreignKey: "operacion_id",
-        // });
+        Operacion.belongsToMany(models.usuarios, {
+            through: models.bitacora,
+            as: "usuarios",
+            foreignKey: "operacion_id",
+        });
         Operacion.hasMany(models.bitacora, {
             foreignKey: "operacion_id",
             as: "bitacoras",

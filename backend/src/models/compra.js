@@ -35,14 +35,10 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "compra_id",
             as: "productos",
         });
+        Compra.hasMany(models.detalle_compras, {
+            foreignKey: "compra_id",
+            as: "detalles",
+        });
     };
-    // Compra.afterCreate(async (compra, options) => {
-    //     const usuario = await compra.getUsuario();
-    //     return await sequelize.models.bitacora.create({
-    //         fecha: new Date(),
-    //         operacion_id: 1,
-    //         usuario_id: usuario.id,
-    //     });
-    // });
     return Compra;
 };

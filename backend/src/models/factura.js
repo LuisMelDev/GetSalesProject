@@ -35,14 +35,10 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "factura_id",
             as: "productos",
         });
+        Factura.hasMany(models.detalle_facturas, {
+            foreignKey: "factura_id",
+            as: "detalles",
+        });
     };
-    // Factura.afterCreate(async (factura, options) => {
-    //     const usuario = await factura.getUsuario();
-    //     return await sequelize.models.bitacora.create({
-    //         fecha: new Date(),
-    //         operacion_id: 1,
-    //         usuario_id: usuario.id,
-    //     });
-    // });
     return Factura;
 };
