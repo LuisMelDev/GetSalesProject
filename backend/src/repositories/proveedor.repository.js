@@ -6,10 +6,10 @@ class ProveedorRepository extends BaseRepository {
         super(Proveedor);
         _proveedor = Proveedor;
     }
-    async find(nombre) {
+    async find(rif) {
         return await _proveedor.findOne({
             where: {
-                nombre,
+                rif,
             },
         });
     }

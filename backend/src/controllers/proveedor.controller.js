@@ -44,7 +44,7 @@ class ProveedorController {
                 .validate(body)
                 .catch((err) => ErrorHelper(401, err.errors[0]));
             // Check if record already exist
-            const proveedorExist = await _proveedorService.find(body.nombre);
+            const proveedorExist = await _proveedorService.find(body.rif);
             if (proveedorExist) {
                 return ErrorHelper(
                     403,
@@ -123,11 +123,16 @@ class ProveedorController {
     }
 
     async search(req, res, next) {
-        const { nombre } = req.query;
+        const { nombre, rif } = req.query;
         const options = { where: {} };
         if (nombre) {
             options.where.nombre = {
                 [Op.like]: `%${nombre}%`,
+            };
+        }
+        if (rif) {
+            options.where.rif = {
+                [Op.like]: `%${rif}%`,
             };
         }
         try {

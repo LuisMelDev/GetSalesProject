@@ -7,19 +7,24 @@ module.exports = {
             [
                 {
                     nombre: "Titanium",
+                    rif: "RIF-012345JG",
                 },
                 {
                     nombre: "Metal Gear",
+                    rif: "RIF-S01234JG",
                 },
 
                 {
                     nombre: "Hattori Hanzo",
+                    rif: "RIF-DXXXXXJG",
                 },
                 {
                     nombre: "Lewis C.A.",
+                    rif: "RIF-FZZZZZJG",
                 },
                 {
                     nombre: "Electroniks",
+                    rif: "RIF-GCCCCCJG",
                 },
             ],
             {}

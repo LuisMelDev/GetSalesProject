@@ -12,6 +12,10 @@ module.exports = {
             nombre: {
                 type: Sequelize.STRING,
                 allowNull: false,
+            },
+            rif: {
+                type: Sequelize.STRING,
+                allowNull: false,
                 unique: true,
             },
         });

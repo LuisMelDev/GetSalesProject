@@ -49,7 +49,7 @@ class CompraController {
                 };
             });
             await _compraService.createDetalles(detallesData);
-            await _bitacoraService(
+            await _bitacoraService.register(
                 "CREATE",
                 `COMPRAS(ID: ${createdCompra.id})`,
                 user.id

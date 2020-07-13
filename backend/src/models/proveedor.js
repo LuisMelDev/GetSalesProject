@@ -7,6 +7,11 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            rif: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                unique: true,
+            },
         },
         {
             timestamps: false,
