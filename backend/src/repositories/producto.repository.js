@@ -96,6 +96,31 @@ class ProductoRepository extends BaseRepository {
             },
         });
     }
+
+    async searchAll(options) {
+        const optionsEager = {
+            ...options,
+            include: [
+                {
+                    model: _inventario,
+                    as: "inventario",
+                },
+                {
+                    model: _marca,
+                    as: "marca",
+                },
+                {
+                    model: _grupo,
+                    as: "grupo",
+                },
+                {
+                    model: _amperaje,
+                    as: "amperaje",
+                },
+            ],
+        };
+        return await this.model.findAll(optionsEager);
+    }
 }
 
 module.exports = ProductoRepository;

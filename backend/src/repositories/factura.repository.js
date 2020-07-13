@@ -15,6 +15,13 @@ class FacturaRepository extends BaseRepository {
         }
         if (!limitResults || !pageNum) {
             return await _factura.findAll({
+                include: [
+                    {
+                        model: _detalleFactura,
+                        as: "detalles",
+                        foreignKey: "factura_id",
+                    },
+                ],
                 order: [[sortBy, orderBy]],
             });
         }
@@ -23,6 +30,13 @@ class FacturaRepository extends BaseRepository {
         const results = await _factura.findAll({
             limit,
             offset: (page - 1) * limit,
+            include: [
+                {
+                    model: _detalleFactura,
+                    foreignKey: "factura_id",
+                    as: "detalles",
+                },
+            ],
             order: [[sortBy, orderBy]],
         });
         const count = await _factura.count();

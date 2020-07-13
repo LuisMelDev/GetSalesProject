@@ -103,6 +103,16 @@ class BitacoraRepository {
     validSort(model, sortKey) {
         return model.rawAttributes.hasOwnProperty(sortKey);
     }
+    async searchAll(options) {
+        const optionsEager = {
+            ...options,
+            include: [
+                { model: _usuario, as: "usuario" },
+                { model: _operacion, as: "operacion" },
+            ],
+        };
+        return await this.model.findAll(optionsEager);
+    }
 }
 
 module.exports = BitacoraRepository;

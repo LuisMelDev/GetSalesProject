@@ -62,6 +62,13 @@ class UsuarioRepository extends BaseRepository {
         const usuario = await _usuario.findByPk(userId);
         return await usuario.getCompras();
     }
+    async searchAll(options) {
+        const optionsEager = {
+            ...options,
+            include: [{ model: _rol, as: "rol" }],
+        };
+        return await this.model.findAll(optionsEager);
+    }
 }
 
 module.exports = UsuarioRepository;

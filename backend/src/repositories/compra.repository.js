@@ -16,6 +16,13 @@ class CompraRepository extends BaseRepository {
         }
         if (!limitResults || !pageNum) {
             return await _compra.findAll({
+                include: [
+                    {
+                        model: _detalleCompra,
+                        foreignKey: "compra_id",
+                        as: "detalles",
+                    },
+                ],
                 order: [[sortBy, orderBy]],
             });
         }
@@ -24,6 +31,13 @@ class CompraRepository extends BaseRepository {
         const results = await _compra.findAll({
             limit,
             offset: (page - 1) * limit,
+            include: [
+                {
+                    model: _detalleCompra,
+                    foreignKey: "compra_id",
+                    as: "detalles",
+                },
+            ],
             order: [[sortBy, orderBy]],
         });
         const count = await _compra.count();
