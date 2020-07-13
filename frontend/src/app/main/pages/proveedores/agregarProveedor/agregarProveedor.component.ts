@@ -18,8 +18,6 @@ export class AgregarProveedor {
 	  public message:string;
 	  public color:string ;
 	  public invalidDate: boolean; 
-	  public clasesInput =
-	    'w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4';
 	  public fg: FormGroup;
 	  public errors: string;
   	

@@ -43,37 +43,36 @@ class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:o
           <app-alert *ngIf="alert" [mensaje]="message" [color]="color" (cerrar)="closeAlert($event)"></app-alert>
         </div>
       <form [formGroup]="fg" (ngSubmit)="send()" class="my-4 text-gray-600 text-sm">
-          <div class="w-full grid grid-cols-2 lg:grid-cols-6 gap-2">
-              <div class="col-span-2 md:col-span-1 lg:col-span-2 ">
-                  <label for="rif" class="text-gray-800 mb-2 font-bold">Rif</label>
-                  <br>
-                  <input type="text" 
-                  [class]="clasesInput"
-                  name="rif" 
-                  id="rif" 
-                  placeholder="ej. J13567439 - V12345678"
-                  formControlName="rif"  >
-              </div>
-              <div class="col-span-2 ">
-                  <label for="nombre" class="text-gray-800 mb-2 font-bold">Nombre</label>
-                  <input type="text"
-                  [class]="clasesInput"
-                  name="nombre" 
-                  id="nombre" 
-                  placeholder="ej. Ana Yepez"
-                  formControlName="nombre">
-              </div>
-              <div class="col-span-2 lg:col-span-6"*ngIf="errors">
-                <error-form [mensaje]="errors"></error-form>
-            </div>
-            <div class="col-span-2 lg:col-span-6">
-                   <input 
-                    type="submit"
-                    placeholder="Registrar"
-                    class="px-6 py-2 bg-red-500 text-sm rounded text-white cursor-pointer hover:shadow-lg transition duration-700 ease-linear mx-auto block" 
-                 >
-              </div>
+        <div class="w-full grid grid-cols-2 gap-2">
+          <div class="col-span-2 mb-2">
+              <label for="rif" class="text-gray-800 font-bold block">Rif</label>
+              <input type="text" 
+              class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4"
+              name="rif" 
+              id="rif" 
+              placeholder="ej. J13567439 - V12345678"
+              formControlName="rif"  >
           </div>
+          <div class="col-span-2 mb-2">
+              <label for="nombre" class="text-gray-800 font-bold block">Nombre</label>
+              <input type="text"
+              class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4"
+              name="nombre" 
+              id="nombre" 
+              placeholder="ej. Ana Yepez"
+              formControlName="nombre">
+          </div>
+          <div class="col-span-2"*ngIf="errors">
+            <error-form [mensaje]="errors"></error-form>
+        </div>
+        <div class="col-span-2">
+               <input 
+                type="submit"
+                placeholder="Registrar"
+                class="px-6 py-2 bg-red-500 text-sm rounded text-white cursor-pointer hover:shadow-lg transition duration-700 ease-linear mx-auto block" 
+             >
+          </div>
+      </div>
       </form>
     </div>
   </div>

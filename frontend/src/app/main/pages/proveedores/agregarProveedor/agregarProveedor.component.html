@@ -42,29 +42,28 @@ class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:o
         </div>
       <form [formGroup]="fg" (ngSubmit)="send()" class="my-4 text-gray-600 text-sm">
           <div class="w-full grid grid-cols-2 gap-2">
-              <div class="col-span-2 ">
-                  <label for="rif" class="text-gray-800 mb-2 font-bold">Rif</label>
-                  <br>
+              <div class="col-span-2 mb-2">
+                  <label for="rif" class="text-gray-800 font-bold block">Rif</label>
                   <input type="text" 
-                  [class]="clasesInput"
+                  class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4"
                   name="rif" 
                   id="rif" 
                   placeholder="ej. J13567439 - V12345678"
                   formControlName="rif"  >
               </div>
-              <div class="col-span-2 ">
-                  <label for="nombre" class="text-gray-800 mb-2 font-bold">Nombre</label>
+              <div class="col-span-2 mb-2">
+                  <label for="nombre" class="text-gray-800 font-bold block">Nombre</label>
                   <input type="text"
-                  [class]="clasesInput"
+                  class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4"
                   name="nombre" 
                   id="nombre" 
                   placeholder="ej. Ana Yepez"
                   formControlName="nombre">
               </div>
-              <div class="col-span-2 lg:col-span-6"*ngIf="errors">
+              <div class="col-span-2"*ngIf="errors">
                 <error-form [mensaje]="errors"></error-form>
             </div>
-            <div class="col-span-2 lg:col-span-6">
+            <div class="col-span-2">
                    <input 
                     type="submit"
                     placeholder="Registrar"
