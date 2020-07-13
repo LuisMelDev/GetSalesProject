@@ -20,7 +20,7 @@ export class ProductosComponent implements OnInit {
   public marcas: any[];
   public grupos: any[];
   public amperajes: any[];
-  public campos = [];
+  
   
 
   constructor(
@@ -43,8 +43,9 @@ export class ProductosComponent implements OnInit {
   }
 
   traerProductos() {
-    this._inventariosService.getAll(this.limit, this.page).subscribe(
+    this._productoService.getAll(this.limit, this.page).subscribe(
       (res: any) => {
+        console.log(res.results)
         this.productos = res.results;
         this.totalPages = res.totalPages;
       },
@@ -82,13 +83,7 @@ export class ProductosComponent implements OnInit {
       (res:any)=>{
         console.log(res)
         
-        this.productos = res.map( e => {
-            e.marca = this.marcas.find( el => el.id === e.marca_id);
-            e.grupo = this.grupos.find( el => el.id === e.grupo_id);
-            e.amperaje = this.amperajes.find( el => el.id === e.amperaje_id);
-            return e;
-            
-        });
+        this.productos = res;
         this.totalPages = 0;
       },
       err=>{

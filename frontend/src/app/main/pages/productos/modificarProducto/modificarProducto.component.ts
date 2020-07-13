@@ -67,11 +67,9 @@ export class ModificarProducto implements OnInit {
 
   enviar(){
     const { nombre } = this.formProductos.controls;
-    console.log(this.formProductos)
-    if(this.formProductos.invalid){
-      this.error = 'Todos los campos son obligatorios';
-      return;
-    } else if(nombre.hasError('maxlength') || nombre.hasError('minlength')){
+    this.error = '';
+    // console.log(this.formProductos)
+    if(nombre.hasError('maxlength') || nombre.hasError('minlength')){
       this.error = 'El codigo de producto no debe ser menos a 5 caracteres ni mayor a 10 caracteres';
       return;
     }

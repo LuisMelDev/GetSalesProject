@@ -1,9 +1,10 @@
 <button
-class="rounded-full h-8 w-8 flex items-center justify-center bg-blue-400 mr-3"
 type="button"
+title="Actualizar informacion de Producto"
 (click)="toggleModal()"
 >
-A
+<i class="fas far fa-edit text-gray-700 fa-lg"></i>
+
 </button>
 <div
 *ngIf="showModal"
@@ -52,7 +53,6 @@ class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:o
                 <select name="marca" id="marca" class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4"
                   formControlName="marca_id"
                 >
-                  <option value="">-- Seleccione --</option>
                   <option *ngFor="let marca of marcas" value="{{marca.id}}"> {{marca.nombre}} </option>
                 </select>
                 
@@ -62,7 +62,6 @@ class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:o
                 <select name="amperaje" id="amperaje" class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4"
                   formControlName="amperaje_id"
                 >
-                  <option value="">-- Seleccione --</option>
                   <option *ngFor="let amperaje of amperajes" value="{{amperaje.id}}"> {{amperaje.amp}}  </option>
                 </select>
                
@@ -72,7 +71,6 @@ class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:o
                 <select name="grupo" id="grupo" class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4"
                   formControlName="grupo_id"
                 >
-                  <option value="">-- Seleccione --</option>
                   <option *ngFor="let grupo of grupos" value="{{grupo.id}}">{{grupo.nombre}}</option>
                 </select>
                 
