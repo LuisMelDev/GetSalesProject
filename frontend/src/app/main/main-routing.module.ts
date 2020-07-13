@@ -25,6 +25,7 @@ const routes: Routes = [
       {path:'productos', component: ProductosComponent},
       {path:'usuarios', component: UsuariosComponent},
       {path:'proveedores', component: ProveedoresComponent}, 
+      {path:'registrar-compra/:proveedorID', component: AgregarCompraComponent},
       {path:'registrar-compra', component: AgregarCompraComponent},
       {path:'consultar-compras', component: ConsultarCompraComponent},
       {path:'registrar-venta/:clienteID', component: AgregarVentaComponent},

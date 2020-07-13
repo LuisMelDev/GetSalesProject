@@ -3,62 +3,64 @@
         <h3 class="text-3xl font-bold">Listado de Proveedores</h3>
     </div>
     <div class="w-full flex justify-start mb-4">
-        <agregar-proveedor></agregar-proveedor>
+        <agregar-proveedor (registred)="getProveedores()"></agregar-proveedor>
     </div>
 
     <div class="bg-white w-full rounded shadow-lg py-4 px-1">
-        <div class="w-full flex justify-end align-middle py-2 mb-4 text-sm">
-            <form class="w-full md:w-3/4 lg:w-1/2 grid grid-cols-6 gap-1">
-                <select name="amperaje" id="amperaje" class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-2">
+        <div class="w-full flex justify-end align-middle mb-4 text-sm">
+            <form [formGroup]="formBusqueda" (ngSubmit)="search()"class="w-full md:w-3/4 lg:w-1/2 grid grid-cols-6 gap-1">
+                <select name="parametro" class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-2" 
+                formControlName="parametro">
                     <option value="rif">Rif</option>
                     <option value="nombre">Nombre</option>
                   </select>
-                <input type="text" class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-3" name="cedula" id="cedula" placeholder="Buscar Producto">
+                <input type="text" class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-3" name="valorParametro"  placeholder="Ingrese su busqueda"
+                formControlName="valorParametro">
                 <button type="submit" class="px-3 py-1 bg-red-500 rounded text-white cursor-pointer hover:shadow-lg transition duration-700 ease-linear col-span-1">Buscar</button>
             </form>
         </div>
-        <div class="overflow-y-auto w-full">
-            <table class="items-center w-full text-xs table-auto shadow-md text-center">
-                <thead>
+        <div class="overflow-y-auto w-full text-xs text-center">
+            <table class="table-auto shadow-lg bg-white w-full">
+                <thead class="bg-purple-400 text-white">
                     <tr>
                         <th
-                            class="bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 uppercase border-l-0 border-r-0  font-semibold">
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
                             Rif
                         </th>
                         <th
-                            class="bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 uppercase border-l-0 border-r-0  font-semibold">
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
                             Nombre
                         </th>
 
                         <th
-                            class="bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 uppercase border-l-0 border-r-0  font-semibold">
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
                             
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
+                <tbody *ngIf="proveedores">
+                    <tr *ngFor=" let proveedor of proveedores">
                         <th
-                            class="border-t-0 align-middle border-l-0 border-r-0 p-4">
-                            26136504
+                            class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            {{proveedor.rif}}
                         </th>
-                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-4">
-                            Luis Melendez
+                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            {{proveedor.nombre}}
                         </td>
                         <td
-                            class="flex items-center justify-center border-t-0 px-6 align-middle border-l-0 border-r-0 p-4">
-                            <ver-proveedor></ver-proveedor>
-                            <modificar-proveedor></modificar-proveedor>
+                            class="flex items-center justify-center border-t-0 px-6 align-middle border-l-0 border-r-0 p-2">
+                            <ver-proveedor [proveedor]="proveedor"></ver-proveedor>
+                            <modificar-proveedor [proveedor]="proveedor" (updated)="getProveedores()"></modificar-proveedor>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="w-full flex justify-center mt-4">
+        <div class="w-full flex justify-center mt-4 text-sm" *ngIf="totalpages > 1">
             <button
-                class="px-4 py-2 bg-blue-900 text-sm rounded text-white cursor-pointer hover:shadow-lg transition duration-500 ease-linear mr-4">Anterior</button>
+                class="px-4 py-2 bg-blue-900 text-sm rounded text-white cursor-pointer hover:shadow-lg transition duration-500 ease-linear mr-4" *ngIf="page !== 1" (click)="previewPage()">Anterior</button>
             <button
-                class="px-4 py-2 bg-blue-900 text-sm rounded text-white cursor-pointer hover:shadow-lg transition duration-500 ease-linear ">Siguiente</button>
+                class="px-4 py-2 bg-blue-900 text-sm rounded text-white cursor-pointer hover:shadow-lg transition duration-500 ease-linear" *ngIf="page !== totalpages" (click)="nextPage() ">Siguiente</button>
         </div>
     </div>
 </div>

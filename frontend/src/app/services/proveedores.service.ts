@@ -21,7 +21,7 @@ export class ProveedoresService {
     this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', this.token)
   }
 
-  getAll(limit, page){
+  getAll(limit, page): any{
     return this._http.get(this.url+`proveedores?limit=${limit}&page=${page}`, {headers:this.headers})
   }
 
