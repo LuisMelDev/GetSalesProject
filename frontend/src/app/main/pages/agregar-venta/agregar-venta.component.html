@@ -5,39 +5,47 @@
     <div class="rounded w-full bg-white mt-4 p-4">
         <div class="w-full  flex justify-between py-2 px-2 mb-6">
             <h3 class="text-2xl">Detalles de Venta</h3>
-            <span class="text-xl text-right"> <strong>Fecha:</strong> 20/20/2020 <br/> <strong>Venta </strong> #0001</span>
+            <span class="text-xl text-right"> <strong>Fecha:</strong> {{fecha | date:'dd/MM/yyyy'}}<br/> <strong>Venta </strong> #0001</span>
         </div>
         <div class="w-full text-sm mb-6 grid grid-cols-7 gap-2">
             <div class="col-span-4 md:col-span-5">
                 <label class="block mb-1 font-bold">Cliente</label>
                 <input class="w-full p-2 bg-gray-200 rounded focus:bg-white" type="text" disabled
-                placeholder="haga click en agregar Cliente">
+                placeholder="haga click en agregar Cliente"
+                    value="{{ (cliente) ? cliente.cedula+' '+cliente.nombre : '' }}"
+                >
             </div>
             <div class="col-span-3 md:col-span-2 relative">
-                <button class="w-full p-2 rounded bg-red-500 text-white bottom-0 absolute text-xs md:text-sm">Agregar Proveedor</button>
+                <elegir-cliente (cliente)="clienteElegido($event)" ></elegir-cliente>
             </div>
-
+ 
         </div>
         <div class="w-full grid grid-cols-12 gap-2 text-sm mb-6">
             <div class="col-span-6">
                 <label class="block mb-1 font-bold">Producto</label>
-                <input class="w-full p-2 bg-gray-200 rounded focus:bg-white shadow-md" type="text">
+                <elegir-producto (producto)="productoElegido($event)" [productoElegido]="producto"></elegir-producto>
             </div>
             <div class="col-span-2">
                 <label class="block mb-1 font-bold">Precio</label>
-                <input class="w-full p-2 bg-gray-200 rounded focus:bg-white shadow-md" type="number">
+                <input class="w-full p-2 bg-gray-200 rounded focus:bg-white shadow-md" type="number"
+                    [formControl]="precioProducto" 
+                    
+                >
 
             </div>
             <div class="col-span-2">
                 <label class="block mb-1 font-bold">Cantidad</label>
-                <input class="w-full p-2 bg-gray-200 rounded focus:bg-white shadow-md" type="number">
+                <input class="w-full p-2 bg-gray-200 rounded focus:bg-white shadow-md" type="number"
+                    [formControl]="cantidadProducto" 
+                    
+                >
             </div>
             <div class="col-span-2 relative">
-                <button class="w-full p-2 rounded bg-red-500 text-white shadow-md absolute bottom-0 text-xs md:text-sm">Agregar</button>
+                <button class="w-full p-2 rounded bg-red-500 text-white shadow-md absolute bottom-0 text-xs md:text-sm" (click)="AgregarProducto()" [disabled]="!producto" [ngClass]="{'opacity-75 cursor-not-allowed':!producto}" >Agregar</button>
             </div>
-
-
-
+        </div>
+        <div class="w-full" *ngIf="mensaje">
+            <error-form [mensaje]="mensaje" ></error-form>
         </div>
         <div class="w-full mb-6">
             <table class="table-auto shadow-lg bg-white w-full text-sm text-center">
@@ -69,36 +77,43 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr *ngFor="let item of productosVenta;  index as i">
                         <th class="border-t-0 align-middle border-l-0 border-r-0 p-2">
-                            1
+                            {{i+1}}
                         </th>
                         <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
-                            Bateria Etna
+                            {{item.producto.nombre+' '+item.producto.marca.nombre+' '+item.producto.grupo.nombre+' '+item.producto.amperaje.amp}}
                         </td>
                         <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
-                            20
+                            {{item.cantidad}}
                         </td>
                         <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
-                            5$
+                            {{item.precio | currency}}
                         </td>
                         <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
-                            100$
+                           {{ item.precio*item.cantidad | currency }}
                         </td>
                         <td class="flex items-center justify-center border-t-0 align-middle border-l-0 border-r-0 p-2">
-                            <button class="h-8 w-8 rounded-full bg-red-600">E</button>
-                            
+                            <button class="h-8 w-8 rounded-full bg-red-600" (click)="eliminarProducto(i)">E</button>
                         </td>
+                    </tr>
+                    <tr *ngIf="productosVenta.length === 0" >
+                        <td colspan="6" class="border-t-0 align-middle border-l-0 border-r-0 p-2 text-center">Agregue un Producto</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div class="w-full flex flex-col justify-end items-end px-6 mb-6">
-            <p class="text-xl">Impuesto <strong>16%</strong></p>
-            <p class="text-xl">Precio Total de Compra:  <strong>$0.0</strong></p>
+            <p class="text-xl">Impuesto 16%: <strong>{{ impuesto | currency}}</strong></p>
+            <p class="text-xl">Impuesto 16%: <strong>Bs.S {{ impuesto*200000 }}</strong></p>
+            <p class="text-xl">Precio Total de Venta:  <strong>{{precioVenta | currency}}</strong></p>
+            <p class="text-xl">Precio Total de Venta:  <strong>Bs.S {{precioVenta*200000}}</strong></p>
+        </div>
+        <div class="w-full" *ngIf="mensaje2">
+            <error-form [mensaje]="mensaje2" ></error-form>
         </div>
         <div class="w-full ">
-            <button class="py-2 px-6 mx-auto block bg-red-500 rounded text-white shadow-md">Registrar</button>
+            <button class="py-2 px-6 mx-auto block bg-red-500 rounded text-white shadow-md" (click)="enviar()" >Registrar</button>
         </div>
     </div>
 </div>
