@@ -86,5 +86,9 @@ class InventarioRepository extends BaseRepository {
             },
         });
     }
+    async stock(productoId) {
+        const producto = await _inventario.findByPk(productoId);
+        return producto.existencia_producto;
+    }
 }
 module.exports = InventarioRepository;
