@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductoService } from '../../../services/producto.service';
-import { MarcaService } from '../../../services/marca.service';
-import { GrupoService } from '../../../services/grupo.service';
-import { AmperajeService } from '../../../services/amperaje.service';
-import { InventariosService } from '../../../services/inventario.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter,Input } from '@angular/core';
+import { ProductoService } from "src/app/services/producto.service";
+import { FormGroup,Validators,FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'app-productos',
-  templateUrl: './productos.component.html',
-  providers:[ProductoService, MarcaService, GrupoService, AmperajeService]
+  selector: 'elegir-producto2',
+  templateUrl: './elegirProducto.component.html',
+  providers:[ProductoService]
 })
-export class ProductosComponent implements OnInit {
+export class ElegirProducto2 implements OnInit {
+  @Output() producto:EventEmitter<any> = new EventEmitter<any>();
+  @Input() productoElegido: any = {};
+
   public formBuscar: FormGroup;
   public productos: any[];
   public limit: any = 10;
@@ -20,15 +19,21 @@ export class ProductosComponent implements OnInit {
   public marcas: any[];
   public grupos: any[];
   public amperajes: any[];
+
+  showModal = false;
+  toggleModal(){
+    this.showModal = !this.showModal;
+  }
+  elegir(producto){
+    this.producto.emit(producto);
+    this.showModal = false;
+  }
+ 
   
   
 
   constructor(
     private _productoService: ProductoService,
-    private _marcaService: MarcaService,
-    private _amperajeService: AmperajeService,
-    private _grupoService: GrupoService,
-    private _inventariosService: InventariosService,
     private fb: FormBuilder
   ) {
     this.formBuscar = this.fb.group({
@@ -39,13 +44,12 @@ export class ProductosComponent implements OnInit {
 
   ngOnInit(): void {
     this.traerProductos();
-    this.traerInfoProductos();
   }
 
   traerProductos() {
     this._productoService.getAll(this.limit, this.page).subscribe(
       (res: any) => {
-        console.log(res.results)
+        // console.log(res.results)
         this.productos = res.results;
         this.totalPages = res.totalPages;
       },
@@ -54,23 +58,7 @@ export class ProductosComponent implements OnInit {
       }
     );
   }
-  traerInfoProductos(){
-     this._marcaService.getAll().subscribe(
-       (res:any)=>{
-         this.marcas = res.results
-       }
-     )
-     this._amperajeService.getAll().subscribe(
-       (res:any)=>{
-         this.amperajes = res.results
-       }
-     )
-     this._grupoService.getAll().subscribe(
-       (res:any)=>{
-         this.grupos = res.results
-       }
-     )
-  }
+
 
   busqueda(){
     if(this.formBuscar.invalid) {
@@ -81,7 +69,7 @@ export class ProductosComponent implements OnInit {
 
     this._productoService.search(parametro, valorParametro).subscribe(
       (res:any)=>{
-        console.log(res)
+        // console.log(res)
         
         this.productos = res;
         this.totalPages = 0;
@@ -101,5 +89,4 @@ export class ProductosComponent implements OnInit {
     this.page--;
     this.traerProductos()
   }
-
 }

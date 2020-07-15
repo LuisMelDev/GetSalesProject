@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from "@angular/forms";
+import { MomentModule } from "angular2-moment";
 
 import { MainRoutingModule } from './main-routing.module';
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
@@ -26,6 +27,10 @@ import { AgregarCompraComponent } from './pages/agregar-compra/agregar-compra.co
 import { ConsultarCompraComponent } from './pages/consultar-compra/consultar-compra.component';
 import { AgregarVentaComponent } from "./pages/agregar-venta/agregar-venta.component";
 import { ConsultarVentaComponent } from "./pages/consultar-venta/consultar-venta.component";
+import { ElegirCliente } from "./pages/agregar-venta/agregarCliente/elegirCliente.component";
+import { ElegirProducto } from "./pages/agregar-venta/agregarProducto/elegirProducto.component";
+import { ElegirProveedor } from './pages/agregar-compra/agregarProveedor/elegirProveedor.component';
+import { ElegirProducto2 } from './pages/agregar-compra/agregarProducto/elegirProducto.component';
 
 
 
@@ -52,14 +57,19 @@ import { ConsultarVentaComponent } from "./pages/consultar-venta/consultar-venta
     AgregarCompraComponent,
     ConsultarCompraComponent,
     ConsultarVentaComponent,
-    AgregarVentaComponent
+    AgregarVentaComponent,
+    ElegirCliente,
+    ElegirProducto,
+    ElegirProveedor, 
+    ElegirProducto2
   ]
   ,
   imports: [
     CommonModule,
     MainRoutingModule, 
     ComponentsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MomentModule
   ]
 })
 export class MainModule { }

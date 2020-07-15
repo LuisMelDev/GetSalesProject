@@ -1,6 +1,6 @@
-<button class="rounded-full h-8 w-8 flex items-center justify-center bg-blue-400 mr-3" (click)="toggleModal()">
-    V
-  </button>
+<button class="mr-3" (click)="toggleModal()" title="Ver informacion de Producto">
+  <i class="fas fa-eye text-gray-700 fa-lg"></i>
+</button>
   <div *ngIf="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center flex">
     <div class=" w-auto my-6 mx-auto w-11/12 md:w-3/4 lg:w-2/4 ">
       <!--content-->
@@ -32,12 +32,12 @@
             <tbody>
                 <tr class="text-left flex flex-col">
 
-                    <td class="py-3 px-2">{{producto.producto.nombre}}</td>
-                    <td class="py-3 px-2">{{producto.producto.grupo.nombre}}</td>
-                    <td class="py-3 px-2">{{producto.producto.amperaje.amp}}</td>
-                    <td class="py-3 px-2">{{producto.producto.marca.nombre}}</td> 
-                    <td class="py-3 px-2">{{producto.existencia_producto}}</td> 
-                    <td class="py-3 px-2">{{producto.fecha_entrada | date:'dd/MM/yyyy'}}</td> 
+                    <td class="py-3 px-2">{{producto.nombre}}</td>
+                    <td class="py-3 px-2">{{producto.grupo.nombre}}</td>
+                    <td class="py-3 px-2">{{producto.amperaje.amp}}</td>
+                    <td class="py-3 px-2">{{producto.marca.nombre}}</td> 
+                    <td class="py-3 px-2">{{producto.inventario.existencia_producto}}</td> 
+                    <td class="py-3 px-2">{{producto.inventario.fecha_entrada | date:'dd/MM/yyyy'}}</td> 
                 </tr>
             </tbody>
         </table>      

@@ -72,26 +72,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let inventario of productos">
+                    <tr *ngFor="let producto of productos">
                         <th class="border-t-0 align-middle border-l-0 border-r-0 p-2">
-                            {{inventario.producto.nombre}}
+                            {{producto.nombre}}
                         </th>
                         <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
-                            {{inventario.producto.grupo.nombre}}
+                            {{producto.grupo.nombre}}
                         </td>
                         <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
-                            {{inventario.producto.amperaje.amp}}
+                            {{producto.amperaje.amp}}
                         </td>
                         <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
-                            {{inventario.producto.marca.nombre}}
+                            {{producto.marca.nombre}}
                         </td>
                         <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
-                            {{inventario.existencia_producto}}
+                            {{producto.inventario.existencia_producto}}
                         </td>
                         <td
                             class="flex items-center justify-center border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs p-4">
-                            <ver-producto [producto]="inventario"></ver-producto>
-                            <modificar-producto [producto]="inventario.producto" (actualizado)="traerProductos()"></modificar-producto>
+                            <ver-producto [producto]="producto"></ver-producto>
+                            <modificar-producto [producto]="producto" (actualizado)="traerProductos()"></modificar-producto>
                         </td>
                     </tr>
                 </tbody>

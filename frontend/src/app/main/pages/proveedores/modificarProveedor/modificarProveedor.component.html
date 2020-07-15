@@ -1,9 +1,10 @@
 <button
-class="rounded-full h-8 w-8 flex items-center justify-center bg-blue-400 mr-3"
 type="button"
+title="Actualizar informacion de Proveedor"
 (click)="toggleModal()"
 >
-A
+<i class="fas far fa-edit text-gray-700 fa-lg"></i>
+
 </button>
 <div
 *ngIf="showModal"
@@ -33,30 +34,45 @@ class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:o
       </button>
     </div>
     <!--body-->
+    <!--body-->
     <div class="relative p-6 flex-auto">
         <div class="w-full pb-6 pt-2">
           <h3 class="text-xl font-bold">Informacion de Proveedor</h3>
         </div>
-      <form class="my-4 text-gray-600 text-sm">
-          <div class="w-full grid grid-cols-2 gap-2">
-              <div class="col-span-2 ">
-                  <label for="rif" class="text-gray-800 mb-2 font-bold">Rif</label>
-                  <input type="text" class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4" name="rif" id="rif" placeholder="ej. 13567439">
-                  <span class="block w-full mb-2 mt-1 p-2 border border-red-600 border-l-4 rounded bg-red-100 text-sm text-gray-800" *ngIf="false">
-                    Este campo es obligatorio
-                  </span>
-              </div>
-              <div class="col-span-2 ">
-                  <label for="nombre" class="text-gray-800 mb-2 font-bold">Nombre</label>
-                  <input type="text" class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4" name="nombre" id="nombre" placeholder="ej. Juanito Perez">
-                  <span class="block w-full mb-2 mt-1 p-2 border border-red-600 border-l-4 rounded bg-red-100 text-sm text-gray-800" *ngIf="false">
-                    Este campo es obligatorio
-                  </span>
-              </div>
-              <div class="col-span-2">
-                  <button type="submit" class="px-4 py-2 bg-red-500 rounded text-white cursor-pointer hover:shadow-lg transition duration-700 ease-linear w-full">Actualizar</button>
-              </div>
+        <div class="w-full">
+          <app-alert *ngIf="alert" [mensaje]="message" [color]="color" (cerrar)="closeAlert($event)"></app-alert>
+        </div>
+      <form [formGroup]="fg" (ngSubmit)="send()" class="my-4 text-gray-600 text-sm">
+        <div class="w-full grid grid-cols-2 gap-2">
+          <div class="col-span-2 mb-2">
+              <label for="rif" class="text-gray-800 font-bold block">Rif</label>
+              <input type="text" 
+              class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4"
+              name="rif" 
+              id="rif" 
+              placeholder="ej. J13567439 - V12345678"
+              formControlName="rif"  >
           </div>
+          <div class="col-span-2 mb-2">
+              <label for="nombre" class="text-gray-800 font-bold block">Nombre</label>
+              <input type="text"
+              class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4"
+              name="nombre" 
+              id="nombre" 
+              placeholder="ej. Ana Yepez"
+              formControlName="nombre">
+          </div>
+          <div class="col-span-2"*ngIf="errors">
+            <error-form [mensaje]="errors"></error-form>
+        </div>
+        <div class="col-span-2">
+               <input 
+                type="submit"
+                placeholder="Registrar"
+                class="px-6 py-2 bg-red-500 text-sm rounded text-white cursor-pointer hover:shadow-lg transition duration-700 ease-linear mx-auto block" 
+             >
+          </div>
+      </div>
       </form>
     </div>
   </div>

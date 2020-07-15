@@ -33,7 +33,7 @@ export class UserDropdownComponent implements OnInit {
   </a>
 </div>`;
     this.usuario = this._authService.getIdentity()
-    console.log(this.usuario)
+    // console.log(this.usuario)
   }
   toggleDropdown(event) {
     event.preventDefault();

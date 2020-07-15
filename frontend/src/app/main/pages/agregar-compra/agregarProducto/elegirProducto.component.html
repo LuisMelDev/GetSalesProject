@@ -1,0 +1,117 @@
+<input class="w-full p-2 bg-gray-200 rounded focus:bg-white shadow-md cursor-pointer" type="text"
+    placeholder="Haga click aqui, para elegir el producto"
+    style="transition: all .15s ease" (click)="toggleModal()"
+    value="{{ productoElegido ? productoElegido.nombre+' '+productoElegido.marca.nombre+' '+productoElegido.grupo.nombre+' '+productoElegido.amperaje.amp : '' }}"
+>
+
+  <div *ngIf="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+    <div class="relative w-auto my-6 mx-auto w-11/12 md:w-10/12 lg:w-3/4">
+      <!--content-->
+      <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+        <!--header-->
+        <div class="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
+          <h3 class="text-3xl font-semibold">
+           Elija un producto
+          </h3>
+          <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" (click)="toggleModal()">
+            <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+              ×
+            </span>
+          </button>
+        </div>
+        <!--body-->
+        <div class="relative p-6 flex-auto">
+            <div class="bg-white w-full rounded py-4 px-1">
+                <div class="w-full flex justify-end align-middle mb-4 text-sm">
+                    <form [formGroup]="formBuscar" class="w-full md:w-3/4 lg:w-1/2 grid grid-cols-6 gap-1"
+                        (ngSubmit)="busqueda()">
+                        <select name="parametro"
+                            class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-2"
+                            formControlName="parametro">
+                            <option value="nombre">Codigo</option>
+                            <option value="marca">Marca</option>
+                            <option value="amperaje">Amperaje</option>
+                            <option value="grupo">Grupo</option>
+                        </select>
+                        <input type="text"
+                            class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-3"
+                            name="valorParametro" placeholder="Buscar Producto" formControlName="valorParametro"
+                            *ngIf="formBuscar.value.parametro === 'nombre'">
+                        <select name="valorParametro"
+                            class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-3"
+                            formControlName="valorParametro" *ngIf="formBuscar.value.parametro === 'amperaje'">
+                            <option *ngFor="let amperaje of amperajes" value="{{amperaje.id}}">{{amperaje.amp}}</option>
+                        </select>
+                        <select name="valorParametro"
+                            class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-3"
+                            formControlName="valorParametro" *ngIf="formBuscar.value.parametro === 'marca'">
+                            <option *ngFor="let marca of marcas" value="{{marca.id}}">{{marca.nombre}}</option>
+                        </select>
+                        <select name="valorParametro"
+                            class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-3"
+                            formControlName="valorParametro" *ngIf="formBuscar.value.parametro === 'grupo'">
+                            <option *ngFor="let grupo of grupos" value="{{grupo.id}}">{{grupo.nombre}}</option>
+                        </select>
+                        <button type="submit"
+                            class="px-3 py-1 bg-red-500 rounded text-white cursor-pointer hover:shadow-lg transition duration-700 ease-linear col-span-1">Buscar</button>
+                    </form>
+                </div>
+                <div class="overflow-y-auto w-full">
+                    <table class="items-center w-full table-auto shadow-md text-center text-xs">
+                        <thead class="bg-blue-900 text-white">
+                            <tr>
+                                <th
+                                    class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                                    Codigo
+                                </th>
+                                <th
+                                    class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                                    Grupo
+                                </th>
+                                <th
+                                    class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                                    Amperaje
+                                </th>
+                                <th
+                                    class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                                    Marca
+                                </th>
+                                <th
+                                    class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                                    Cantidad en inventario
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let producto of productos" (click)="elegir(producto)" class="cursor-pointer">
+                                <th class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                                    {{producto.nombre}}
+                                </th>
+                                <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                                    {{producto.grupo.nombre}}
+                                </td>
+                                <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                                    {{producto.amperaje.amp}}
+                                </td>
+                                <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                                    {{producto.marca.nombre}}
+                                </td>
+                                <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                                    {{producto.inventario.existencia_producto}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="w-full flex justify-center mt-4 text-sm" *ngIf="totalPages > 1">
+                    <button
+                        class="px-4 py-2 bg-blue-900 rounded text-white cursor-pointer hover:shadow-lg transition duration-500 ease-linear mr-4" *ngIf="page !== 1" (click)="paginaAnterior()">Anterior</button>
+                    <button
+                        class="px-4 py-2 bg-blue-900 rounded text-white cursor-pointer hover:shadow-lg transition duration-500 ease-linear" *ngIf="page !== totalPages" (click)="paginaSiguiente()">Siguiente</button>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
