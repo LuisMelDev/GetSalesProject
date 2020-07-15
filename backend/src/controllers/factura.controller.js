@@ -1,3 +1,5 @@
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 const { facturaSchema } = require("../validations");
 const { ErrorHelper } = require("../helpers");
 
@@ -39,9 +41,24 @@ class FacturaController {
         const { user } = req;
         const { detalles, ...factura } = req.body;
         try {
+            // Input validation
             await facturaSchema
                 .validate(factura)
                 .catch((err) => ErrorHelper(401, err.errors[0]));
+            if (!detalles || detalles.length < 1) {
+                return ErrorHelper(
+                    400,
+                    "No se ha proveído productos para realizar la factura."
+                );
+            }
+            // Check if stock is available for each product
+            const stockChecker = await _facturaService.checkStock(detalles);
+            stockChecker.forEach((status) => {
+                if (status.overflow) {
+                    return ErrorHelper(403, status.message);
+                }
+            });
+            // Created and store data
             const createdFactura = await _facturaService.create(factura);
             const detallesData = detalles.map((detalle) => {
                 return {
@@ -50,6 +67,7 @@ class FacturaController {
                 };
             });
             await _facturaService.createDetalles(detallesData);
+            // Save record on bitacora
             await _bitacoraService.register(
                 "CREATE",
                 `FACTURAS(ID: ${createdFactura.id})`,
@@ -120,17 +138,16 @@ class FacturaController {
         }
     }
     async search(req, res, next) {
-        const { cliente, usuario } = req.query;
+        const { cedula } = req.query;
         const options = { where: {} };
-        if (cliente) {
-            options.where.cliente_id = cliente;
-        }
-        if (usuario) {
-            options.where.usuario_id = usuario;
+        if (cedula) {
+            options.where.cedula = {
+                [Op.like]: `%${cedula}%`,
+            };
         }
         try {
-            const compras = await _facturaService.searchAll(options);
-            return res.send(compras);
+            const facturas = await _facturaService.searchAll(options);
+            return res.send(facturas);
         } catch (err) {
             console.error(err);
             next(err);

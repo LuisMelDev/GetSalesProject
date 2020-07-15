@@ -1,12 +1,16 @@
 const BaseRepository = require("./base.repository");
 let _compra = null;
 let _detalleCompra = null;
+let _proveedor = null;
+let _usuario = null;
 
 class CompraRepository extends BaseRepository {
-    constructor({ Compra, DetalleCompra }) {
+    constructor({ Compra, DetalleCompra, Proveedor, Usuario }) {
         super(Compra);
         _compra = Compra;
         _detalleCompra = DetalleCompra;
+        _proveedor = Proveedor;
+        _usuario = Usuario;
     }
 
     async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
@@ -22,6 +26,16 @@ class CompraRepository extends BaseRepository {
                         foreignKey: "compra_id",
                         as: "detalles",
                     },
+                    {
+                        model: _usuario,
+                        as: "usuario",
+                        foreignKey: "usuario_id",
+                    },
+                    {
+                        model: _proveedor,
+                        foreignKey: "proveedor_id",
+                        as: "proveedor",
+                    },
                 ],
                 order: [[sortBy, orderBy]],
             });
@@ -36,6 +50,16 @@ class CompraRepository extends BaseRepository {
                     model: _detalleCompra,
                     foreignKey: "compra_id",
                     as: "detalles",
+                },
+                {
+                    model: _usuario,
+                    as: "usuario",
+                    foreignKey: "usuario_id",
+                },
+                {
+                    model: _proveedor,
+                    foreignKey: "proveedor_id",
+                    as: "proveedor",
                 },
             ],
             order: [[sortBy, orderBy]],
@@ -54,6 +78,28 @@ class CompraRepository extends BaseRepository {
             where: {
                 fecha,
             },
+        });
+    }
+    async searchAll(options) {
+        return await this.model.findAll({
+            include: [
+                {
+                    model: _detalleCompra,
+                    foreignKey: "compra_id",
+                    as: "detalles",
+                },
+                {
+                    model: _usuario,
+                    foreignKey: "usuario_id",
+                    as: "usuario",
+                },
+                {
+                    model: _proveedor,
+                    foreignKey: "proveedor_id",
+                    as: "proveedor",
+                    ...options,
+                },
+            ],
         });
     }
 }

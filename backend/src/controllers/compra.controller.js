@@ -1,3 +1,5 @@
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 const { compraSchema } = require("../validations");
 const { ErrorHelper } = require("../helpers");
 
@@ -20,7 +22,10 @@ class CompraController {
         }
     }
     async getAll(req, res, next) {
-        const { limit, page, sort_by, order_by } = req;
+        const { limit, page, sort_by, order_by } = req.query;
+        console.log(
+            `limit: ${limit} page: ${page} sort_by: ${sort_by} order_by: ${order_by}`
+        );
         try {
             const compras = await _compraService.getAll(
                 limit,
@@ -38,9 +43,17 @@ class CompraController {
         const { user } = req;
         const { detalles, ...compra } = req.body;
         try {
+            // Input validation
             await compraSchema
                 .validate(compra)
                 .catch((err) => ErrorHelper(401, err.errors[0]));
+            if (!detalles || detalles.length < 1) {
+                return ErrorHelper(
+                    400,
+                    "No se ha proveído productos para realizar la compra."
+                );
+            }
+            // Create and store data
             const createdCompra = await _compraService.create(compra);
             const detallesData = detalles.map((detalle) => {
                 return {
@@ -49,6 +62,7 @@ class CompraController {
                 };
             });
             await _compraService.createDetalles(detallesData);
+            // Save record on bitacora
             await _bitacoraService.register(
                 "CREATE",
                 `COMPRAS(ID: ${createdCompra.id})`,
@@ -111,13 +125,12 @@ class CompraController {
         }
     }
     async search(req, res, next) {
-        const { proveedor, usuario } = req.query;
+        const { rif } = req.query;
         const options = { where: {} };
-        if (proveedor) {
-            options.where.proveedor_id = proveedor;
-        }
-        if (usuario) {
-            options.where.usuario_id = usuario;
+        if (rif) {
+            options.where.rif = {
+                [Op.like]: `%${rif}%`,
+            };
         }
         try {
             const compras = await _compraService.searchAll(options);
