@@ -9,6 +9,11 @@ class UsuarioRepository extends BaseRepository {
         _rol = Rol;
     }
 
+    async get(userId) {
+        return await _usuario.findByPk(userId, {
+            include: [{ model: _rol, as: "rol" }],
+        });
+    }
     async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
         // Check if sort key is an actual attribute of model
         if (

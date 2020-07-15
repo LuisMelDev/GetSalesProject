@@ -15,6 +15,29 @@ class ProductoRepository extends BaseRepository {
         _inventario = Inventario;
     }
 
+    async get(productoId) {
+        return await _producto.findByPk(productoId, {
+            include: [
+                {
+                    model: _inventario,
+                    as: "inventario",
+                },
+                {
+                    model: _marca,
+                    as: "marca",
+                },
+                {
+                    model: _grupo,
+                    as: "grupo",
+                },
+                {
+                    model: _amperaje,
+                    as: "amperaje",
+                },
+            ],
+        });
+    }
+
     async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
         let order;
         if (sortBy === "marca") {

@@ -12,6 +12,27 @@ class FacturaRepository extends BaseRepository {
         _cliente = Cliente;
         _usuario = Usuario;
     }
+    async get(facturaId) {
+        return await _factura.findByPk(facturaId, {
+            include: [
+                {
+                    model: _detalleFactura,
+                    foreignKey: "factura_id",
+                    as: "detalles",
+                },
+                {
+                    model: _usuario,
+                    as: "usuario",
+                    foreignKey: "usuario_id",
+                },
+                {
+                    model: _cliente,
+                    foreignKey: "cliente_id",
+                    as: "cliente",
+                },
+            ],
+        });
+    }
     async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
         // Check if sort key is an actual attribute of model
         if (!this.validSort(_factura, sortBy)) {

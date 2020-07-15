@@ -15,6 +15,24 @@ class InventarioRepository extends BaseRepository {
         _amperaje = Amperaje;
     }
 
+    async get(productoId) {
+        return await _inventario.findByPk(productoId, {
+            include: [
+                {
+                    model: _marca,
+                    as: "marca",
+                },
+                {
+                    model: _grupo,
+                    as: "grupo",
+                },
+                {
+                    model: _amperaje,
+                    as: "amperaje",
+                },
+            ],
+        });
+    }
     async getAll(
         limitResults,
         pageNum,

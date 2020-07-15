@@ -23,9 +23,6 @@ class CompraController {
     }
     async getAll(req, res, next) {
         const { limit, page, sort_by, order_by } = req.query;
-        console.log(
-            `limit: ${limit} page: ${page} sort_by: ${sort_by} order_by: ${order_by}`
-        );
         try {
             const compras = await _compraService.getAll(
                 limit,

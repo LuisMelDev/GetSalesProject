@@ -13,6 +13,28 @@ class CompraRepository extends BaseRepository {
         _usuario = Usuario;
     }
 
+    async get(compraId) {
+        return await _compra.findByPk(compraId, {
+            include: [
+                {
+                    model: _detalleCompra,
+                    foreignKey: "compra_id",
+                    as: "detalles",
+                },
+                {
+                    model: _usuario,
+                    as: "usuario",
+                    foreignKey: "usuario_id",
+                },
+                {
+                    model: _proveedor,
+                    foreignKey: "proveedor_id",
+                    as: "proveedor",
+                },
+            ],
+        });
+    }
+
     async getAll(limitResults, pageNum, sortBy = "id", orderBy = "desc") {
         // Check if sort key is an actual attribute of model
         if (!this.validSort(_compra, sortBy)) {
