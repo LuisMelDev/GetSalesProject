@@ -38,9 +38,15 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    return true;
+    let token = this.getToken();
+    let headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', token);
+    
+    return this._http.post(this.url+'auth/signout',{hela:'hola'},{headers}).pipe(
+      map((response:any)=>{
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+      })
+    );
   }
 
   getIdentity(): any{

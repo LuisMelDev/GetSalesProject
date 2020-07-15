@@ -65,7 +65,9 @@ export class UserDropdownComponent implements OnInit {
   }
 
   logout(){
-    this._authService.logout();
-    this._router.navigate(['/login'])
+    this._authService.logout().subscribe(res=>{
+
+      this._router.navigate(['/login'])
+    });
   }
 }
