@@ -1,0 +1,100 @@
+<div class="relative mt-20 p-4">
+
+    <div class="w-full flex justify-start mb-6">
+        <h3 class="text-3xl font-bold">Panel de Usuario</h3>
+    </div>
+    <div class="rounded w-full bg-white mt-4 p-4">
+
+        <table class="flex rounded text-sm">
+            <thead>
+                <tr class="text-left flex flex-col uppercase bg-gray-200 ">
+                    <th class="py-3 px-2">Nombre de usuario</th>
+                    <th class="py-3 px-2">Nombre</th>
+                    <th class="py-3 px-2">Rol</th>
+                    <th class="py-3 px-2">Correo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-left flex flex-col">
+
+                    <td class="py-3 px-2">Holasdasds</td>
+                    <td class="py-3 px-2">Holasdasds</td>
+                    <td class="py-3 px-2">Holasdasds</td>
+                    <td class="py-3 px-2">Holasdasds</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="w-full grid grid-cols-2 gap-2">
+        <div class="col-span-2 md:col-span-1 rounded bg-white mt-4 p-4">
+            <div class="w-full" *ngIf="false">
+                <app-alert [mensaje]="'mensaje'" [color]="'color'" ></app-alert>
+            </div>
+            <form class="my-4 text-gray-600 text-sm" [formGroup]=""autocomplete="off">
+                <div class="w-full">
+                    <div class="w-full">
+                        <label for="nombre" class=" text-gray-800 mb-2 font-bold">Nombres Y Apellidos</label>
+                        <input type="text"
+                            class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4"
+                            name="nombre" id="nombre" placeholder="ej. Juanito Perez" formControlName="nombre">
+
+                    </div>
+                    <div class="w-full">
+                        <label for="correo" class="text-gray-800 mb-2 font-bold">Correo</label>
+                        <input type="text"
+                            class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4"
+                            name="correo" id="correo" placeholder="ej. correo@correo.com" formControlName="email">
+
+                    </div>
+                    <div class="w-full" *ngIf="false">
+                        <error-form [mensaje]="'nada'"></error-form>
+                    </div>
+                    <div class="w-full">
+                        <button type="submit"
+                            class="px-4 py-2 bg-red-500 text-sm rounded text-white cursor-pointer hover:shadow-lg transition duration-700 ease-linear block mx-auto">Actualizar mis Datos</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-span-2 md:col-span-1 rounded bg-white mt-4 p-4">
+            <div class="w-full" *ngIf="false">
+                <app-alert [mensaje]="'nada'" [color]="'color'"></app-alert>
+            </div>
+            <form class="my-4 text-gray-600 text-sm" [formGroup]=""  autocomplete="off">
+                <div class="w-full">
+                    
+                    <div class="col-span-2 md:col-span-1 lg:col-span-2">
+                        <label for="password" class="text-gray-800 mb-2 font-bold">Contraseña Actual</label>
+                        <input type="password"
+                            class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4"
+                            name="password" id="password" placeholder="ingrese su contraseña"
+                            formControlName="password">
+                    </div>
+                    <div class="col-span-2 md:col-span-1 lg:col-span-2">
+                        <label for="password" class="text-gray-800 mb-2 font-bold">Nueva Contraseña</label>
+                        <input type="password"
+                            class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4"
+                            name="password" id="password" placeholder="ingrese su contraseña"
+                            formControlName="password">
+                    </div>
+                    <div class="col-span-2 md:col-span-1 lg:col-span-2">
+                        <label for="password" class="text-gray-800 mb-2 font-bold">Repetir Nueva Contraseña</label>
+                        <input type="password"
+                            class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4"
+                            name="password" id="password" placeholder="ingrese su contraseña"
+                            formControlName="password">
+                    </div>
+                    <div class="col-span-2 lg:col-span-6" *ngIf="false">
+                        <error-form [mensaje]="'error'"></error-form>
+                    </div>
+                    <div class="col-span-2 lg:col-span-6">
+                        <button type="submit"
+                            class="px-4 py-2 bg-red-500 text-sm rounded text-white cursor-pointer hover:shadow-lg transition duration-700 ease-linear block mx-auto">Actualizar Contraseña</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

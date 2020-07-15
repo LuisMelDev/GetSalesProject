@@ -12,6 +12,10 @@ import { AgregarCompraComponent } from './pages/agregar-compra/agregar-compra.co
 import { ConsultarCompraComponent } from './pages/consultar-compra/consultar-compra.component';
 import { AgregarVentaComponent } from "./pages/agregar-venta/agregar-venta.component";
 import { ConsultarVentaComponent } from "./pages/consultar-venta/consultar-venta.component";
+import { BitacoraComponent } from './pages/bitacora/bitacora.component';
+import { PanelUsuarioComponent } from './pages/panel-usuario/panel-usuario.component';
+import { FacturaVentaComponent } from './pages/factura-venta/factura-venta.component';
+import { FacturaCompraComponent } from './pages/factura-compra/factura-compra.component';
 
 
 const routes: Routes = [
@@ -31,6 +35,11 @@ const routes: Routes = [
       {path:'registrar-venta/:clienteID', component: AgregarVentaComponent},
       {path:'registrar-venta', component: AgregarVentaComponent},
       {path:'consultar-ventas', component: ConsultarVentaComponent},
+      {path:'consultar-ventas', component: ConsultarVentaComponent},
+      {path:'bitacora', component: BitacoraComponent},
+      {path:'panel-usuario', component: PanelUsuarioComponent},
+      {path:'venta/:id', component: FacturaVentaComponent},
+      {path:'compra/:id', component: FacturaCompraComponent},
       {path:'**', redirectTo:'/main'}
     ] 
   }

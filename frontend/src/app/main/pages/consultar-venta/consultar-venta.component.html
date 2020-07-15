@@ -8,11 +8,8 @@
             <h3 class="text-2xl">Listado de Ventas</h3>
         </div>
         <div class="w-full flex justify-end align-middle mb-6 text-sm">
-            <form class="w-full md:w-3/4 lg:w-3/5 grid grid-cols-12 gap-1">
+            <form class="w-full md:w-3/4 lg:w-3/5 grid grid-cols-12 gap-1" [formGroup]="">
                 <select name="amperaje" id="amperaje" class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-3">
-                    <option value="comprobante">Numero de Comprobante</option>
-                    <option value="rango">Rango de fechas</option>
-                    <option value="fecha">fecha</option>
                     <option value="usuario">Usuario</option>
                     <option value="cliente">Proveedor</option>
                   </select>
@@ -34,7 +31,7 @@
                         </th>
                         <th
                             class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
-                            Proveedor
+                            Cliente
                         </th>
                         <th
                             class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
@@ -50,30 +47,43 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr *ngIf="ventas.length === 0" >
+                        <td colspan="6" class="border-t-0 align-middle border-l-0 border-r-0 p-2 text-center">No hay Ventas registradas</td>
+                    </tr>
+                    <tr *ngFor="let venta of ventas">
                         <th class="border-t-0 align-middle border-l-0 border-r-0 p-2">
-                            0001
+                            {{venta.id}}
                         </th>
                         <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
-                            20/12/2020
+                            {{venta.fecha | amLocale:'es' | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}
                         </td>
                         <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
-                            Proveedor
+                            {{venta.cliente.nombre}}
                         </td>
                         <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
-                            Usuario
+                            {{venta.usuario.username}}
                         </td>
                         <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
-                            1000$
+                            {{venta.total | currency}} <br> {{ venta.total * precioDolar | currency:'Bs.S '}}
                         </td>
                         <td class="flex items-center justify-center border-t-0 align-middle border-l-0 border-r-0 p-2">
-                            <button class="h-8 w-8 rounded-full bg-blue-600 mr-2">V</button>
+                            <button class="h-8 w-8 rounded-full bg-blue-600 mr-2"
+                                [routerLink]="['/main/venta',venta.id]"
+                            >
+
+                            V</button>
                             
                             <button class="h-8 w-8 rounded-full bg-red-600">E</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="w-full flex justify-center mt-4 text-sm" *ngIf="totalPages > 1">
+            <button
+                class="px-4 py-2 bg-blue-900 rounded text-white cursor-pointer hover:shadow-lg transition duration-500 ease-linear mr-4" *ngIf="page !== 1" (click)="paginaAnterior()">Anterior</button>
+            <button
+                class="px-4 py-2 bg-blue-900 rounded text-white cursor-pointer hover:shadow-lg transition duration-500 ease-linear" *ngIf="page !== totalPages" (click)="paginaSiguiente()">Siguiente</button>
         </div>
     </div>
 </div>

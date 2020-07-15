@@ -62,8 +62,9 @@ export class AgregarProducto implements OnInit {
   }
 
   enviar(){
+    this.error = '';
     const { nombre } = this.formProductos.controls;
-    console.log(this.formProductos)
+    // console.log(this.formProductos)
     if(this.formProductos.invalid){
       this.error = 'Todos los campos son obligatorios';
       return;

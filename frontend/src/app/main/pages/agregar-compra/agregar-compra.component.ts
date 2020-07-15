@@ -4,11 +4,12 @@ import { ActivatedRoute } from "@angular/router";
 import { ProveedoresService } from "src/app/services/proveedores.service";
 import { AuthService } from "src/app/services/auth.service";
 import { CompraService } from "src/app/services/compra.service";
+import { PrecioDolarService } from "src/app/services/precioDolar.service";
 
 @Component({
   selector: 'app-agregar-compra',
   templateUrl: './agregar-compra.component.html',
-  providers: [ProveedoresService, AuthService, CompraService]
+  providers: [ProveedoresService, AuthService, CompraService,PrecioDolarService]
 })
 export class AgregarCompraComponent implements OnInit {
 
@@ -24,16 +25,19 @@ export class AgregarCompraComponent implements OnInit {
   public productosCompra = [];
   public precioCompra = 0;
   public impuesto = 0;
+  public precioDolar=0;
 
   constructor(
     private _route: ActivatedRoute,
     private _proveedorService: ProveedoresService,
     private _authService: AuthService,
-    private _compraService: CompraService
+    private _compraService: CompraService,
+    private _precioDolarService:PrecioDolarService
   ) {
     this.cantidadProducto = new FormControl('', [Validators.pattern(/^([0-9])*$/), Validators.required])
     this.precioProducto = new FormControl('', [Validators.pattern(/^([0-9])*$/), Validators.required])
     this.usuario = this._authService.getIdentity();
+    this.precioDolar = parseFloat(this._precioDolarService.precio());
   }
 
   ngOnInit(): void {

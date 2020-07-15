@@ -31,6 +31,10 @@ import { ElegirCliente } from "./pages/agregar-venta/agregarCliente/elegirClient
 import { ElegirProducto } from "./pages/agregar-venta/agregarProducto/elegirProducto.component";
 import { ElegirProveedor } from './pages/agregar-compra/agregarProveedor/elegirProveedor.component';
 import { ElegirProducto2 } from './pages/agregar-compra/agregarProducto/elegirProducto.component';
+import { FacturaVentaComponent } from './pages/factura-venta/factura-venta.component';
+import { FacturaCompraComponent } from './pages/factura-compra/factura-compra.component';
+import { BitacoraComponent } from './pages/bitacora/bitacora.component';
+import { PanelUsuarioComponent } from './pages/panel-usuario/panel-usuario.component';
 
 
 
@@ -61,7 +65,7 @@ import { ElegirProducto2 } from './pages/agregar-compra/agregarProducto/elegirPr
     ElegirCliente,
     ElegirProducto,
     ElegirProveedor, 
-    ElegirProducto2
+    ElegirProducto2, FacturaVentaComponent, FacturaCompraComponent, BitacoraComponent, PanelUsuarioComponent
   ]
   ,
   imports: [

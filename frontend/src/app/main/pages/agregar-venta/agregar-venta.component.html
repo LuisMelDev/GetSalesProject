@@ -91,7 +91,8 @@
                             {{item.precio | currency}}
                         </td>
                         <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
-                           {{ item.precio*item.cantidad | currency }}
+                           {{ item.precio*item.cantidad | currency }} <br/>
+                           {{item.precio*precioDolar| currency:'Bs.S '}}
                         </td>
                         <td class="flex items-center justify-center border-t-0 align-middle border-l-0 border-r-0 p-2">
                             <button class="h-8 w-8 rounded-full bg-red-600" (click)="eliminarProducto(i)">E</button>
@@ -105,9 +106,9 @@
         </div>
         <div class="w-full flex flex-col justify-end items-end px-6 mb-6">
             <p class="text-xl">Impuesto 16%: <strong>{{ impuesto | currency}}</strong></p>
-            <p class="text-xl">Impuesto 16%: <strong>Bs.S {{ impuesto*200000 }}</strong></p>
+            <p class="text-xl">Impuesto 16%: <strong>{{ impuesto*precioDolar | currency:'Bs.S '}}</strong></p>
             <p class="text-xl">Precio Total de Venta:  <strong>{{precioVenta | currency}}</strong></p>
-            <p class="text-xl">Precio Total de Venta:  <strong>Bs.S {{precioVenta*200000}}</strong></p>
+            <p class="text-xl">Precio Total de Venta:  <strong>{{precioVenta*precioDolar| currency:'Bs.S '}}</strong></p>
         </div>
         <div class="w-full" *ngIf="mensaje2">
             <error-form [mensaje]="mensaje2" ></error-form>

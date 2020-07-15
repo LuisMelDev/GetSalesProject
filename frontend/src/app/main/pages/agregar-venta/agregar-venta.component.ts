@@ -3,12 +3,13 @@ import { ActivatedRoute } from "@angular/router";
 import { ClientesService } from "src/app/services/clientes.service";
 import { AuthService } from "src/app/services/auth.service";
 import { VentasService } from "src/app/services/ventas.service";
+import { PrecioDolarService } from "src/app/services/precioDolar.service";
 import { FormControl, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-agregar-venta',
   templateUrl: './agregar-venta.component.html',
-  providers: [ClientesService,AuthService,VentasService]
+  providers: [ClientesService,AuthService,VentasService,PrecioDolarService]
 })
 export class AgregarVentaComponent implements OnInit {
 
@@ -24,16 +25,19 @@ export class AgregarVentaComponent implements OnInit {
   public productosVenta = [];
   public precioVenta = 0;
   public impuesto = 0;
+  public precioDolar = 0;
 
   constructor(
     private _route: ActivatedRoute,
     private _clienteService: ClientesService,
     private _ventaService: VentasService,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _precioDolarService:PrecioDolarService
   ) {
     this.cantidadProducto = new FormControl('', [Validators.pattern(/^([0-9])*$/), Validators.required])
     this.precioProducto = new FormControl('', [Validators.pattern(/^([0-9])*$/), Validators.required])
     this.usuario = this._authService.getIdentity();
+    this.precioDolar = parseFloat(this._precioDolarService.precio());
   }
 
   ngOnInit(): void {
