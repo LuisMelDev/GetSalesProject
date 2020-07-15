@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ClientesService } from "src/app/services/clientes.service";
 import { AuthService } from "src/app/services/auth.service";
 import { VentasService } from "src/app/services/ventas.service";
@@ -12,6 +12,9 @@ import { FormControl, Validators } from "@angular/forms";
   providers: [ClientesService,AuthService,VentasService,PrecioDolarService]
 })
 export class AgregarVentaComponent implements OnInit {
+
+  public alerta = '';
+  public color = 'bg-red-600'
 
   public usuario;
   public cliente: any = '';
@@ -29,6 +32,7 @@ export class AgregarVentaComponent implements OnInit {
 
   constructor(
     private _route: ActivatedRoute,
+    private _router: Router,
     private _clienteService: ClientesService,
     private _ventaService: VentasService,
     private _authService: AuthService,
@@ -129,11 +133,11 @@ export class AgregarVentaComponent implements OnInit {
     console.log(compra)
 
     this._ventaService.create(compra).subscribe(
-      res => {
-        console.log(res)
+      (res:any) => {
+        if(res.id) this._router.navigate(['/main/venta', res.id]);
       },
-      err => {
-        console.log(err)
+      (err:any) => {
+        this.alerta = err.message
       }
     )
   }

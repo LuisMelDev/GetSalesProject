@@ -8,13 +8,11 @@
             <h3 class="text-2xl">Listado de Ventas</h3>
         </div>
         <div class="w-full flex justify-end align-middle mb-6 text-sm">
-            <form class="w-full md:w-3/4 lg:w-3/5 grid grid-cols-12 gap-1" [formGroup]="">
-                <select name="amperaje" id="amperaje" class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-3">
-                    <option value="usuario">Usuario</option>
-                    <option value="cliente">Proveedor</option>
-                  </select>
-                <input type="text" class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-7" name="usuario" id="usuario" placeholder="Ingrese su busqueda">
-                <button type="submit" class="px-3 py-1 bg-red-500 rounded text-white cursor-pointer hover:shadow-lg transition duration-700 ease-linear col-span-2">Buscar</button>
+            <form class="w-full md:w-3/4 lg:w-3/5 grid grid-cols-12 gap-1" [formGroup]="formBusqueda" (ngSubmit)="busqueda()">
+                  <input type="text" class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 col-span-9" name="usuario" id="usuario" placeholder="Ingrese cedula de cliente"
+                formControlName="valorParametro"
+                >
+                <button type="submit" class="px-3 py-1 bg-red-500 rounded text-white cursor-pointer hover:shadow-lg transition duration-700 ease-linear col-span-3">Buscar</button>
             </form>
         </div>
         <div class="w-full mb-6">
@@ -67,13 +65,12 @@
                             {{venta.total | currency}} <br> {{ venta.total * precioDolar | currency:'Bs.S '}}
                         </td>
                         <td class="flex items-center justify-center border-t-0 align-middle border-l-0 border-r-0 p-2">
-                            <button class="h-8 w-8 rounded-full bg-blue-600 mr-2"
+                            <button class="mr-2"
                                 [routerLink]="['/main/venta',venta.id]"
                             >
-
-                            V</button>
+                            <i class="fas fa-eye text-gray-700 fa-lg"></i></button>
                             
-                            <button class="h-8 w-8 rounded-full bg-red-600">E</button>
+                            <button><i class="fas fa-trash text-gray-700 fa-lg"></i></button>
                         </td>
                     </tr>
                 </tbody>

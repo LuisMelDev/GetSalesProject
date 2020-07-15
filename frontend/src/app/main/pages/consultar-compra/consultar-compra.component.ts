@@ -29,7 +29,6 @@ export class ConsultarCompraComponent implements OnInit {
   ngOnInit(): void {
     this.traercompras()
     this.formBusqueda =this.fb.group({
-      parametro: ['cedula'],
       valorParametro: ['',[Validators.required]]
     })
    }
@@ -70,11 +69,19 @@ export class ConsultarCompraComponent implements OnInit {
  
    busqueda(){
      if(this.formBusqueda.invalid) this.traercompras();
-     let {parametro, valorParametro} = this.formBusqueda.value;
-     this._comprasService.search(parametro, valorParametro).subscribe(
+     let { valorParametro} = this.formBusqueda.value;
+     this._comprasService.search('rif', valorParametro).subscribe(
        (res:any)=>{
-         this.compras = res
-         this.totalPages = 0;
+        let resultados = res;
+        this.compras = resultados.map(e => {
+          let precioTotal = 0;
+          e.detalles.forEach(element => {
+            precioTotal += parseInt(element.cantidad_producto) * parseFloat(element.precio_producto)
+          });
+          e.total = precioTotal;
+          return e;
+        })
+        this.totalPages = 0;
        },
        err=>{
          console.log(err)

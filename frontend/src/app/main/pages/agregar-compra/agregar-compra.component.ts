@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute ,Router} from "@angular/router";
 import { ProveedoresService } from "src/app/services/proveedores.service";
 import { AuthService } from "src/app/services/auth.service";
 import { CompraService } from "src/app/services/compra.service";
@@ -12,6 +12,9 @@ import { PrecioDolarService } from "src/app/services/precioDolar.service";
   providers: [ProveedoresService, AuthService, CompraService,PrecioDolarService]
 })
 export class AgregarCompraComponent implements OnInit {
+
+  public alerta = '';
+  public color = 'bg-red-600';
 
   public proveedor: any = '';
   public producto: any = '';
@@ -29,6 +32,7 @@ export class AgregarCompraComponent implements OnInit {
 
   constructor(
     private _route: ActivatedRoute,
+    private _router: Router,
     private _proveedorService: ProveedoresService,
     private _authService: AuthService,
     private _compraService: CompraService,
@@ -127,11 +131,11 @@ export class AgregarCompraComponent implements OnInit {
     console.log(compra)
 
     this._compraService.create(compra).subscribe(
-      res => {
-        console.log(res)
+      (res:any) => {
+        if(res.id) this._router.navigate(['/main/compra', res.id]);
       },
-      err => {
-        console.log(err)
+      (err:any) => {
+        this.alerta = err.message
       }
     )
   }

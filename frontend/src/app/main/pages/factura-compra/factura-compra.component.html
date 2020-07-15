@@ -1,0 +1,70 @@
+<div class="relative mt-20 p-4">
+
+    <div class="rounded w-full bg-white p-4">
+        <div class="w-full grid grid-cols-2">
+            <div class="col-span-1 text-left">
+                <img src="/assets/img/logo1.png" alt="logo" class="w-10/12">
+            </div>
+            <div class="col-span-1 text-right">
+                <h3 class="text-3xl">Comprobante de compra</h3>
+                <h3 class="text-xl">N° 000{{compra.id}}</h3>
+                <h3 class="text-xl">Fecha: <strong>{{compra.fecha | date:'dd/MM/yyyy'}}</strong></h3>
+            </div>
+        </div> 
+        <div class="w-full my-6">
+                <h3 class="text-xl"> <strong>Proveedor:</strong> </h3>
+                <h4 class="text-lg ml-2"> {{compra.proveedor.rif}} </h4>
+                <h4 class="text-md ml-2"> {{compra.proveedor.nombre}} </h4>
+        </div>
+        <div class="w-full mb-6">
+            <table class="table-auto shadow-lg bg-white w-full text-sm text-center">
+                <thead class="bg-blue-900 text-white">
+                    <tr>
+                        <th
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                            Cantidad
+                        </th>
+                        <th
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                            Descripción
+                        </th>
+                        <th
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                            Precio unitario
+                        </th>
+                        <th
+                            class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                            Importe
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let detalle of compra.detalles" >
+                        <th class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                           {{detalle.cantidad_producto}}
+                        </th>
+                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            {{detalle.producto.nombre+' '+ detalle.producto.grupo.nombre+' '+detalle.producto.amperaje.amp+' '+detalle.producto.marca.nombre}}
+                        </td>
+                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            {{detalle.precio_producto | currency}} <br/>
+                            {{detalle.precio_producto*dolar | currency:'Bs.S '}}
+                        </td>
+                        <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                            {{detalle.precio_producto*detalle.cantidad_producto | currency }}<br/>
+                            {{detalle.precio_producto*detalle.cantidad_producto*dolar | currency:'Bs.S ' }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="w-full flex flex-col justify-end items-end px-6 mb-6">
+            <p class="text-xl">SubTotal:  <strong>{{compra.subtotal| currency}}</strong></p>
+            <p class="text-xl">SubTotal:  <strong>{{compra.subtotal*dolar| currency:'Bs.S '}}</strong></p>
+            <p class="text-xl">IVA 16%: <strong>{{ compra.impuesto | currency}}</strong></p>
+            <p class="text-xl">IVA 16%: <strong>{{ compra.impuesto*dolar | currency:'Bs.S '}}</strong></p>
+            <p class="text-xl">Precio Total:  <strong>{{compra.total| currency}}</strong></p>
+            <p class="text-xl">Precio Total:  <strong>{{compra.total*dolar| currency:'Bs.S '}}</strong></p>
+        </div>
+    </div>
+</div>
