@@ -24,7 +24,7 @@ export class UserDropdownComponent implements OnInit {
   ngOnInit() {
     this.popper.innerHTML = `
     <div class="bg-white text-base z-60 float-left py-2 list-none text-left rounded shadow-lg mt-1" style="min-width:12rem" #popoverDropdownRef>
-  <a href="javascript:void(0)" class="text-sm py-2 px-4 font-normal block w-full  bg-transparent  text-gray-800">
+  <a href="javascript:void(0)" id="panelUser" class="text-sm py-2 px-4 font-normal block w-full  bg-transparent  text-gray-800">
     Panel de usuario
   </a>
   <div class="h-0 my-2 border border-solid border-gray-200"></div>
@@ -58,6 +58,9 @@ export class UserDropdownComponent implements OnInit {
     );
     document.getElementById('logout').addEventListener('click', ()=>{
       this.logout();
+    })
+    document.getElementById('panelUser').addEventListener('click', ()=>{
+      this._router.navigate(['/main/panel-usuario'])
     })
   }
 
