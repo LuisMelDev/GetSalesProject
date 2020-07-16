@@ -28,7 +28,6 @@ export class ConsultarVentaComponent implements OnInit {
   ngOnInit(): void {
     this.traerVentas()
     this.formBusqueda =this.fb.group({
-      parametro: ['cedula'],
       valorParametro: ['',[Validators.required]]
     })
    }
@@ -47,7 +46,7 @@ export class ConsultarVentaComponent implements OnInit {
              return e;
            })
            this.totalPages = res.totalPages;
-           console.log(this.ventas)
+          //  console.log(this.ventas)
          }
        },
        err=>{
@@ -70,11 +69,21 @@ export class ConsultarVentaComponent implements OnInit {
  
    busqueda(){
      if(this.formBusqueda.invalid) this.traerVentas();
-     let {parametro, valorParametro} = this.formBusqueda.value;
-     this._ventasService.search(parametro, valorParametro).subscribe(
+     let { valorParametro} = this.formBusqueda.value;
+     this._ventasService.search('cedula', valorParametro).subscribe(
        (res:any)=>{
-         this.ventas = res
+    
+        let resultados = res;
+        this.ventas = resultados.map(e => {
+          let precioTotal = 0;
+          e.detalles.forEach(element => {
+            precioTotal += parseInt(element.cantidad_producto) * parseFloat(element.precio_producto)
+          });
+          e.total = precioTotal;
+          return e;
+        })
          this.totalPages = 0;
+         
        },
        err=>{
          console.log(err)

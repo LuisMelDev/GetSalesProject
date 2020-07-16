@@ -3,6 +3,9 @@
         <h3 class="text-3xl font-bold">Registrar Venta</h3>
     </div>
     <div class="rounded w-full bg-white mt-4 p-4">
+        <div class="w-full" *ngIf="alerta">
+            <app-alert [mensaje]="alerta" [color]="color"></app-alert>
+        </div>
         <div class="w-full  flex justify-between py-2 px-2 mb-6">
             <h3 class="text-2xl">Detalles de Venta</h3>
             <span class="text-xl text-right"> <strong>Fecha:</strong> {{fecha | date:'dd/MM/yyyy'}}<br/> <strong>Venta </strong> #0001</span>

@@ -35,6 +35,7 @@ import { FacturaVentaComponent } from './pages/factura-venta/factura-venta.compo
 import { FacturaCompraComponent } from './pages/factura-compra/factura-compra.component';
 import { BitacoraComponent } from './pages/bitacora/bitacora.component';
 import { PanelUsuarioComponent } from './pages/panel-usuario/panel-usuario.component';
+// import { ReportesComponent } from './pages/reportes/reportes.component';
 
 
 
@@ -65,7 +66,12 @@ import { PanelUsuarioComponent } from './pages/panel-usuario/panel-usuario.compo
     ElegirCliente,
     ElegirProducto,
     ElegirProveedor, 
-    ElegirProducto2, FacturaVentaComponent, FacturaCompraComponent, BitacoraComponent, PanelUsuarioComponent
+    ElegirProducto2, 
+    FacturaVentaComponent, 
+    FacturaCompraComponent, 
+    BitacoraComponent, 
+    PanelUsuarioComponent,
+    //  ReportesComponent
   ]
   ,
   imports: [
