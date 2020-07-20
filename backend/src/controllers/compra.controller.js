@@ -100,9 +100,38 @@ class CompraController {
     }
 
     async getByFecha(req, res, next) {
-        const { fecha } = req.params;
+        const { dia, mes, año } = req.query;
+        const options = {};
+        const filters = [];
+        if (dia) {
+            filters.push(
+                Sequelize.where(
+                    Sequelize.fn("DAY", Sequelize.col("fecha")),
+                    dia
+                )
+            );
+        }
+        if (mes) {
+            filters.push(
+                Sequelize.where(
+                    Sequelize.fn("MONTH", Sequelize.col("fecha")),
+                    mes
+                )
+            );
+        }
+        if (año) {
+            filters.push(
+                Sequelize.where(
+                    Sequelize.fn("YEAR", Sequelize.col("fecha")),
+                    año
+                )
+            );
+        }
+        options.where = {
+            [Op.and]: [...filters],
+        };
         try {
-            const compra = await _compraService.getByFecha(fecha);
+            const compra = await _compraService.getByFecha(options);
             return res.send(compra);
         } catch (err) {
             console.error(err);

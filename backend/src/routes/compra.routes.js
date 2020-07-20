@@ -6,6 +6,7 @@ module.exports = ({ CompraController }) => {
 
     router.get("", AuthMiddleWare, CompraController.getAll);
     router.get("/search", AuthMiddleWare, CompraController.search);
+    router.get("/date", AuthMiddleWare, CompraController.getByFecha);
     router.get("/:id", AuthMiddleWare, CompraController.get);
     router.get("/:id/proveedor", AuthMiddleWare, CompraController.getProveedor);
     router.post("", AuthMiddleWare, CompraController.create);

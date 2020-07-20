@@ -94,10 +94,27 @@ class FacturaRepository extends BaseRepository {
         return await _detalleFactura.bulkCreate(detalles);
     }
 
-    async getByFecha(fecha) {
+    async getByFecha(options) {
         return await _factura.findAll({
+            include: [
+                {
+                    model: _detalleFactura,
+                    foreignKey: "factura_id",
+                    as: "detalles",
+                },
+                {
+                    model: _usuario,
+                    as: "usuario",
+                    foreignKey: "usuario_id",
+                },
+                {
+                    model: _cliente,
+                    as: "cliente",
+                    foreignKey: "cliente_id",
+                },
+            ],
             where: {
-                fecha,
+                ...options,
             },
         });
     }

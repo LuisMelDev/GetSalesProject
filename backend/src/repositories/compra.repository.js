@@ -95,11 +95,26 @@ class CompraRepository extends BaseRepository {
         return await _detalleCompra.bulkCreate(detalles);
     }
 
-    async getByFecha(fecha) {
+    async getByFecha(options) {
         return await _compra.findAll({
-            where: {
-                fecha,
-            },
+            include: [
+                {
+                    model: _detalleCompra,
+                    foreignKey: "compra_id",
+                    as: "detalles",
+                },
+                {
+                    model: _usuario,
+                    as: "usuario",
+                    foreignKey: "usuario_id",
+                },
+                {
+                    model: _proveedor,
+                    foreignKey: "proveedor_id",
+                    as: "proveedor",
+                },
+            ],
+            where: { ...options },
         });
     }
     async searchAll(options) {

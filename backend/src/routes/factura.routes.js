@@ -6,6 +6,7 @@ module.exports = ({ FacturaController }) => {
 
     router.get("", AuthMiddleWare, FacturaController.getAll);
     router.get("/search", AuthMiddleWare, FacturaController.search);
+    router.get("/date", AuthMiddleWare, FacturaController.getByFecha);
     router.get("/:id", AuthMiddleWare, FacturaController.get);
     router.get("/:id/cliente", AuthMiddleWare, FacturaController.getCliente);
     router.post("", AuthMiddleWare, FacturaController.create);

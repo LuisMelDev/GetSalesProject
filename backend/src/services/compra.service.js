@@ -9,11 +9,11 @@ class CompraService extends BaseService {
     async createDetalles(detalles) {
         return await _compraRepository.createDetalles(detalles);
     }
-    async getByFecha(fecha) {
-        if (!fecha) {
+    async getByFecha(options) {
+        if (!options) {
             ErrorHelper(400, "fecha must be sent");
         }
-        return await _compraRepository.getByFecha();
+        return await _compraRepository.getByFecha(options);
     }
 }
 

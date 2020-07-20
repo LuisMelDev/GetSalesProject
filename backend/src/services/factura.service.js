@@ -12,11 +12,11 @@ class FacturaService extends BaseService {
         return await _facturaRepository.createDetalles(detalles);
     }
 
-    async getByFecha(fecha) {
-        if (!fecha) {
+    async getByFecha(options) {
+        if (!options) {
             ErrorHelper(400, "fecha must be sent");
         }
-        return await _facturaRepository.getByFecha();
+        return await _facturaRepository.getByFecha(options);
     }
     async checkStock(detalles) {
         return Promise.all(
