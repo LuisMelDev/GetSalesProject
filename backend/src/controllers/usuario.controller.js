@@ -147,9 +147,9 @@ class UsuarioController {
 
     async getOperaciones(req, res, next) {
         const { id } = req.params;
+        const { sort_by, order_by } = req.query;
         try {
-            const usuario = await _usuarioService.get(id);
-            const operaciones = await usuario.getOperaciones();
+            const operaciones = await _usuarioService.getOperaciones(id, sort_by, order_by);
             return res.send(operaciones);
         } catch (err) {
             console.error(err);

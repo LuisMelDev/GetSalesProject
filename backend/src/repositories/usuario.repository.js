@@ -1,12 +1,16 @@
 const BaseRepository = require("./base.repository");
 let _usuario = null;
 let _rol = null;
+let _operacion = null;
+let _bitacora = null;
 
 class UsuarioRepository extends BaseRepository {
-    constructor({ Usuario, Rol }) {
+    constructor({ Usuario, Rol, Operacion, Bitacora }) {
         super(Usuario);
         _usuario = Usuario;
         _rol = Rol;
+        _operacion = Operacion;
+        _bitacora = Bitacora;
     }
 
     async get(userId) {
@@ -34,7 +38,7 @@ class UsuarioRepository extends BaseRepository {
             limit,
             offset: (page - 1) * limit,
             include: [{ model: _rol, as: "rol" }],
-            order: [[sortBy ? sortBy : "id", orderBy ? orderBy : "desc"]],
+            order: [[sortBy, orderBy]],
         });
         const count = await _usuario.count();
         const paginatedResults = this.getPaginate(limit, page, count);
@@ -82,6 +86,16 @@ class UsuarioRepository extends BaseRepository {
             user[`${field}`] = value;
         });
         return await user.save();
+    }
+    async getOperaciones(userId, sortBy = "fecha", orderBy = "desc") {
+        const registro = await _bitacora.findAll({
+            where: {
+                usuario_id: userId,
+            },
+            order: [[sortBy, orderBy]],
+            include: [{ model: _operacion, as: "operacion" }],
+        });
+        return registro;
     }
 }
 

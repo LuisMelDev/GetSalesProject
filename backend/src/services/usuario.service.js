@@ -19,6 +19,9 @@ class UsuarioService extends BaseService {
         }
         return await _usuarioRepository.getUsuarioByNombre(nombre);
     }
+    async getOperaciones(userId, sortBy, orderBy) {
+        return await _usuarioRepository.getOperaciones(userId, sortBy, orderBy);
+    }
     async getFacturas(userId) {
         return await _usuarioRepository.getFacturas(userId);
     }
