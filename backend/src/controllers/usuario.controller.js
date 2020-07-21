@@ -43,10 +43,15 @@ class UsuarioController {
             await usuarioSchema
                 .validate(body)
                 .catch((err) => ErrorHelper(401, err.errors[0]));
-            
-            const userExist = await _usuarioService.getUsuarioByUsername(body.username);
+
+            const userExist = await _usuarioService.getUsuarioByUsername(
+                body.username
+            );
             if (userExist) {
-            	return ErrorHelper(401, 'El usuario ya se encuentra registrado.');
+                return ErrorHelper(
+                    401,
+                    "El usuario ya se encuentra registrado."
+                );
             }
             const createdUsuario = await _usuarioService.create(body);
             await _bitacoraService.register(
@@ -65,9 +70,6 @@ class UsuarioController {
         const { body, user } = req;
         const { id } = req.params;
         try {
-            await usuarioSchema
-                .validate(body)
-                .catch((err) => ErrorHelper(401, err.errors[0]));
             const updatedUsuario = await _usuarioService.update(id, body);
             await _bitacoraService.register(
                 "UPDATE",
@@ -156,7 +158,7 @@ class UsuarioController {
     }
 
     async search(req, res, next) {
-        const { nombre, username, email } = req.query;
+        const { nombre, username, rol, email } = req.query;
         const options = { where: {} };
         if (nombre) {
             options.where.nombre = {
@@ -167,6 +169,9 @@ class UsuarioController {
             options.where.username = {
                 [Op.like]: `%${username}%`,
             };
+        }
+        if (rol) {
+            options.where.rol_id = rol;
         }
         if (email) {
             options.where.email = {

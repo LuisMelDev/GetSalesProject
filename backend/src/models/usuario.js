@@ -56,12 +56,18 @@ module.exports = (sequelize, DataTypes) => {
         });
     };
 
+    const hashPassword = async function (usuario, options) {
+        const password = usuario.password || usuario.attributes.password;
+        if (usuario.changed("password")) {
+            const salt = await genSaltSync();
+            const hashedPassword = await hashSync(password, salt);
+            usuario.password = hashedPassword;
+        }
+    };
+
     // hooks
-    Usuario.beforeCreate(async (usuario, options) => {
-        const salt = await genSaltSync();
-        const hashedPassword = await hashSync(usuario.password, salt);
-        usuario.password = hashedPassword;
-    });
+    Usuario.beforeCreate(hashPassword);
+    Usuario.beforeUpdate(hashPassword);
 
     Usuario.prototype.validPassword = async function (password) {
         return await compareSync(password, this.password);

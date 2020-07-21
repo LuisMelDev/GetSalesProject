@@ -74,6 +74,15 @@ class UsuarioRepository extends BaseRepository {
         };
         return await this.model.findAll(optionsEager);
     }
+
+    async update(id, entity) {
+        const user = await this.model.findByPk(id);
+
+        Object.entries(entity).forEach(([field, value]) => {
+            user[`${field}`] = value;
+        });
+        return await user.save();
+    }
 }
 
 module.exports = UsuarioRepository;
