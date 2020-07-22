@@ -8,8 +8,7 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
             },
             imagen: {
-                type: DataTypes.STRING,
-                allowNull: false,
+                type: DataTypes.STRING
             },
             amperaje_id: {
                 type: DataTypes.INTEGER,

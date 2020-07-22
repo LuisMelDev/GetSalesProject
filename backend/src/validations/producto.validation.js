@@ -2,7 +2,7 @@ const yup = require("yup");
 
 const productoSchema = yup.object().shape({
     nombre: yup.string().required("'nombre' es un campo obligatorio."),
-    imagen: yup.string().required("'imagen' es un campo obligatorio."),
+    // imagen: yup.string().required("'imagen' es un campo obligatorio."),
     amperaje_id: yup
         .number()
         .integer()
