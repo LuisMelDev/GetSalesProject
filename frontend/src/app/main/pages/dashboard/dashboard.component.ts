@@ -24,8 +24,8 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this._usuarioService.getOperaciones(this.usuario.id).subscribe(
       (res:any[])=>{
-
-        res.reverse();
+        console.log(res);
+        // res.reverse();
         let ope = [];
         for (let i = 0; i < 10; i++) {
           if(i < res.length){
@@ -33,37 +33,37 @@ export class DashboardComponent implements OnInit {
           }
         }
         this.operaciones = ope.map(e =>{
-          let operacion = {
-            fecha: '',
-            mensaje: ''
-          }
-          let mensaje,resultado;
-          switch (e.operacion) {
-            case 'LOGIN':
-                operacion.mensaje = 'Iniciaste sesión'      
-              break;
-            case 'LOGOUT':
-                operacion.mensaje = 'Cerraste sesión'
-              break;
-            case 'DELETE':
-              resultado = e.bitacora.descripcion.split('(')[0];
-              mensaje = resultado.slice(0,resultado.length-1);
-              operacion.mensaje = `Eliminaste un ${mensaje.toLowerCase()}`
-              break;
-            case 'UPDATE':
-              resultado = e.bitacora.descripcion.split('(')[0];
-              mensaje = resultado.slice(0,resultado.length-1);
-              operacion.mensaje = `Actualizaste un ${mensaje.toLowerCase()}`
-              break;
-            case 'CREATE':
-              resultado = e.bitacora.descripcion.split('(')[0];
-              mensaje = resultado.slice(0,resultado.length-1);
-              operacion.mensaje = `Registraste un ${mensaje.toLowerCase()}`
-              break;
-           }
-          operacion.fecha = e.bitacora.fecha
-          return operacion;
-        })
+            let operacion = {
+              fecha: '',
+              mensaje: ''
+            }
+            let mensaje,resultado;
+            switch (e.operacion.operacion) {
+              case 'LOGIN':
+                  operacion.mensaje = 'Inicio sesión'      
+                break;
+              case 'LOGOUT':
+                  operacion.mensaje = 'Cerro sesión'
+                break;
+              case 'DELETE':
+                resultado = e.descripcion.split('(')[0];
+                mensaje = resultado.slice(0,resultado.length-1);
+                operacion.mensaje = `Elimino un ${mensaje.toLowerCase()}`
+                break;
+              case 'UPDATE':
+                resultado = e.descripcion.split('(')[0];
+                mensaje = resultado.slice(0,resultado.length-1);
+                operacion.mensaje = `Actualizo un ${mensaje.toLowerCase()}`
+                break;
+              case 'CREATE':
+                resultado = e.descripcion.split('(')[0];
+                mensaje = resultado.slice(0,resultado.length-1);
+                operacion.mensaje = `Registro un ${mensaje.toLowerCase()}`
+                break;
+             }
+            operacion.fecha = e.fecha
+            return operacion;
+          });
        
       },
       err=>{

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -8,9 +10,17 @@ export class SidebarComponent implements OnInit {
   collapseShow = "hidden";
   collapse1 = false;
   collapse2 = false;
-  constructor() { }
+  public usuario;
+  constructor(
+    private _authService:AuthService
+  ) {
+    this.usuario = this._authService.getIdentity()
+    // console.log(this.usuario)
+   }
 
-  ngOnInit() {
+  ngOnInit(
+
+  ) {
   }
   toggleCollapseShow(classes) {
     this.collapseShow = classes;

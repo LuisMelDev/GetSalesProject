@@ -31,19 +31,61 @@ export class BitacoraComponent implements OnInit {
   ngOnInit(): void {
   	this.Listados();
   	this.formBusqueda =this.fb.group({
-     parametro: ['usuario_id'],
      valorParametro: ['',[Validators.required]]
    })  
-   
+   this._usuarioService.getAll(1000, 1).subscribe(
+    (res:any) => {
+         this.usuarios = res.results;
+    },
+      err=>{
+        console.log(err)
+        // this.error = true;
+      } )
   }
 
   Listados(){
     this._bitacoraService.getAll(this.limit, this.page).subscribe(
       res =>{
-        if(res.totalPages && res.results){
-          this.listado = res.results;
+        
+        // console.log(res)
+          
+          let ope = res.results;
+          this.listado = ope.map(e =>{
+          let operacion = {
+            fecha: '',
+            mensaje: '',
+            usuario: e.usuario.username
+          }
+          let mensaje,resultado;
+          switch (e.operacion.operacion) {
+            case 'LOGIN':
+                operacion.mensaje = 'Inicio sesión'      
+              break;
+            case 'LOGOUT':
+                operacion.mensaje = 'Cerro sesión'
+              break;
+            case 'DELETE':
+              resultado = e.descripcion.split('(')[0];
+              mensaje = resultado.slice(0,resultado.length-1);
+              operacion.mensaje = `Elimino un ${mensaje.toLowerCase()}`
+              break;
+            case 'UPDATE':
+              resultado = e.descripcion.split('(')[0];
+              mensaje = resultado.slice(0,resultado.length-1);
+              operacion.mensaje = `Actualizo un ${mensaje.toLowerCase()}`
+              break;
+            case 'CREATE':
+              resultado = e.descripcion.split('(')[0];
+              mensaje = resultado.slice(0,resultado.length-1);
+              operacion.mensaje = `Registro un ${mensaje.toLowerCase()}`
+              break;
+           }
+          operacion.fecha = e.fecha
+          return operacion;
+        });
+          // console.log(this.listado)
           this.totalPages = res.totalPages;
-        }
+        
       },
       err=>{
         console.log(err)
@@ -51,22 +93,7 @@ export class BitacoraComponent implements OnInit {
       }
     )
 
-    this._usuarioService.getAll(this.limit, this.page).subscribe(
-        (res:any) => {
-            if(res.totalPages && res.results){
-              this.usuarios = res.results;
-              this.totalPages = res.totalPages;
-            }
-
-          },
-          err=>{
-            console.log(err)
-            this.error = true;
-          } )
-
-  }
-
-
+    }
 
   paginaSiguiente(){
     this.page++;
@@ -79,10 +106,44 @@ export class BitacoraComponent implements OnInit {
 
   busqueda(){
     if(this.formBusqueda.invalid) this.Listados();
-    let {parametro, valorParametro} = this.formBusqueda.value;
-    this._bitacoraService.search(parametro, valorParametro).subscribe(
+    let { valorParametro} = this.formBusqueda.value;
+    this._bitacoraService.operaciones(valorParametro).subscribe(
       (res:any)=>{
-        this.listado = res
+        // console.log(res)
+        let user = this.usuarios.find( e => e.id == valorParametro)
+        this.listado = res.map(e =>{
+        let operacion = {
+          fecha: '',
+          mensaje: '',
+          usuario: user.username
+        }
+        let mensaje,resultado;
+        switch (e.operacion.operacion) {
+          case 'LOGIN':
+              operacion.mensaje = 'Inicio sesión'      
+            break;
+          case 'LOGOUT':
+              operacion.mensaje = 'Cerro sesión'
+            break;
+          case 'DELETE':
+            resultado = e.descripcion.split('(')[0];
+            mensaje = resultado.slice(0,resultado.length-1);
+            operacion.mensaje = `Elimino un ${mensaje.toLowerCase()}`
+            break;
+          case 'UPDATE':
+            resultado = e.descripcion.split('(')[0];
+            mensaje = resultado.slice(0,resultado.length-1);
+            operacion.mensaje = `Actualizo un ${mensaje.toLowerCase()}`
+            break;
+          case 'CREATE':
+            resultado = e.descripcion.split('(')[0];
+            mensaje = resultado.slice(0,resultado.length-1);
+            operacion.mensaje = `Registro un ${mensaje.toLowerCase()}`
+            break;
+         }
+        operacion.fecha = e.fecha
+        return operacion;
+      });
         this.totalPages = 0;
       },
       err=>{

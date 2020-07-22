@@ -1,0 +1,113 @@
+<div class="relative mt-20 p-4">
+    <div class="w-full flex justify-start mb-8">
+        <h3 class="text-3xl font-bold">Reportes</h3>
+    </div>
+    <form class="w-full bg-white px-4 py-6 " [formGroup]="form">
+        <select name="reporte" id="reporte" class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full" formControlName="busqueda" >
+            <option value="">-- Seleccione reporte a generar --</option>
+            <option value="ventas">Listado de ventas</option>
+            <option value="ventaDia">Listado de ventas del dia</option>
+            <option value="ventaMes">Listado de ventas del mes</option>
+            <option value="ventaYear">Listado de ventas del año</option>
+            <option value="compras">Listado de compras</option>
+            <option value="compraDia">Listado de compras del dia</option>
+            <option value="compraMes">Listado de compras del mes</option>
+            <option value="compraYear">Listado de compras del año</option>
+        </select>
+        <!-- <select class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full mt-4" formControlName="valorUsuario" *ngIf="form.value.busqueda =='ventaUsuario' || form.value.busqueda =='compraUsuario'">
+            <option value=""></option>
+
+        </select>
+        <select class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 box-border p-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full mt-4" formControlName="valorProducto" *ngIf="form.value.busqueda =='ventaProducto' || form.value.busqueda =='compraProducto'" >
+            <option value="">-- Seleccione --</option>
+            <option *ngFor="let producto of productos" value="{{producto.id}}">{{producto.nombre +' '+producto.marca.nombre+' '+producto.amperaje.amp+' '+producto.grupo.nombre }} </option>
+        </select> -->
+        <div class="w full">
+            <button type="button" class="px-6 py-2 bg-red-500 text-sm rounded text-white cursor-pointer hover:shadow-lg transition duration-700 ease-linear mx-auto block mt-4" (click)="consultar()">Generar</button>
+        </div>
+    </form>
+    <div class="w-full w-full bg-white px-4 py-6 mt-6" *ngIf="ventas.length != 0" >
+        <table class="table-auto shadow-lg bg-white w-full text-xs text-center">
+            <thead class="bg-blue-900 text-white">
+                <tr>
+                    <th
+                        class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                        Fecha
+                    </th>
+                    <th
+                        class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                        Cliente
+                    </th>
+                    <th
+                        class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                        Usuario
+                    </th>
+                    <th
+                        class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                        Total
+                    </th>
+                   </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="ventas.length === 0" >
+                    <td colspan="6" class="border-t-0 align-middle border-l-0 border-r-0 p-2 text-center">No hay Ventas registradas</td>
+                </tr>
+                <tr *ngFor="let venta of ventas">
+                    <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                        {{venta.fecha | amLocale:'es' | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}
+                    </td>
+                    <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                        {{venta.cliente.nombre}}
+                    </td>
+                    <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                        {{venta.usuario.username}}
+                    </td>
+                    <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                        {{venta.total | currency}} <br> {{ venta.total * precioDolar | currency:'Bs.S '}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="w-full w-full bg-white px-4 py-6 mt-6" *ngIf="compras.length != 0">
+        <table class="table-auto shadow-lg bg-white w-full text-xs text-center">
+            <thead class="bg-blue-900 text-white">
+                <tr>
+                    <th
+                        class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                        Fecha
+                    </th>
+                    <th
+                        class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                        Proveedor
+                    </th>
+                    <th
+                        class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                        Usuario
+                    </th>
+                    <th
+                        class="align-middle border border-solid border-gray-200 py-2  uppercase border-l-0 border-r-0 font-semibold">
+                        Total
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let compra of compras">
+                    <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                        {{compra.fecha | amLocale:'es' | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}
+                    </td>
+                    <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                        {{compra.proveedor.nombre}}
+                    </td>
+                    <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                        {{compra.usuario.username}}
+                    </td>
+                    <td class="border-t-0 align-middle border-l-0 border-r-0 p-2">
+                        {{compra.total | currency}} <br> {{ compra.total * precioDolar | currency:'Bs.S '}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <app-alert [mensaje]="'No hay resultados para este reporte'" [color]="'bg-blue-500'" *ngIf="nada"></app-alert>
+</div>    

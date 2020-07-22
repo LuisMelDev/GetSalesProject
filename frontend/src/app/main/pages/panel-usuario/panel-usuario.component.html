@@ -17,21 +17,21 @@
             <tbody>
                 <tr class="text-left flex flex-col">
 
-                    <td class="py-3 px-2">Holasdasds</td>
-                    <td class="py-3 px-2">Holasdasds</td>
-                    <td class="py-3 px-2">Holasdasds</td>
-                    <td class="py-3 px-2">Holasdasds</td>
+                    <td class="py-3 px-2">{{usuario.username}}</td>
+                    <td class="py-3 px-2">{{usuario.nombre}} </td>
+                    <td class="py-3 px-2">{{usuario.rol.rol}} </td>
+                    <td class="py-3 px-2">{{usuario.email}} </td>
                 </tr>
             </tbody>
         </table>
 
     </div>
-    <div class="w-full grid grid-cols-2 gap-2">
+    <div class="w-full grid grid-cols-2 gap-2" *ngIf="usuario.rol_id == 1">
         <div class="col-span-2 md:col-span-1 rounded bg-white mt-4 p-4">
-            <div class="w-full" *ngIf="false">
-                <app-alert [mensaje]="'mensaje'" [color]="'color'" ></app-alert>
+            <div class="w-full" *ngIf="error != ''">
+                <app-alert [mensaje]="error" [color]="color" ></app-alert>
             </div>
-            <form class="my-4 text-gray-600 text-sm" [formGroup]=""autocomplete="off">
+            <form class="my-4 text-gray-600 text-sm" [formGroup]="formUsuario" autocomplete="off" (ngSubmit)="enviar()">
                 <div class="w-full">
                     <div class="w-full">
                         <label for="nombre" class=" text-gray-800 mb-2 font-bold">Nombres Y Apellidos</label>
@@ -47,8 +47,8 @@
                             name="correo" id="correo" placeholder="ej. correo@correo.com" formControlName="email">
 
                     </div>
-                    <div class="w-full" *ngIf="false">
-                        <error-form [mensaje]="'nada'"></error-form>
+                    <div class="w-full" *ngIf="mensaje != ''">
+                        <error-form [mensaje]="mensaje"></error-form>
                     </div>
                     <div class="w-full">
                         <button type="submit"
@@ -58,35 +58,27 @@
             </form>
         </div>
         <div class="col-span-2 md:col-span-1 rounded bg-white mt-4 p-4">
-            <div class="w-full" *ngIf="false">
-                <app-alert [mensaje]="'nada'" [color]="'color'"></app-alert>
+            <div class="w-full" *ngIf="error2 != ''">
+                <app-alert [mensaje]="error2" [color]="color2"></app-alert>
             </div>
-            <form class="my-4 text-gray-600 text-sm" [formGroup]=""  autocomplete="off">
+            <form class="my-4 text-gray-600 text-sm" [formGroup]="formPass"  autocomplete="off" (ngSubmit)="enviar2()">
                 <div class="w-full">
-                    
                     <div class="col-span-2 md:col-span-1 lg:col-span-2">
-                        <label for="password" class="text-gray-800 mb-2 font-bold">Contraseña Actual</label>
+                        <label for="pass" class="text-gray-800 mb-2 font-bold">Nueva Contraseña</label>
                         <input type="password"
                             class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4"
-                            name="password" id="password" placeholder="ingrese su contraseña"
+                            name="pass" id="pass" placeholder="ingrese su contraseña"
                             formControlName="password">
                     </div>
                     <div class="col-span-2 md:col-span-1 lg:col-span-2">
-                        <label for="password" class="text-gray-800 mb-2 font-bold">Nueva Contraseña</label>
+                        <label for="pass2" class="text-gray-800 mb-2 font-bold">Repetir Nueva Contraseña</label>
                         <input type="password"
                             class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4"
-                            name="password" id="password" placeholder="ingrese su contraseña"
-                            formControlName="password">
+                            name="pass2" id="pass2" placeholder="ingrese su contraseña"
+                            formControlName="password2">
                     </div>
-                    <div class="col-span-2 md:col-span-1 lg:col-span-2">
-                        <label for="password" class="text-gray-800 mb-2 font-bold">Repetir Nueva Contraseña</label>
-                        <input type="password"
-                            class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 box-border p-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4"
-                            name="password" id="password" placeholder="ingrese su contraseña"
-                            formControlName="password">
-                    </div>
-                    <div class="col-span-2 lg:col-span-6" *ngIf="false">
-                        <error-form [mensaje]="'error'"></error-form>
+                    <div class="col-span-2 lg:col-span-6" *ngIf="mensaje2 != ''">
+                        <error-form [mensaje]="mensaje2"></error-form>
                     </div>
                     <div class="col-span-2 lg:col-span-6">
                         <button type="submit"

@@ -10,10 +10,12 @@ import { PrecioDolarService } from "./services/precioDolar.service";
 })
 export class AppComponent implements OnInit {
 
-  @HostListener("window:close", [ "$event" ])
-  beforeUnloadHander(event) {
-    this._authService.logout()
-  }
+  // @HostListener("window:unload", [ "$event" ])
+  // beforeUnloadHander(event) {
+  //   this._authService.logout().subscribe(res=>{
+  //     this._router.navigate(['/login'])
+  //   })
+  // }
   
   
   constructor(

@@ -41,6 +41,11 @@ export class CompraService {
           headers: this.headers,
         });
       }
+      getByFecha(year,mes:any = '',dia:any = '') {
+        return this._http.get(this.url + `/date?dia=${dia}&mes=${mes}&año=${year}`, {
+          headers: this.headers,
+        });
+      }
     
       create(model) {
         return this._http.post(this.url , model, {

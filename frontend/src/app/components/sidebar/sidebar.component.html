@@ -151,12 +151,12 @@
             <i class="text-xl fas fa-user-circle mr-3"></i>
             Productos</a>
         </li>
-        <li class="items-center ">
+        <li class="items-center " *ngIf="usuario.rol_id == 1" >
           <a [routerLink]="['/main/proveedores']" class="text-gray-800 lg:text-white cursor-pointer transition-all duration-500 ease-in-out transform hover:scale-105 text-md py-4 font-bold block">
             <i class="text-xl fas fa-fingerprint mr-3"></i>
             Proveedores</a>
         </li>
-        <li class="items-center ">
+        <li class="items-center " *ngIf="usuario.rol_id == 1" >
           <a [routerLink]="['/main/usuarios']" class="text-gray-800 lg:text-white cursor-pointer transition-all duration-500 ease-in-out transform hover:scale-105 text-md py-4 font-bold block">
             <i class="text-xl fas fa-fingerprint mr-3"></i>
             Usuarios</a>
@@ -170,7 +170,7 @@
               <li class="text-white cursor-pointer pl-4 text-sm py-2 font-bold block" [routerLink]="['/main/consultar-ventas']"><i class="text-md fas fa-fingerprint mr-3 transition-all duration-700 ease-in-out"></i> Consultar</li>
             </ul>
         </li>
-        <li class="items-center rounded transition-all duration-700 ease-in-out" [ngClass]="{ 'bg-blue-900 text-white p-2': collapse2}">
+        <li class="items-center rounded transition-all duration-700 ease-in-out" [ngClass]="{ 'bg-blue-900 text-white p-2': collapse2}" *ngIf="usuario.rol_id == 1" >
           <a class="cursor-pointer transition-all duration-500 ease-in-out transform hover:scale-105 text-md py-4 font-bold block {{collapse2 ? ' pl-2 text-white':'text-gray-800 lg:text-white'}}"  (click)="collapse(2)">
             <i class="text-xl fas fa-fingerprint mr-3"></i>
             Compras</a>
@@ -179,10 +179,15 @@
               <li class="text-white cursor-pointer pl-4 text-sm py-2 font-bold block" [routerLink]="['/main/consultar-compras']"><i class="text-md fas fa-fingerprint mr-3 transition-all duration-700 ease-in-out"></i> Consultar</li>
             </ul>
         </li>
-        <li class="items-center ">
+        <li class="items-center " *ngIf="usuario.rol_id == 1" >
           <a [routerLink]="['/main/bitacora']" class="text-gray-800 lg:text-white cursor-pointer transition-all duration-500 ease-in-out transform hover:scale-105 text-md py-4 font-bold block">
             <i class="text-xl fas fa-fingerprint mr-3"></i>
             Bitacora</a>
+        </li>
+        <li class="items-center " *ngIf="usuario.rol_id == 1" >
+          <a [routerLink]="['/main/reportes']" class="text-gray-800 lg:text-white cursor-pointer transition-all duration-500 ease-in-out transform hover:scale-105 text-md py-4 font-bold block">
+            <i class="text-xl fas fa-fingerprint mr-3"></i>
+            Reportes</a>
         </li>
       </ul>
     </div>

@@ -16,6 +16,7 @@ import { BitacoraComponent } from './pages/bitacora/bitacora.component';
 import { PanelUsuarioComponent } from './pages/panel-usuario/panel-usuario.component';
 import { FacturaVentaComponent } from './pages/factura-venta/factura-venta.component';
 import { FacturaCompraComponent } from './pages/factura-compra/factura-compra.component';
+import { ReportesComponent } from './pages/reportes/reportes.component';
 
 
 const routes: Routes = [
@@ -40,6 +41,7 @@ const routes: Routes = [
       {path:'panel-usuario', component: PanelUsuarioComponent},
       {path:'venta/:id', component: FacturaVentaComponent},
       {path:'compra/:id', component: FacturaCompraComponent},
+      {path:'reportes', component: ReportesComponent},
       {path:'**', redirectTo:'/main'}
     ] 
   }

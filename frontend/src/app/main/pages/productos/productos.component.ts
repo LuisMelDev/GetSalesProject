@@ -5,6 +5,7 @@ import { GrupoService } from '../../../services/grupo.service';
 import { AmperajeService } from '../../../services/amperaje.service';
 import { InventariosService } from '../../../services/inventario.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-productos',
@@ -20,6 +21,7 @@ export class ProductosComponent implements OnInit {
   public marcas: any[];
   public grupos: any[];
   public amperajes: any[];
+  public usuario;
   
   
 
@@ -29,12 +31,14 @@ export class ProductosComponent implements OnInit {
     private _amperajeService: AmperajeService,
     private _grupoService: GrupoService,
     private _inventariosService: InventariosService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private _authService : AuthService
   ) {
     this.formBuscar = this.fb.group({
       parametro: ['nombre',Validators.required],
       valorParametro: ['',Validators.required],
     });
+    this.usuario = this._authService.getIdentity();
   }
 
   ngOnInit(): void {

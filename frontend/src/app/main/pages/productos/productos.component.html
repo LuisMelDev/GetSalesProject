@@ -2,7 +2,7 @@
     <div class="w-full flex justify-start mb-8">
         <h3 class="text-3xl font-bold">Listado de Productos</h3>
     </div>
-    <div class="w-full flex justify-start mb-4">
+    <div class="w-full flex justify-start mb-4" *ngIf="usuario.rol_id == 1">
         <agregar-producto (registrado)="traerProductos()"></agregar-producto>
     </div>
 
@@ -91,7 +91,7 @@
                         <td
                             class="flex items-center justify-center border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs p-4">
                             <ver-producto [producto]="producto"></ver-producto>
-                            <modificar-producto [producto]="producto" (actualizado)="traerProductos()"></modificar-producto>
+                            <modificar-producto [producto]="producto" (actualizado)="traerProductos()" *ngIf="usuario.rol_id == 1"></modificar-producto>
                         </td>
                     </tr>
                 </tbody>
