@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL:'http://localhost:3000/v1/api/'
+  API_URL:'https://app-2b66bc7c-844a-499f-a9ae-00f70a4cac37.cleverapps.io/v1/api/'
   
 };
 
