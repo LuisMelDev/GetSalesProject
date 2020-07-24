@@ -1,6 +1,10 @@
 import { Component, OnInit, Output, EventEmitter,Input } from '@angular/core';
 import { ProductoService } from "src/app/services/producto.service";
+import { MarcaService  } from "src/app/services/marca.service";
+import { GrupoService } from "src/app/services/grupo.service";
+import { AmperajeService } from "src/app/services/amperaje.service";
 import { FormGroup,Validators,FormBuilder } from '@angular/forms';
+
 
 @Component({
   selector: 'elegir-producto2',
@@ -34,6 +38,9 @@ export class ElegirProducto2 implements OnInit {
 
   constructor(
     private _productoService: ProductoService,
+    private _marcaService: MarcaService,
+    private _grupoService: GrupoService,
+    private _amperajeService: AmperajeService,
     private fb: FormBuilder
   ) {
     this.formBuscar = this.fb.group({
@@ -57,7 +64,34 @@ export class ElegirProducto2 implements OnInit {
         console.log(err);
       }
     );
-  }
+    this._marcaService.getAll(this.limit, this.page).subscribe(
+      (res: any) =>{
+        this.marcas = res.results;
+        this.totalPages = res.totalPages;
+      },
+      (err) =>{
+        console.log(err);
+      }
+      );
+        this._grupoService.getAll(this.limit, this.page).subscribe(
+      (res: any) =>{
+        this.grupos = res.results;
+        this.totalPages = res.totalPages;
+      },
+      (err) =>{
+        console.log(err);
+      }
+      );
+      this._amperajeService.getAll(this.limit, this.page).subscribe(
+      (res: any) =>{
+        this.amperajes = res.results;
+        this.totalPages = res.totalPages;
+      },
+      (err) =>{
+        console.log(err);
+      }
+      );
+  };
 
 
   busqueda(){
