@@ -98,7 +98,7 @@
                            {{item.precio*precioDolar| currency:'Bs.S '}}
                         </td>
                         <td class="flex items-center justify-center border-t-0 align-middle border-l-0 border-r-0 p-2">
-                            <button class="h-8 w-8 rounded-full bg-red-600" (click)="eliminarProducto(i)">E</button>
+                            <button class="" (click)="eliminarProducto(i)"> <i class="fas fa-trash text-gray-700 fa-lg"></i> </button>
                         </td>
                     </tr>
                     <tr *ngIf="productosVenta.length === 0" >

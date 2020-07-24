@@ -26,7 +26,7 @@ export class PrecioDolarService {
 
   precio(){
       let precio = localStorage.getItem("precioDolar")
-    return (precio) ? precio: '200000';
+    return (precio) ? precio: '260000';
   }
 
 }
