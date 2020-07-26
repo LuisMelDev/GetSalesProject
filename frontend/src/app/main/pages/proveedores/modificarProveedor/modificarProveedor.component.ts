@@ -100,7 +100,7 @@ constructor(
     this._proveedorService.update(this.fg.value, this.proveedor.id).subscribe(
       (res:any)=>{
         this.fg.reset();
-        this.showAlert(`El cliente ha sido actualizado`,'bg-green-400');
+        this.showAlert(`El proveedor ha sido actualizado`,'bg-green-400');
       },
       err =>{
         this.showAlert(err.error.message,'bg-red-600')

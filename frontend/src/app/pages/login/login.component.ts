@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       (err) => {
         switch (err.status) {
           case 401:
-            this.mensaje = 'Nombre de usuario o contraña invalido';
+            this.mensaje = 'Nombre de usuario o contraseña invalidos';
             break;
           case 500:  
             this.mensaje = 'Error interno, intente mas tarde';
