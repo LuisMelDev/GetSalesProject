@@ -39,6 +39,9 @@ export class LoginComponent implements OnInit {
           case 500:  
             this.mensaje = 'Error interno, intente mas tarde';
             break;
+          case 404:
+            this.mensaje = 'Usuario No Registrado';
+            break;
           default:
             break;
         }

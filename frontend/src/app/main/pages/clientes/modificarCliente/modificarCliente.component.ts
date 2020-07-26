@@ -40,6 +40,7 @@ export class ModificarCliente implements OnInit{
         [
           Validators.required,
           Validators.pattern(/^([0-9])*$/),
+          Validators.minLength(8),
           Validators.maxLength(8),
         ],
       ],
@@ -52,7 +53,7 @@ export class ModificarCliente implements OnInit{
         ],
       ],
       fecha_nacimiento: [fecha, [Validators.required]],
-      telefono: [this.cliente.telefono, [Validators.required,Validators.pattern(/^([0-9])*$/),Validators.maxLength(11)]],
+      telefono: [this.cliente.telefono, [Validators.required,Validators.pattern(/^([0-9])*$/),Validators.minLength(11),Validators.maxLength(11)]],
       email: [this.cliente.email, [Validators.required, Validators.email]],
       direccion: [this.cliente.direccion, [Validators.required, Validators.maxLength(200)]],
     });
@@ -91,6 +92,9 @@ export class ModificarCliente implements OnInit{
         if(cedula.hasError('maxlength')){
           this.errors = 'El campo cedula no debe tener mas de 8 numeros'
         }
+        if(cedula.hasError('minlength')){
+          this.errors = 'El campo cedula debe tener como minimo 8 numeros'
+        }
       } else if (nombre.errors) {
         if(nombre.hasError('pattern')){
           this.errors = 'El campo nombre solo admite caracteres'
@@ -101,6 +105,9 @@ export class ModificarCliente implements OnInit{
       } else if (telefono.errors) {
         if(telefono.hasError('pattern')){
           this.errors = 'El campo telefono solo admite numeros'
+        }
+        if(telefono.hasError('minlength')){
+          this.errors = 'El campo telefono debe tener como minimo 11 numeros'
         }
         if(telefono.hasError('maxlength')){
           this.errors = 'El campo telefono no debe tener mas de 11 numeros'
@@ -122,7 +129,7 @@ export class ModificarCliente implements OnInit{
         this.mostrarAlerta(`El cliente ha sido actualizado`,'bg-green-400')
       },
       err =>{
-        this.mostrarAlerta(`ha ocurrio un error al registrar cliente`,'bg-red-600')
+        this.mostrarAlerta(err.error.message,'bg-red-600')
         console.log(err)
       }
     )

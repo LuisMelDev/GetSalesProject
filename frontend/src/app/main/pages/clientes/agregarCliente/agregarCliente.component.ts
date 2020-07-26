@@ -33,6 +33,7 @@ export class AgregarCliente {
         [
           Validators.required,
           Validators.pattern(/^([0-9])*$/),
+          Validators.minLength(8),
           Validators.maxLength(8),
         ],
       ],
@@ -45,7 +46,7 @@ export class AgregarCliente {
         ],
       ],
       fecha_nacimiento: ['', [Validators.required]],
-      telefono: ['', [Validators.required,Validators.pattern(/^([0-9])*$/),Validators.maxLength(11)]],
+      telefono: ['', [Validators.required,Validators.pattern(/^([0-9])*$/),Validators.minLength(11),Validators.maxLength(11)]],
       email: ['', [Validators.required, Validators.email]],
       direccion: ['', [Validators.required, Validators.maxLength(200)]],
     });
@@ -85,6 +86,9 @@ export class AgregarCliente {
         if(cedula.hasError('maxlength')){
           this.errors = 'El campo cedula no debe tener mas de 8 numeros'
         }
+        if(cedula.hasError('minlength')){
+          this.errors = 'El campo cedula debe tener como minimo 8 numeros'
+        }
       } else if (nombre.errors) {
         if(nombre.hasError('pattern')){
           this.errors = 'El campo nombre solo admite caracteres'
@@ -95,6 +99,9 @@ export class AgregarCliente {
       } else if (telefono.errors) {
         if(telefono.hasError('pattern')){
           this.errors = 'El campo telefono solo admite numeros'
+        }
+        if(telefono.hasError('minlength')){
+          this.errors = 'El campo telefono debe tener como minimo 11 numeros'
         }
         if(telefono.hasError('maxlength')){
           this.errors = 'El campo telefono no debe tener mas de 11 numeros'

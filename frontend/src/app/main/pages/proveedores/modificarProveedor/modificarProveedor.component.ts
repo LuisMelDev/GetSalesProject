@@ -83,7 +83,7 @@ constructor(
           this.errors = 'Llenar los datos del RIF con la salvedad de colocar “V” si se es Persona Natural o “J” si es Persona Jurídica'
         }
         if(rif.hasError('maxlength')){
-          this.errors = 'El campo cedula no debe tener mas de 8 numeros'
+          this.errors = 'El campo rif no debe tener mas de 8 numeros'
         }
       } else if (nombre.errors) {
         if(nombre.hasError('pattern')){
