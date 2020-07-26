@@ -81,7 +81,7 @@ export class AgregarUsuario implements OnInit {
         }, 10000)
       },
       (err:any)=>{
-        this.mensaje = err.message
+        this.mensaje = err.error.message
         this.color =  'bg-red-600'
         this.alerta = true;
         setTimeout(()=>{
